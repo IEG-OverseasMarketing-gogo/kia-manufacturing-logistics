@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KOICA IBS — ROI 모델 & 글로벌 선순환 구조</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&family=IBM+Plex+Sans+KR:wght@300;400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root {
+    --bg: #0b1219;
+    --surface: #121e28;
+    --surface2: #1a2b38;
+    --border: #223344;
+    --green: #00d97e;
+    --green-dim: #007a47;
+    --gold: #f4c430;
+    --gold-dim: #7a6010;
+    --blue: #4da6ff;
+    --red: #ff6b6b;
+    --white: #e8f0f8;
+    --muted: #6a8099;
+    --text: #c8d8e8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'IBM Plex Sans KR', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 13px;
+    line-height: 1.75;
+  }
+
+  /* ── HEADER ── */
+  .hero {
+    padding: 60px 60px 50px;
+    background: linear-gradient(135deg, #0b1219 0%, #0f2030 60%, #071a10 100%);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(ellipse, rgba(0,217,126,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 18px;
+  }
+  .hero-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 30px;
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.25;
+    margin-bottom: 12px;
+  }
+  .hero-title span { color: var(--green); }
+  .hero-sub {
+    font-size: 13px;
+    color: var(--muted);
+    max-width: 600px;
+    margin-bottom: 30px;
+  }
+  .hero-kpi-row {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .hero-kpi {
+    border-left: 3px solid var(--green-dim);
+    padding-left: 14px;
+  }
+  .hero-kpi-val {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--green);
+    letter-spacing: -0.01em;
+  }
+  .hero-kpi-label {
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 2px;
+  }
+
+  /* ── LAYOUT ── */
+  .wrap { max-width: 960px; margin: 0 auto; padding: 0 48px 80px; }
+
+  /* ── SECTION ── */
+  .sec { margin-top: 56px; }
+  .sec-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .sec-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+    margin-bottom: 22px;
+  }
+
+  /* ── EMOTII LEGAL BOX ── */
+  .legal-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin: 16px 0;
+  }
+  .legal-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 20px 18px;
+    position: relative;
+  }
+  .legal-card.recommended { border-color: var(--green-dim); }
+  .legal-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--border);
+    position: absolute;
+    top: 12px; right: 16px;
+    line-height: 1;
+  }
+  .legal-card.recommended .legal-num { color: var(--green-dim); }
+  .legal-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 8px;
+    padding-right: 28px;
+  }
+  .legal-body { font-size: 11.5px; color: var(--muted); line-height: 1.6; }
+  .rec-tag {
+    display: inline-block;
+    background: var(--green-dim);
+    color: var(--green);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    padding: 2px 8px;
+    margin-bottom: 8px;
+  }
+
+  /* ── ROI TABLE ── */
+  .roi-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    margin: 16px 0;
+  }
+  .roi-table th {
+    background: var(--surface2);
+    color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    text-transform: uppercase;
+  }
+  .roi-table td {
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .roi-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .num { text-align: right; font-family: 'IBM Plex Mono', monospace; }
+  .green { color: var(--green); }
+  .gold { color: var(--gold); }
+  .red-txt { color: var(--red); }
+  .white { color: var(--white); font-weight: 600; }
+  .roi-table tr.total td {
+    background: var(--surface2);
+    color: var(--white);
+    font-weight: 700;
+    border-top: 1px solid var(--green-dim);
+  }
+  .roi-table tr.highlight td { background: rgba(0,217,126,0.04); }
+
+  /* ── FLYWHEEL ── */
+  .flywheel {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    gap: 0;
+    align-items: center;
+    margin: 24px 0;
+  }
+  .fw-site {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 20px 18px;
+    text-align: center;
+    position: relative;
+  }
+  .fw-site.hub { border-color: var(--green-dim); background: rgba(0,217,126,0.04); }
+  .fw-site.spoke1 { border-color: var(--gold-dim); }
+  .fw-site.spoke2 { border-color: #1a3a5a; }
+  .fw-country {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .fw-name {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 10px;
+  }
+  .fw-kpi { font-size: 11px; color: var(--muted); line-height: 1.5; }
+  .fw-kpi strong { color: var(--green); }
+  .fw-arrow {
+    font-size: 22px;
+    color: var(--green-dim);
+    text-align: center;
+    padding: 0 8px;
+    flex-shrink: 0;
+  }
+
+  /* ── IMPACT NUMBERS ── */
+  .impact-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin: 20px 0;
+  }
+  .impact-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 20px 16px;
+    text-align: center;
+  }
+  .impact-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .impact-label { font-size: 10.5px; color: var(--muted); line-height: 1.4; }
+
+  /* ── CALLOUT ── */
+  .callout {
+    border-left: 3px solid;
+    padding: 14px 18px;
+    margin: 14px 0;
+    font-size: 12.5px;
+    line-height: 1.65;
+  }
+  .callout-green { border-color: var(--green-dim); background: rgba(0,217,126,0.04); color: var(--text); }
+  .callout-gold { border-color: var(--gold-dim); background: rgba(244,196,48,0.04); color: var(--text); }
+  .callout-red { border-color: var(--red); background: rgba(255,107,107,0.05); color: var(--text); }
+  .callout-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .callout-green .callout-label { color: var(--green); }
+  .callout-gold .callout-label { color: var(--gold); }
+  .callout-red .callout-label { color: var(--red); }
+
+  /* ── NARRATIVE CHAIN ── */
+  .chain {
+    margin: 20px 0;
+    position: relative;
+  }
+  .chain-item {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 0;
+    position: relative;
+  }
+  .chain-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    width: 36px;
+  }
+  .chain-dot {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    flex-shrink: 0;
+    border: 2px solid;
+    z-index: 1;
+    background: var(--bg);
+  }
+  .chain-dot.g { border-color: var(--green-dim); color: var(--green); }
+  .chain-dot.b { border-color: #1a4a6a; color: var(--blue); }
+  .chain-dot.d { border-color: var(--gold-dim); color: var(--gold); }
+
+  .chain-line {
+    width: 2px;
+    flex: 1;
+    background: linear-gradient(to bottom, var(--border), transparent);
+    margin: 0 auto;
+    min-height: 24px;
+  }
+  .chain-content {
+    flex: 1;
+    padding: 8px 0 24px;
+  }
+  .chain-title { font-weight: 700; color: var(--white); font-size: 13px; margin-bottom: 4px; }
+  .chain-body { font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .chain-metric {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 2px;
+    margin-top: 6px;
+    background: rgba(0,217,126,0.08);
+    color: var(--green);
+  }
+
+  /* ── KOICA SCORECARD ── */
+  .scorecard {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    margin: 16px 0;
+  }
+  .scorecard-header {
+    background: var(--surface2);
+    padding: 12px 18px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+  }
+  .score-row {
+    display: flex;
+    align-items: center;
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--border);
+    gap: 16px;
+  }
+  .score-row:last-child { border-bottom: none; }
+  .score-criterion { flex: 1; font-size: 12px; color: var(--text); }
+  .score-bar-wrap { width: 200px; background: var(--bg); height: 6px; border-radius: 3px; flex-shrink: 0; }
+  .score-bar { height: 100%; border-radius: 3px; }
+  .score-val {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    width: 80px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  /* ── PROPOSAL NARRATIVE ── */
+  .narrative-box {
+    background: var(--surface);
+    border: 1px solid var(--green-dim);
+    padding: 24px 28px;
+    margin: 20px 0;
+  }
+  .narrative-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 12px;
+  }
+  .narrative-text {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.85;
+    color: var(--white);
+  }
+  .narrative-text em { color: var(--green); font-style: normal; font-weight: 600; }
+  .narrative-text strong { color: var(--gold); }
+
+  /* ── FOOTER STRIP ── */
+  .footer-strip {
+    background: var(--surface2);
+    border-top: 1px solid var(--border);
+    padding: 28px 48px;
+    display: flex;
+    gap: 48px;
+    flex-wrap: wrap;
+    margin-top: 60px;
+  }
+  .fs-item { flex: 1; min-width: 150px; }
+  .fs-label { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .fs-val { font-size: 13px; color: var(--white); font-weight: 500; }
+
+  hr.rule { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+
+  .tag-inline {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    padding: 2px 7px;
+    border-radius: 2px;
+    vertical-align: middle;
+    margin-left: 6px;
+  }
+  .tag-green { background: rgba(0,217,126,0.12); color: var(--green); }
+  .tag-gold { background: rgba(244,196,48,0.12); color: var(--gold); }
+  .tag-red { background: rgba(255,107,107,0.12); color: var(--red); }
+  .tag-blue { background: rgba(77,166,255,0.12); color: var(--blue); }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">KOICA IBS 2026 · 사업 통과 근거 · 수치 기반 임팩트 모델</div>
+  <div class="hero-title">IEG × Emotii × 이노비즈협회<br><span>ROI & 글로벌 선순환 구조 분석</span></div>
+  <div class="hero-sub">지작 FEZ → 기아 첸나이 → 기아 코스타나이로 이어지는 HMG 글로벌 TVET 복제 모델과 KOICA 심사 통과를 위한 구체적 수치 근거</div>
+  <div class="hero-kpi-row">
+    <div class="hero-kpi">
+      <div class="hero-kpi-val">8.4×</div>
+      <div class="hero-kpi-label">KOICA 투입 대비 BOP 소득 창출 배수 (5년)</div>
+    </div>
+    <div class="hero-kpi">
+      <div class="hero-kpi-val">$1.6M+</div>
+      <div class="hero-kpi-label">ADM 연간 해외 연수비 대체 절감액</div>
+    </div>
+    <div class="hero-kpi">
+      <div class="hero-kpi-val">1,000명+</div>
+      <div class="hero-kpi-label">5년 누적 BOP 청년 취업 인원 (3개 사이트)</div>
+    </div>
+    <div class="hero-kpi">
+      <div class="hero-kpi-val">97%</div>
+      <div class="hero-kpi-label">Emotii 활용 시 통역 비용 절감률</div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- SECTION 1: Emotii 법인 문제 -->
+<div class="sec">
+  <div class="sec-eyebrow">Section 01 · 법적 구조</div>
+  <div class="sec-title">Emotii — 한국 법인 없이 컨소시엄 참여하는 3가지 경로</div>
+
+  <div class="callout callout-gold">
+    <div class="callout-label">📌 핵심 전제</div>
+    KOICA IBS에서 <strong>주관기업은 반드시 한국 법인</strong>이어야 합니다. 협력기관(컨소시엄 멤버)의 경우 외국 기업·기관도 "현지 이행 파트너" 또는 "기술 솔루션 제공자" 형태로 포함 가능하나, <strong>파트너 분담금을 직접 부담하는 주체는 원칙적으로 한국 법인 또는 국내 비영리 기관</strong>이어야 합니다. Emotii가 외국 법인이라면 아래 세 경로 중 하나를 선택해야 합니다.
+  </div>
+
+  <div class="legal-grid">
+    <div class="legal-card recommended">
+      <div class="rec-tag">RECOMMENDED</div>
+      <div class="legal-num">01</div>
+      <div class="legal-title">IEG의 하도급 서비스 계약 구조</div>
+      <div class="legal-body">
+        IEG가 Emotii와 <strong>기술 서비스 계약</strong>을 체결하고, Emotii 비용을 사업비 내 "AI 통역 기술 용역비" 항목으로 계상. Emotii는 공식 컨소시엄 멤버가 아닌 <strong>기술 공급 협력사(sub-vendor)</strong>로 처리.<br><br>
+        ✔ 법적 리스크 없음<br>
+        ✔ KOICA 심사에서 가장 검증된 구조<br>
+        ✔ Emotii 비용을 KOICA 예산 내 정식 계상 가능<br>
+        ✗ Emotii가 공식 컨소시엄 로고·명칭 노출 제한
+      </div>
+    </div>
+    <div class="legal-card">
+      <div class="legal-num">02</div>
+      <div class="legal-title">한국 대리인(Agent) 또는 파트너사 지정</div>
+      <div class="legal-body">
+        Emotii가 한국 유통사 또는 파트너 기업을 통해 서비스를 제공하는 구조. 한국 파트너가 컨소시엄 멤버로 참여하고 Emotii 라이선스를 재공급.<br><br>
+        ✔ Emotii 브랜드 명칭 유지 가능<br>
+        ✔ 한국 파트너가 분담금 주체 역할 가능<br>
+        ✗ 한국 파트너 존재 여부 확인 필요<br>
+        ✗ 마진 구조로 비용 증가 가능
+      </div>
+    </div>
+    <div class="legal-card">
+      <div class="legal-num">03</div>
+      <div class="legal-title">Emotii 한국 법인 설립 지원</div>
+      <div class="legal-body">
+        IEG가 Emotii의 한국 시장 진출을 지원하여 한국 법인 설립을 유도. 중장기 파트너십 강화 효과.<br><br>
+        ✔ 정식 컨소시엄 멤버로 모든 권한 보유<br>
+        ✔ IEG와의 장기 파트너십 공식화<br>
+        ✗ 법인 설립 최소 2~3개월 소요<br>
+        ✗ 6월 18일 마감 일정상 현실적 어려움
+      </div>
+    </div>
+  </div>
+
+  <div class="callout callout-green">
+    <div class="callout-label">💡 실용적 결론</div>
+    <strong>현실적 최선은 경로 01(하도급 구조)</strong>입니다. 제안서 내에서 Emotii를 "기술 협력사(Technology Enabler)"로 명시하고, IEG 예산 내 "AI 다국어 교육 플랫폼 구축비"로 계상하면 됩니다. 이 경우 컨설팅에서 "외부 기술 솔루션 비용이 KOICA 예산 내 인정되는지" 여부를 확인해야 합니다. 일반적으로 사업 목적에 직결된 기술 비용은 인정됩니다.
+  </div>
+</div>
+
+<!-- SECTION 2: Emotii ROI -->
+<div class="sec">
+  <div class="sec-eyebrow">Section 02 · Emotii 도입 ROI</div>
+  <div class="sec-title">Emotii 없이 vs. Emotii 도입 시 — 비용·품질 대비표</div>
+
+  <table class="roi-table">
+    <tr>
+      <th>비용 항목</th>
+      <th class="num">기존 방식 (통역사 파견)</th>
+      <th class="num">Emotii 도입 시</th>
+      <th class="num">절감액/차이</th>
+    </tr>
+    <tr>
+      <td>한국↔우즈벡·러시아어 전문 통역사 파견<br><span style="font-size:11px;color:var(--muted)">연간 6회 코호트, 통역사 1명씩 파견 (항공+숙박+일당)</span></td>
+      <td class="num red-txt">$24,000~36,000/yr</td>
+      <td class="num green">$0</td>
+      <td class="num green">$24K~36K 절감</td>
+    </tr>
+    <tr>
+      <td>교재·교안 현지어 번역 발주<br><span style="font-size:11px;color:var(--muted)">32주 CBT × 3언어(우즈벡·러시아·영어) 전문 번역</span></td>
+      <td class="num red-txt">$15,000~25,000 (1회성)</td>
+      <td class="num green">Emotii 자동 번역 + 검수비 $2,000~3,000</td>
+      <td class="num green">$12K~22K 절감</td>
+    </tr>
+    <tr>
+      <td>마스터 트레이너 현지 체재 기간 단축<br><span style="font-size:11px;color:var(--muted)">통역 없으면 4주 → Emotii 도입 시 2주로 단축 가능</span></td>
+      <td class="num red-txt">체재비 $8,000 (4주 기준)</td>
+      <td class="num green">체재비 $4,000 (2주)</td>
+      <td class="num green">$4,000 절감</td>
+    </tr>
+    <tr>
+      <td>동시 다교실 교육 가능성<br><span style="font-size:11px;color:var(--muted)">Emotii = 트레이너 1명이 복수 교실 동시 지원 가능</span></td>
+      <td class="num red-txt">교실당 통역사 1명 필요 → 교실 수 제한</td>
+      <td class="num green">동시 3~4개 교실 지원 가능</td>
+      <td class="num green">연간 교육 수용량 3배+</td>
+    </tr>
+    <tr>
+      <td><strong>Emotii Enterprise 연간 비용</strong></td>
+      <td class="num" style="color:var(--muted)">—</td>
+      <td class="num red-txt">초기 $5,000~10,000<br>연간 구독 $12,000~18,000</td>
+      <td class="num" style="color:var(--muted)">투자 비용</td>
+    </tr>
+    <tr class="total">
+      <td><strong>연간 순 절감액 (2년차부터)</strong></td>
+      <td class="num">통역 총비용 ~$47K~61K/yr</td>
+      <td class="num">Emotii 비용 ~$12K~18K/yr</td>
+      <td class="num green">연 $29K~43K 순절감<br>(절감률 약 <span class="green">65~75%</span>)</td>
+    </tr>
+  </table>
+
+  <div class="callout callout-green">
+    <div class="callout-label">📊 제안서 핵심 문장 (그대로 활용 가능)</div>
+    "Emotii AI 동시통역 플랫폼 도입을 통해 한국 마스터 트레이너 1인이 우즈베크어·러시아어 장벽 없이 연간 200명 이상의 ADM 기술 인력을 교육할 수 있으며, 기존 통역사 파견 방식 대비 연간 약 USD 29,000~43,000의 운영 비용을 절감합니다. 이는 KOICA IBS 사업 종료 후에도 현지 자력으로 교육 프로그램을 지속 운영할 수 있는 재정적 지속가능성을 보장합니다."
+  </div>
+</div>
+
+<!-- SECTION 3: 해외 연수 대체 ROI -->
+<div class="sec">
+  <div class="sec-eyebrow">Section 03 · 핵심 ROI</div>
+  <div class="sec-title">해외 연수 대체 효과 — KOICA 심사관이 가장 중시하는 수치</div>
+
+  <table class="roi-table">
+    <tr>
+      <th>구분</th>
+      <th class="num">현행 (해외 연수)</th>
+      <th class="num">IEG 온사이트 (IBS 사업 후)</th>
+      <th class="num">개선 효과</th>
+    </tr>
+    <tr>
+      <td>1인당 교육 비용</td>
+      <td class="num red-txt">$8,000~12,000</td>
+      <td class="num green">$1,200~2,000</td>
+      <td class="num green">약 85% 절감</td>
+    </tr>
+    <tr>
+      <td>연간 교육 인원</td>
+      <td class="num red-txt">50명/사이클 × 2회 = 100명</td>
+      <td class="num green">50명/코호트 × 4회 = 200명</td>
+      <td class="num green">2배 확대</td>
+    </tr>
+    <tr>
+      <td>ADM 연간 교육 총비용</td>
+      <td class="num red-txt">$800K~1.2M/yr</td>
+      <td class="num green">$240K~400K/yr<br><span style="font-size:10px;color:var(--muted)">(IEG 장비 감가상각 포함)</span></td>
+      <td class="num green">$560K~800K 절감/yr</td>
+    </tr>
+    <tr>
+      <td>지식 국내화 (Knowledge Retention)</td>
+      <td class="num red-txt">해외 체류 중 습득 → 귀국 후 이탈률 높음</td>
+      <td class="num green">현지 인증 + 로컬 강사 풀 형성 → 지식 내재화</td>
+      <td class="num green">인적자본 현지 누적</td>
+    </tr>
+    <tr>
+      <td>ADM 장비 투자 payback</td>
+      <td class="num" style="color:var(--muted)">자산 미형성</td>
+      <td class="num green">KOICA ODA 전액 지원<br>→ ADM CAPEX $0</td>
+      <td class="num green">영구 자산 획득</td>
+    </tr>
+    <tr class="highlight">
+      <td><strong>5년 누적 절감액 (ADM 기준)</strong></td>
+      <td class="num red-txt">$4M~6M 지출</td>
+      <td class="num green">$1.2M~2M 지출</td>
+      <td class="num green"><strong>$2.8M~4M 순절감</strong></td>
+    </tr>
+    <tr class="total">
+      <td><strong>KOICA 투입 7억 원 대비 ADM 절감 배수</strong></td>
+      <td colspan="2" class="num">7억 원 ≈ USD 538K</td>
+      <td class="num green"><strong>5년 절감 $2.8M~4M<br>→ 5.2~7.4배 ROI</strong></td>
+    </tr>
+  </table>
+</div>
+
+<!-- SECTION 4: 선순환 구조 -->
+<div class="sec">
+  <div class="sec-eyebrow">Section 04 · 글로벌 파급효과</div>
+  <div class="sec-title">HMG 생산거점 복제 선순환 구조 — 지작 → 첸나이 → 코스타나이</div>
+
+  <div class="flywheel">
+    <div class="fw-site hub">
+      <div class="fw-country">🇺🇿 Uzbekistan</div>
+      <div class="fw-name">ADM 지작<br>스마트 TVET 센터</div>
+      <div class="fw-kpi">
+        <strong>IBS 파일럿 사이트</strong><br>
+        연 200명 교육<br>
+        IEG 3432·4000·6050 설치<br>
+        로컬 강사 6명 양성<br>
+        Emotii 통역 실증
+      </div>
+    </div>
+    <div class="fw-arrow">→</div>
+    <div class="fw-site spoke1">
+      <div class="fw-country">🇮🇳 India · 첸나이/안드라프라데시</div>
+      <div class="fw-name">기아·HMG<br>인도 생산거점</div>
+      <div class="fw-kpi">
+        연 생산 300,000대<br>
+        현지 기술 인력: 13,000명+<br>
+        연간 신규 채용: <strong>500~800명</strong><br>
+        IEG 복제 사이트 가능
+      </div>
+    </div>
+    <div class="fw-arrow">→</div>
+    <div class="fw-site spoke2">
+      <div class="fw-country">🇰🇿 Kazakhstan · 코스타나이</div>
+      <div class="fw-name">기아 카자흐스탄<br>코스타나이 공장</div>
+      <div class="fw-kpi">
+        연 생산 70,000+대<br>
+        CKD 조립 → 현지화 추진<br>
+        IEG 지작 레퍼런스 적용<br>
+        <strong>중앙아 복제 1호 사이트</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- 선순환 논리 체인 -->
+  <div class="chain" style="margin-top:28px;">
+
+    <div class="chain-item">
+      <div class="chain-left">
+        <div class="chain-dot g">01</div>
+        <div class="chain-line"></div>
+      </div>
+      <div class="chain-content">
+        <div class="chain-title">KOICA IBS 파일럿 (2026–2028) — 지작 FEZ</div>
+        <div class="chain-body">KOICA 7억 원 + IEG 장비 현물로 ADM Jizzakh 내 스마트 TVET 센터 구축. Emotii 통역 플랫폼이 한국 교육 콘텐츠를 우즈벡·러시아어로 실시간 전달. 200명/년 × 2년 = 400명 BOP 청년 ADM 직고용.</div>
+        <div class="chain-metric">KOICA 공식 레퍼런스 사이트 확보 → 후속 제안 신뢰도 폭등</div>
+      </div>
+    </div>
+
+    <div class="chain-item">
+      <div class="chain-left">
+        <div class="chain-dot b">02</div>
+        <div class="chain-line"></div>
+      </div>
+      <div class="chain-content">
+        <div class="chain-title">HMG 글로벌 구매 채널 진입 (2028~) — 기아·현대 공식 TVET 파트너</div>
+        <div class="chain-body">ADM Jizzakh는 기아차 CKD 부품 납품 파트너. IEG 훈련 시스템이 "기아 OEM 스펙 정렬 교육 장비"로 검증됨. 이 레퍼런스를 활용해 <strong>Kia India(안드라프라데시), Hyundai India(첸나이)</strong> TVET 구축 사업에 직접 제안 가능. 기아 글로벌 공급망 내 공식 교육 파트너 등재 목표.</div>
+        <div class="chain-metric">기아/HMG 공급망 승인 → 다국 복제 수주 파이프라인 형성</div>
+      </div>
+    </div>
+
+    <div class="chain-item">
+      <div class="chain-left">
+        <div class="chain-dot d">03</div>
+        <div class="chain-line"></div>
+      </div>
+      <div class="chain-content">
+        <div class="chain-title">중앙아·남아시아 TVET 허브 복제 (2028–2030)</div>
+        <div class="chain-body">카자흐스탄 코스타나이(기아 CKD 조립), 인도 첸나이/안드라프라데시(기아·현대), 우즈베키스탄 타슈켄트(2호 센터) 순차 복제. 각 사이트마다 IEG 장비 패키지($150K~280K) 수출 + Emotii 라이선스 확산 + 커리큘럼 로열티 수익 구조.</div>
+        <div class="chain-metric">사이트당 IEG 수출 매출 $150K~280K × 5개 사이트 = $750K~1.4M</div>
+      </div>
+    </div>
+
+    <div class="chain-item">
+      <div class="chain-left">
+        <div class="chain-dot g">04</div>
+      </div>
+      <div class="chain-content">
+        <div class="chain-title">지속가능 BOP 일자리 창출 선순환 완성</div>
+        <div class="chain-body">각 사이트에서 로컬 강사 풀 형성 → KOICA 사업 종료 후에도 자력 운영. 연간 200명/사이트 × 5개 사이트 = <strong>연간 1,000명+ BOP 청년 스마트 제조 인력 배출</strong>. 이들의 ADM/기아/현대 취업이 지역 GDP와 소비력을 높여 다시 현지 제조업 투자를 유인하는 선순환.</div>
+        <div class="chain-metric">SDG 8 (양질의 일자리) + SDG 9 (산업·혁신) 동시 달성 → KOICA 플래그십 사례 등재 목표</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 5: 5년 임팩트 수치 요약 -->
+<div class="sec">
+  <div class="sec-eyebrow">Section 05 · 임팩트 계량화</div>
+  <div class="sec-title">KOICA 심사 제출용 — 5년 누적 임팩트 수치 (보수적 추정)</div>
+
+  <div class="impact-grid">
+    <div class="impact-box">
+      <div class="impact-num" style="color:var(--green)">1,000+</div>
+      <div class="impact-label">5년 누적 BOP 청년<br>스마트 제조 인력 배출<br><span style="color:var(--muted)">3개 사이트 기준</span></div>
+    </div>
+    <div class="impact-box">
+      <div class="impact-num" style="color:var(--gold)">$4.8M</div>
+      <div class="impact-label">5년 누적 BOP 소득 창출<br><span style="color:var(--muted)">$4,800/인 × 1,000명 × 1배수</span></div>
+    </div>
+    <div class="impact-box">
+      <div class="impact-num" style="color:var(--blue)">8.4×</div>
+      <div class="impact-label">KOICA 7억 투입 대비<br>BOP 소득 창출 배수<br><span style="color:var(--muted)">($4.8M ÷ $538K)</span></div>
+    </div>
+    <div class="impact-box">
+      <div class="impact-num" style="color:var(--green)">6명</div>
+      <div class="impact-label">Y2까지 양성 완료<br>현지 로컬 강사 (ToT)<br><span style="color:var(--muted)">자립 운영 가능 기준점</span></div>
+    </div>
+    <div class="impact-box">
+      <div class="impact-num" style="color:var(--red)">$0</div>
+      <div class="impact-label">ADM Jizzakh<br>장비 투자 CAPEX<br><span style="color:var(--muted)">KOICA ODA 전액 커버</span></div>
+    </div>
+    <div class="impact-box">
+      <div class="impact-num" style="color:var(--gold)">3개국</div>
+      <div class="impact-label">즉시 복제 가능 사이트<br>우즈벡 → 카자흐 → 인도<br><span style="color:var(--muted)">HMG 생산거점 연계</span></div>
+    </div>
+    <div class="impact-box">
+      <div class="impact-num" style="color:var(--green)">65~75%</div>
+      <div class="impact-label">Emotii 도입 시<br>통역 운영비 절감률<br><span style="color:var(--muted)">vs. 전문 통역사 파견</span></div>
+    </div>
+    <div class="impact-box">
+      <div class="impact-num" style="color:var(--blue)">1/7</div>
+      <div class="impact-label">유럽 경쟁사 대비<br>IEG 장비 가격 경쟁력<br><span style="color:var(--muted)">Festo Didactic 비교</span></div>
+    </div>
+  </div>
+
+  <hr class="rule">
+
+  <!-- KOICA 심사 5대 기준별 대응 -->
+  <div class="scorecard">
+    <div class="scorecard-header">KOICA IBS 심사 5대 기준 — IEG 사업 대응력 자가평가</div>
+    <div class="score-row">
+      <div class="score-criterion">
+        <strong style="color:var(--white)">① BOP 포용성 (Inclusiveness)</strong><br>
+        <span style="font-size:11px;color:var(--muted)">지작 18~35세 저소득 청년 직접 수혜, 여성 훈련생 30% 쿼터 설정 가능, ADM 직고용 보장</span>
+      </div>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:88%;background:var(--green)"></div></div>
+      <div class="score-val" style="color:var(--green)">강점 ●●●●○</div>
+    </div>
+    <div class="score-row">
+      <div class="score-criterion">
+        <strong style="color:var(--white)">② 비즈니스 지속가능성 (Business Viability)</strong><br>
+        <span style="font-size:11px;color:var(--muted)">IEG 장비 판매 수익, 커리큘럼 라이선스, 스페어파츠 반복 매출 구조. ADM 절감액이 사업 지속 유인</span>
+      </div>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:82%;background:var(--green)"></div></div>
+      <div class="score-val" style="color:var(--green)">강점 ●●●●○</div>
+    </div>
+    <div class="score-row">
+      <div class="score-criterion">
+        <strong style="color:var(--white)">③ 개발 임팩트 (Development Impact)</strong><br>
+        <span style="font-size:11px;color:var(--muted)">SDG 4·8·9 연계, 지작 FEZ 산업 생태계 형성, 현지 로컬 강사 토대 → KOICA 사업 후 자립 운영</span>
+      </div>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:85%;background:var(--green)"></div></div>
+      <div class="score-val" style="color:var(--green)">강점 ●●●●○</div>
+    </div>
+    <div class="score-row">
+      <div class="score-criterion">
+        <strong style="color:var(--white)">④ 한국 개발협력 기여 (Korea ODA Alignment)</strong><br>
+        <span style="font-size:11px;color:var(--muted)">한·우즈벡 MOU(2024.06), 한국 스마트제조 기술 이전, K-SmartTVET™ 브랜드 ODA 가시성</span>
+      </div>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:90%;background:var(--green)"></div></div>
+      <div class="score-val" style="color:var(--green)">최강점 ●●●●●</div>
+    </div>
+    <div class="score-row">
+      <div class="score-criterion">
+        <strong style="color:var(--white)">⑤ 실행 역량 (Implementation Capacity)</strong><br>
+        <span style="font-size:11px;color:var(--muted)">IEG KOICA 실적 없음 → 이노비즈협회로 보완. ADM MOU + 지작 폴리테크닉 협력 증빙 필수</span>
+      </div>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:58%;background:var(--gold)"></div></div>
+      <div class="score-val" style="color:var(--gold)">보완 필요 ●●●○○</div>
+    </div>
+  </div>
+
+  <div class="callout callout-red">
+    <div class="callout-label">🔑 심사 통과 핵심 취약점 — 대응 전략</div>
+    <strong style="color:var(--white)">실행 역량 항목이 유일한 약점</strong>입니다. 보완 전략: ① 이노비즈협회의 KOICA IBS 기존 실적 3건 이상을 제안서 앞부분에 명시, ② ADM Jizzakh의 CEO 또는 훈련센터장 명의 "파트너십 확약 레터(Letter of Commitment)" 첨부, ③ 지작 폴리테크닉 MOU 또는 협력의향서, ④ 이노비즈협회가 담당하는 M&amp;E 계획을 구체적 KPI와 함께 PDM에 반영.
+  </div>
+</div>
+
+<!-- SECTION 6: 제안서 핵심 내러티브 -->
+<div class="sec">
+  <div class="sec-eyebrow">Section 06 · 사업 내러티브</div>
+  <div class="sec-title">KOICA 심사관 설득 — 제안서 핵심 스토리라인</div>
+
+  <div class="narrative-box">
+    <div class="narrative-label">📝 제안서 추진배경·기대효과 항목에 바로 활용 가능한 내러티브</div>
+    <div class="narrative-text">
+      ADM Jizzakh는 우즈베키스탄 유일의 한국 OEM 스펙 자동차 생산 거점으로, 2027년까지 인력을 5,000명에서 10,000명으로 두 배 확대할 계획입니다. 그러나 현재 우즈베키스탄에는 <em>스마트 제조 현장 인력을 체계적으로 배출할 산업 TVET 인프라가 존재하지 않으며</em>, ADM은 매년 USD 800만~1,200만 달러에 달하는 해외 연수 비용을 지출하고 있습니다. 지식은 해외에 남고, 인력은 복귀 후 이탈하며, 348개 부품의 현지화 목표는 요원합니다.
+      <br><br>
+      IEG는 <strong>유럽 경쟁사 대비 7분의 1 가격</strong>의 한국 스마트팩토리 훈련 장비와 Emotii AI 다국어 동시통역 플랫폼을 결합하여, 한국인 마스터 트레이너 1명이 우즈벡·러시아어로 연간 200명의 ADM 기술 인력을 교육하는 체계를 구축합니다. <em>KOICA 7억 원의 투자는 ADM의 5년 누적 교육비 28억~40억 원 절감으로 회수</em>되며, 배출된 400명(2년 기준)의 저소득 청년이 ADM에 직고용되어 연간 소득 증가, 지역 소비 확대, 추가 제조업 투자 유인으로 이어지는 <strong>자기 강화형 선순환 구조</strong>를 만듭니다.
+      <br><br>
+      2028년부터는 이 모델을 기아 코스타나이(카자흐스탄), HMG 인도 생산거점으로 복제하여 한국 ODA가 단 한 번의 투자로 <em>중앙아·남아시아 전역의 청년 일자리와 스마트 제조 생태계를 동시에 형성하는 KOICA 플래그십 사례</em>로 발전시키는 것이 본 사업의 궁극적 목표입니다.
+    </div>
+  </div>
+</div>
+
+</div><!-- /wrap -->
+
+<div class="footer-strip">
+  <div class="fs-item">
+    <div class="fs-label">문서 목적</div>
+    <div class="fs-val">KOICA IBS 2026 컨설팅 준비 + 제안서 초안</div>
+  </div>
+  <div class="fs-item">
+    <div class="fs-label">작성</div>
+    <div class="fs-val">IEG 해외마케팅팀 · Kelly Cho</div>
+  </div>
+  <div class="fs-item">
+    <div class="fs-label">수치 기준</div>
+    <div class="fs-val">보수적 추정 · 컨설팅 후 갱신 예정</div>
+  </div>
+  <div class="fs-item">
+    <div class="fs-label">제출 마감</div>
+    <div class="fs-val">2026년 6월 18일</div>
+  </div>
+</div>
+
+</body>
+</html>
