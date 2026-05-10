@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KOICA IBS-STC 사업화 지원 신청서 | IEG × 이노비즈협회</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --navy: #0c1f3a;
+  --navy2: #152d50;
+  --navy3: #1e3d6a;
+  --gold: #c8960a;
+  --gold-light: #f0c040;
+  --gold-pale: #fef9e7;
+  --green: #1a6b4a;
+  --green-light: #27a368;
+  --green-pale: #edf7f2;
+  --ink: #1a1a2e;
+  --paper: #fafaf7;
+  --border: #dde3ec;
+  --muted: #6b7a90;
+  --red: #b83232;
+  --red-pale: #fdf2f2;
+  --text: #2c3548;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--paper);
+  color: var(--text);
+  font-size: 13.5px;
+  line-height: 1.8;
+}
+
+/* ── COVER PAGE ── */
+.cover {
+  background: var(--navy);
+  min-height: 220px;
+  padding: 56px 64px 48px;
+  position: relative;
+  overflow: hidden;
+}
+.cover::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 40%, var(--green-light) 100%);
+}
+.cover-grid {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 48px;
+  align-items: end;
+}
+.cover-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  margin-bottom: 18px;
+}
+.cover-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 900;
+  color: white;
+  line-height: 1.25;
+  margin-bottom: 10px;
+}
+.cover-subtitle {
+  font-family: 'Source Serif 4', serif;
+  font-style: italic;
+  font-size: 14px;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.5;
+}
+.cover-meta {
+  text-align: right;
+}
+.cover-meta-item {
+  margin-bottom: 10px;
+}
+.cm-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  display: block;
+  margin-bottom: 2px;
+}
+.cm-val {
+  font-size: 12.5px;
+  color: rgba(255,255,255,0.8);
+  font-weight: 500;
+}
+
+/* ── SITE BAR ── */
+.site-bar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-bottom: 1px solid var(--border);
+}
+.site-cell {
+  padding: 18px 24px;
+  border-right: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.site-cell:last-child { border-right: none; }
+.site-flag { font-size: 22px; flex-shrink: 0; }
+.site-info {}
+.site-country {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.site-name { font-size: 13px; font-weight: 700; color: var(--navy); }
+.site-anchor { font-size: 11px; color: var(--muted); }
+.site-phase {
+  margin-left: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  padding: 3px 8px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.ph1 { background: rgba(200,150,10,0.12); color: var(--gold); border: 1px solid rgba(200,150,10,0.3); }
+.ph2 { background: rgba(26,107,74,0.1); color: var(--green); border: 1px solid rgba(26,107,74,0.25); }
+.ph3 { background: rgba(12,31,58,0.08); color: var(--navy3); border: 1px solid rgba(12,31,58,0.2); }
+
+/* ── LAYOUT ── */
+.body-wrap {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  min-height: calc(100vh - 300px);
+}
+
+/* ── SIDEBAR NAV ── */
+.sidenav {
+  background: var(--navy);
+  padding: 32px 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+.sidenav-section {
+  padding: 6px 24px;
+  margin-bottom: 2px;
+}
+.sn-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.25);
+  display: block;
+  margin-bottom: 1px;
+}
+.sn-title {
+  font-size: 11px;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.4;
+  cursor: pointer;
+}
+.sn-title:hover { color: var(--gold-light); }
+.sidenav-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.08);
+  margin: 12px 24px;
+}
+
+/* ── MAIN CONTENT ── */
+.main { padding: 48px 56px 80px; }
+
+/* ── SECTION ── */
+.sec { margin-bottom: 56px; scroll-margin-top: 24px; }
+.sec-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--border);
+}
+.sec-num {
+  background: var(--navy);
+  color: white;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 10px;
+  letter-spacing: 0.06em;
+  flex-shrink: 0;
+}
+.sec-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.3;
+}
+.sec-sub {
+  font-size: 11.5px;
+  color: var(--muted);
+  margin-bottom: 18px;
+  font-style: italic;
+}
+
+/* ── OVERVIEW CARDS ── */
+.overview-4 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 16px 0;
+}
+.ov-card {
+  background: white;
+  border: 1px solid var(--border);
+  padding: 18px 20px;
+}
+.ov-card.gold-border { border-left: 4px solid var(--gold); }
+.ov-card.green-border { border-left: 4px solid var(--green-light); }
+.ov-card.navy-border { border-left: 4px solid var(--navy3); }
+.ov-card.red-border { border-left: 4px solid var(--red); }
+.ov-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+.ov-val { font-size: 13px; font-weight: 700; color: var(--navy); line-height: 1.4; }
+.ov-sub { font-size: 11px; color: var(--muted); margin-top: 3px; }
+
+/* ── TABLE ── */
+.doc-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+  margin: 14px 0;
+}
+.doc-table th {
+  background: var(--navy);
+  color: rgba(255,255,255,0.85);
+  padding: 10px 14px;
+  text-align: left;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+.doc-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.doc-table tr:nth-child(even) td { background: rgba(0,0,0,0.015); }
+.doc-table tr.subtotal td { background: var(--green-pale); font-weight: 700; color: var(--green); }
+.doc-table tr.total td { background: var(--navy); color: white; font-weight: 700; }
+.doc-table tr.cash-row td { background: var(--gold-pale); color: var(--gold); font-weight: 600; }
+.num { text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; }
+.g { color: var(--green-light); }
+.gold-c { color: var(--gold); }
+
+/* ── PDM BOX ── */
+.pdm {
+  border: 1px solid var(--border);
+  overflow: hidden;
+  margin: 14px 0;
+}
+.pdm-row {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  border-bottom: 1px solid var(--border);
+}
+.pdm-row:last-child { border-bottom: none; }
+.pdm-level {
+  background: var(--navy);
+  color: white;
+  padding: 14px 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1.4;
+}
+.pdm-row:nth-child(2) .pdm-level { background: var(--navy2); }
+.pdm-row:nth-child(3) .pdm-level { background: var(--navy3); }
+.pdm-row:nth-child(4) .pdm-level { background: var(--green); }
+.pdm-content { padding: 14px 18px; font-size: 12.5px; line-height: 1.6; }
+.pdm-content strong { color: var(--navy); }
+
+/* ── SITE CARDS (3-col) ── */
+.site-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin: 16px 0;
+}
+.site-card {
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+.site-card-head {
+  padding: 14px 16px;
+  color: white;
+}
+.sh-uz { background: var(--gold); color: var(--navy); }
+.sh-id { background: var(--green); }
+.sh-in { background: var(--navy3); }
+.sc-phase {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-bottom: 2px;
+}
+.sc-name { font-weight: 700; font-size: 13.5px; line-height: 1.3; }
+.sc-anchor { font-size: 11px; opacity: 0.75; margin-top: 4px; }
+.site-card-body { padding: 14px 16px; font-size: 12px; }
+.sc-kpi {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 11.5px;
+}
+.sc-kpi:last-child { border-bottom: none; }
+.sc-kpi-label { color: var(--muted); }
+.sc-kpi-val { font-weight: 600; color: var(--navy); }
+
+/* ── CALLOUT ── */
+.callout {
+  padding: 14px 18px;
+  margin: 14px 0;
+  border-left: 4px solid;
+  font-size: 12.5px;
+  line-height: 1.65;
+}
+.callout-navy { border-color: var(--navy3); background: rgba(12,31,58,0.04); }
+.callout-gold { border-color: var(--gold); background: var(--gold-pale); }
+.callout-green { border-color: var(--green-light); background: var(--green-pale); }
+.callout-red { border-color: var(--red); background: var(--red-pale); }
+.callout-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  display: block;
+}
+.callout-navy .callout-label { color: var(--navy3); }
+.callout-gold .callout-label { color: var(--gold); }
+.callout-green .callout-label { color: var(--green); }
+.callout-red .callout-label { color: var(--red); }
+
+/* ── CONSORTIUM ── */
+.consortium-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  margin: 14px 0;
+}
+.cons-card {
+  border: 1px solid var(--border);
+  padding: 18px 18px;
+  background: white;
+}
+.cons-card.lead { border-top: 3px solid var(--navy); }
+.cons-card.assoc { border-top: 3px solid var(--gold); }
+.cons-card.tech { border-top: 3px solid var(--green-light); }
+.cons-role {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+.cons-name { font-weight: 700; font-size: 13px; color: var(--navy); margin-bottom: 10px; }
+.cons-body { font-size: 11.5px; color: var(--text); line-height: 1.6; }
+.cons-body li { list-style: none; padding-left: 14px; position: relative; margin-bottom: 3px; }
+.cons-body li::before { content: '·'; position: absolute; left: 4px; color: var(--muted); }
+
+/* ── EMOTII PANEL ── */
+.emotii-panel {
+  background: white;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  margin: 16px 0;
+}
+.ep-head {
+  background: var(--navy);
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ep-title { color: white; font-weight: 700; font-size: 14px; }
+.ep-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  padding: 3px 10px;
+  background: rgba(240,192,64,0.2);
+  color: var(--gold-light);
+  border: 1px solid rgba(240,192,64,0.3);
+}
+.ep-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border-top: none;
+}
+.ep-col { padding: 16px 18px; border-right: 1px solid var(--border); }
+.ep-col:last-child { border-right: none; }
+.ep-col-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.ep-lang-tag {
+  display: inline-block;
+  background: var(--navy);
+  color: rgba(255,255,255,0.8);
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 2px;
+  margin: 2px 2px 2px 0;
+  font-family: 'JetBrains Mono', monospace;
+}
+.ep-text { font-size: 11.5px; color: var(--muted); line-height: 1.6; }
+
+/* ── TIMELINE ── */
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  margin: 16px 0;
+}
+.tl-col { border-right: 1px solid var(--border); }
+.tl-col:last-child { border-right: none; }
+.tl-head {
+  padding: 12px 16px;
+  color: white;
+  font-weight: 700;
+  font-size: 12.5px;
+}
+.tl-y1 { background: var(--gold); color: var(--navy); }
+.tl-y2 { background: var(--navy2); }
+.tl-y3 { background: var(--navy3); }
+.tl-year {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  display: block;
+  margin-bottom: 2px;
+}
+.tl-body { padding: 14px 16px; font-size: 12px; }
+.tl-item {
+  padding: 5px 0;
+  border-bottom: 1px dashed var(--border);
+  color: var(--text);
+  line-height: 1.5;
+}
+.tl-item:last-child { border-bottom: none; }
+.tl-site {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  padding: 1px 5px;
+  border-radius: 2px;
+  font-weight: 500;
+}
+.tl-uz { background: rgba(200,150,10,0.15); color: var(--gold); }
+.tl-id { background: rgba(26,107,74,0.12); color: var(--green); }
+.tl-in { background: rgba(30,61,106,0.12); color: var(--navy3); }
+
+/* ── KPI IMPACT ── */
+.kpi-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin: 16px 0;
+}
+.kpi-box {
+  background: white;
+  border: 1px solid var(--border);
+  padding: 18px 16px;
+  text-align: center;
+}
+.kpi-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.kpi-label { font-size: 11px; color: var(--muted); line-height: 1.4; }
+
+/* ── SUSTAINABILITY FLYWHEEL ── */
+.flywheel-box {
+  background: var(--navy);
+  padding: 32px;
+  margin: 16px 0;
+  position: relative;
+  overflow: hidden;
+}
+.flywheel-box::before {
+  content: '↻';
+  position: absolute;
+  right: 32px; top: 50%;
+  transform: translateY(-50%);
+  font-size: 120px;
+  color: rgba(255,255,255,0.03);
+  font-family: sans-serif;
+}
+.fw-title { color: var(--gold-light); font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; margin-bottom: 20px; }
+.fw-steps {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+  align-items: center;
+}
+.fw-step { text-align: center; }
+.fw-step-num {
+  width: 36px; height: 36px;
+  border: 2px solid rgba(240,192,64,0.4);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--gold-light);
+}
+.fw-step-text { font-size: 11px; color: rgba(255,255,255,0.6); line-height: 1.4; }
+.fw-arrow { text-align: center; color: rgba(255,255,255,0.2); font-size: 20px; }
+
+/* ── NARRATIVE QUOTE ── */
+.proposal-quote {
+  border: 1px solid var(--gold);
+  background: var(--gold-pale);
+  padding: 24px 28px;
+  margin: 16px 0;
+}
+.pq-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+.pq-text {
+  font-family: 'Source Serif 4', serif;
+  font-size: 14px;
+  line-height: 1.85;
+  color: var(--ink);
+}
+.pq-text em { color: var(--green); font-style: italic; font-weight: 600; }
+.pq-text strong { color: var(--navy); }
+
+/* ── FOOTER ── */
+.doc-footer {
+  background: var(--navy);
+  padding: 24px 56px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px;
+  border-top: 3px solid var(--gold);
+}
+.df-item {}
+.df-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 4px; }
+.df-val { font-size: 12px; color: rgba(255,255,255,0.75); font-weight: 500; }
+
+tag {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  padding: 2px 7px;
+  border-radius: 2px;
+  vertical-align: middle;
+  margin: 1px;
+}
+.tg-navy { background: rgba(12,31,58,0.1); color: var(--navy3); border: 1px solid rgba(12,31,58,0.2); }
+.tg-gold { background: rgba(200,150,10,0.1); color: var(--gold); border: 1px solid rgba(200,150,10,0.25); }
+.tg-green { background: rgba(26,107,74,0.1); color: var(--green); border: 1px solid rgba(26,107,74,0.25); }
+
+ul.body-list { list-style: none; padding: 0; margin: 10px 0; }
+ul.body-list li { padding: 5px 0 5px 18px; position: relative; border-bottom: 1px dashed var(--border); font-size: 12.5px; }
+ul.body-list li:last-child { border-bottom: none; }
+ul.body-list li::before { content: '→'; position: absolute; left: 0; color: var(--gold); font-size: 11px; top: 7px; }
+
+p.body-p { font-size: 13px; line-height: 1.8; color: var(--text); margin-bottom: 12px; }
+</style>
+</head>
+<body>
+
+<!-- ── COVER ── -->
+<div class="cover">
+  <div class="cover-grid">
+    <div>
+      <div class="cover-eyebrow">KOICA IBS 2026 · 사업화 지원 신청서 (STC) · 초안 Draft v1.0</div>
+      <div class="cover-title">한국-HMG 글로벌 스마트 제조<br>TVET 복제 사업</div>
+      <div class="cover-subtitle">Korea–HMG Global Smart Manufacturing TVET Replication Programme<br>IEG 스마트팩토리 훈련 장비 + Emotii AI 다국어 플랫폼을 통한<br>3개국 BOP 청년 산업기술 인력 양성 체계 구축</div>
+    </div>
+    <div class="cover-meta">
+      <div class="cover-meta-item">
+        <span class="cm-label">주관기업</span>
+        <span class="cm-val">주식회사 아이지 (IEG Co., Ltd.)</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="cm-label">협력기관</span>
+        <span class="cm-val">이노비즈협회 / Emotii AI</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="cm-label">대상국 (3개국)</span>
+        <span class="cm-val">우즈베키스탄 · 인도네시아 · 인도</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="cm-label">사업 기간 / 총 사업비</span>
+        <span class="cm-val">3년 (2027–2029) / 18억 원</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="cm-label">IBS 마감</span>
+        <span class="cm-val">2026년 6월 18일</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── SITE BAR ── -->
+<div class="site-bar">
+  <div class="site-cell">
+    <div class="site-flag">🇺🇿</div>
+    <div class="site-info">
+      <div class="site-country">Uzbekistan</div>
+      <div class="site-name">지작 자유경제구역</div>
+      <div class="site-anchor">앵커기업: ADM Jizzakh LLC</div>
+    </div>
+    <span class="site-phase ph1">Y1 파일럿</span>
+  </div>
+  <div class="site-cell">
+    <div class="site-flag">🇮🇩</div>
+    <div class="site-info">
+      <div class="site-country">Indonesia · West Java</div>
+      <div class="site-name">치카랑 산업단지</div>
+      <div class="site-anchor">앵커기업: PT. HMID / 한국 제조기업 클러스터</div>
+    </div>
+    <span class="site-phase ph2">Y2 복제1</span>
+  </div>
+  <div class="site-cell">
+    <div class="site-flag">🇮🇳</div>
+    <div class="site-info">
+      <div class="site-country">India · Andhra Pradesh</div>
+      <div class="site-name">안드라프라데시 (아난타푸르)</div>
+      <div class="site-anchor">앵커기업: Kia India (KMMIL)</div>
+    </div>
+    <span class="site-phase ph3">Y3 복제2</span>
+  </div>
+</div>
+
+<!-- ── BODY ── -->
+<div class="body-wrap">
+
+<!-- SIDEBAR -->
+<nav class="sidenav">
+  <div class="sidenav-section">
+    <span class="sn-num">01</span><span class="sn-title">사업 개요 및 기본 정보</span>
+  </div>
+  <div class="sidenav-section">
+    <span class="sn-num">02</span><span class="sn-title">문제 분석 및 BOP 맥락</span>
+  </div>
+  <div class="sidenav-section">
+    <span class="sn-num">03</span><span class="sn-title">사업 목표 · PDM</span>
+  </div>
+  <div class="sidenav-section">
+    <span class="sn-num">04</span><span class="sn-title">컨소시엄 구조 및 역할</span>
+  </div>
+  <div class="sidenav-section">
+    <span class="sn-num">05</span><span class="sn-title">Emotii 기술 통합 방식</span>
+  </div>
+  <div class="sidenav-divider"></div>
+  <div class="sidenav-section">
+    <span class="sn-num">06</span><span class="sn-title">3개 사이트 실행 계획</span>
+  </div>
+  <div class="sidenav-section">
+    <span class="sn-num">07</span><span class="sn-title">예산 계획 (현물 최대화)</span>
+  </div>
+  <div class="sidenav-section">
+    <span class="sn-num">08</span><span class="sn-title">성과 지표 (M&amp;E)</span>
+  </div>
+  <div class="sidenav-divider"></div>
+  <div class="sidenav-section">
+    <span class="sn-num">09</span><span class="sn-title">지속가능성 · 선순환 구조</span>
+  </div>
+  <div class="sidenav-section">
+    <span class="sn-num">10</span><span class="sn-title">심사 설득 핵심 내러티브</span>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="main">
+
+<!-- ── 01 사업 개요 ── -->
+<section class="sec" id="s01">
+  <div class="sec-header">
+    <div class="sec-num">01</div>
+    <div class="sec-title">사업 개요 및 기본 정보</div>
+  </div>
+
+  <div class="overview-4">
+    <div class="ov-card gold-border">
+      <div class="ov-label">사업명 (국문)</div>
+      <div class="ov-val">한국-HMG 글로벌 스마트 제조 TVET 복제 사업</div>
+      <div class="ov-sub">우즈베키스탄·인도네시아·인도 BOP 청년 기술 인력 양성</div>
+    </div>
+    <div class="ov-card green-border">
+      <div class="ov-label">사업명 (영문)</div>
+      <div class="ov-val">Korea–HMG Global Smart Manufacturing TVET Replication Programme</div>
+      <div class="ov-sub">Uzbekistan · Indonesia · India</div>
+    </div>
+    <div class="ov-card navy-border">
+      <div class="ov-label">총 사업비 / 기간</div>
+      <div class="ov-val">18억 원 / 3년 (2027–2029)</div>
+      <div class="ov-sub">KOICA 12.6억(70%) + 파트너 5.4억(30%)</div>
+    </div>
+    <div class="ov-card red-border">
+      <div class="ov-label">BOP 목표 수혜자</div>
+      <div class="ov-val">3개국 18~35세 저소득 청년 제조 기술 인력</div>
+      <div class="ov-sub">연간 600명 → 3년 1,800명 배출 목표</div>
+    </div>
+  </div>
+
+  <div class="callout callout-navy">
+    <span class="callout-label">사업 핵심 개념</span>
+    본 사업은 단순 TVET 장비 설치가 아닙니다. <strong>IEG 스마트팩토리 훈련 장비 + Emotii AI 다국어 동시통역 플랫폼</strong>을 결합하여, 한국 OEM 스펙의 스마트 제조 교육을 현지어로 즉시 전달하는 "언어 장벽 없는 기술 전수 시스템"을 우즈베키스탄(지작)에 파일럿 구축하고, 인도네시아(치카랑) → 인도(안드라프라데시)로 순차 복제하는 <strong>HMG 글로벌 생산거점 연계 TVET 표준 모델</strong>입니다.
+  </div>
+</section>
+
+<!-- ── 02 문제 분석 ── -->
+<section class="sec" id="s02">
+  <div class="sec-header">
+    <div class="sec-num">02</div>
+    <div class="sec-title">문제 분석 및 3개국 BOP 맥락</div>
+  </div>
+
+  <div class="site-grid">
+    <div class="site-card">
+      <div class="site-card-head sh-uz">
+        <div class="sc-phase">🇺🇿 Y1 PILOT · Uzbekistan</div>
+        <div class="sc-name">지작 자유경제구역<br>(ADM Jizzakh)</div>
+        <div class="sc-anchor">우즈베키스탄 유일 한국 OEM 자동차 생산거점</div>
+      </div>
+      <div class="site-card-body">
+        <div class="sc-kpi"><span class="sc-kpi-label">2027 목표 인력</span><span class="sc-kpi-val">10,000명 (현 5,000명)</span></div>
+        <div class="sc-kpi"><span class="sc-kpi-label">Phase 3 투자</span><span class="sc-kpi-val">USD 550M (2025–27)</span></div>
+        <div class="sc-kpi"><span class="sc-kpi-label">부품 현지화 목표</span><span class="sc-kpi-val">348종</span></div>
+        <div class="sc-kpi"><span class="sc-kpi-label">BOP 대상</span><span class="sc-kpi-val">지작 농촌 저소득 청년</span></div>
+        <div class="sc-kpi"><span class="sc-kpi-label">핵심 문제</span><span class="sc-kpi-val">스마트 제조 TVET 인프라 전무</span></div>
+        <div class="sc-kpi"><span class="sc-kpi-label">현 해외 연수비</span><span class="sc-kpi-val">$8K~12K/인 (연 $800K+)</span></div>
+        <div class="sc-kpi"><span class="sc-kpi-label">교육 언어</span><span class="sc-kpi-val">우즈벡어 · 러시아어</span></div>
+      </div>
+    </div>
+
+    <div class="site-card">
+      <div class="site-card-head sh-id">
+        <div class="sc-phase">🇮🇩 Y2 REPLICATION · Indonesia</div>
+        <div class="sc-name">치카랑 산업단지<br>(Cikarang, Bekasi)</div>
+        <div class="sc-anchor">현대차 인도네시아 (HMID) + 한국 제조기업 클러스터</div>
+      </div>
+      <div class="site-card-body">
+        <div class="sc-kpi"><span class="sc-kpi-label">HMID 생산 규모</span><span class="sc-kpi-val">150,000대/년 (확장 목표 250K)</span></div>
+        <div class="sc-kpi"><span class="sc-kpi-label">한국 제조기업 수</span><span class="sc-kpi-val">치카랑 내 300개사+</span></div>
+        <div class="sc-kpi"><span class="sc-kpi-label">TVET 현황</span><span class="sc-kpi-val">BNSP 인증 · SKKNI 기준</span></div>
+        <div class="sc-kpi"><span class="sc-kpi-label">BOP 대상</span><span class="sc-kpi-val">브카시·까라왕 저소득 청년</span></div>
+        <div class="sc-kpi"><span class="sc-kpi-label">핵심 문제</span><span class="sc-kpi-val">한국 OEM 스펙 정렬 TVET 없음</span></div>
+        <div class="sc-kpi"><span class="sc-kpi-label">현지화 과제</span><span class="sc-kpi-val">Ioniq 5 · EV 플랫폼 생산 확대</span></div>
+        <div class="sc-kpi"><span class="sc-kpi-label">교육 언어</span><span class="sc-kpi-val">바하사 인도네시아</span></div>
+      </div>
+    </div>
+
+    <div class="site-card">
+      <div class="site-card-head sh-in">
+        <div class="sc-phase">🇮🇳 Y3 REPLICATION · India</div>
+        <div class="sc-name">안드라프라데시<br>(Kia KMMIL · 아난타푸르)</div>
+        <div class="sc-anchor">기아 인도 생산공장 · 연간 300,000대 생산</div>
+      </div>
+      <div class="site-card-body">
+        <div class="sc-kpi"><span class="sc-kpi-label">KMMIL 고용 인원</span><span class="sc-kpi-val">13,000명+</span></div>
+        <div class="sc-kpi"><span class="sc-kpi-label">생산 차종</span><span class="sc-kpi-val">Seltos · Sonet · Carens · EV6</span></div>
+        <div class="sc-kpi"><span class="sc-kpi-label">TVET 현황</span><span class="sc-kpi-val">NSDC · ASDC · APTS 체계</span></div>
+        <div class="sc-kpi"><span class="sc-kpi-label">BOP 대상</span><span class="sc-kpi-val">라야세마 지역 저소득 청년</span></div>
+        <div class="sc-kpi"><span class="sc-kpi-label">핵심 문제</span><span class="sc-kpi-val">스마트 제조 실습 장비 부족</span></div>
+        <div class="sc-kpi"><span class="sc-kpi-label">현지화 과제</span><span class="sc-kpi-val">EV 전환·부품 공급망 내재화</span></div>
+        <div class="sc-kpi"><span class="sc-kpi-label">교육 언어</span><span class="sc-kpi-val">텔루구어 · 힌디어</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout callout-gold">
+    <span class="callout-label">3개국 공통 구조적 문제</span>
+    세 사이트 모두 <strong>한국 OEM 스펙 정렬 스마트 제조 TVET 인프라 부재</strong>라는 동일한 문제를 공유합니다. 또한 현지 교육 언어(우즈벡·바하사·텔루구)와 한국 기술 교육 언어 사이의 <strong>언어 장벽</strong>이 기술 전수를 구조적으로 가로막고 있습니다. IEG 장비 + Emotii 플랫폼 조합이 이 두 문제를 동시에 해결합니다.
+  </div>
+</section>
+
+<!-- ── 03 PDM ── -->
+<section class="sec" id="s03">
+  <div class="sec-header">
+    <div class="sec-num">03</div>
+    <div class="sec-title">사업 목표 및 PDM 논리 모델</div>
+  </div>
+
+  <div class="pdm">
+    <div class="pdm-row">
+      <div class="pdm-level">GOAL<br>(SDGs)</div>
+      <div class="pdm-content">
+        <strong>SDG 8.6</strong> — 3개국 지작·치카랑·안드라프라데시 산업 회랑 내 청년(18–35세) 미취업·미교육 비율 감소<br>
+        <strong>SDG 9.2</strong> — 한국 OEM 스펙 기반 포용적 스마트 제조 역량 구축, 3개국 현지 부품 공급망 내재화 촉진<br>
+        <strong>SDG 4.4</strong> — 고용 가능한 기술·직업 역량 보유 청년 비율 제고
+      </div>
+    </div>
+    <div class="pdm-row">
+      <div class="pdm-level">OUTCOMES<br>(성과)</div>
+      <div class="pdm-content">
+        <strong>성과 1:</strong> 3개국 BOP 청년의 스마트 제조 기술 역량 향상 → IEG Level 1·2 인증 취득, 앵커기업 직고용<br>
+        <strong>성과 2:</strong> 한국-현지 지속가능 TVET 생태계 구축 → 사업 종료 후 자력 운영 가능한 현지 강사 풀 형성<br>
+        <strong>성과 3:</strong> 한국 스마트 제조 기술 표준(K-SmartTVET™) 3개국 확산 → HMG 글로벌 TVET 표준 모델 정립
+      </div>
+    </div>
+    <div class="pdm-row">
+      <div class="pdm-level">OUTPUTS<br>(산출)</div>
+      <div class="pdm-content">
+        <strong>1.1</strong> 스마트팩토리 훈련 센터 3개 구축 (지작 Y1 · 치카랑 Y2 · 안드라프라데시 Y3)<br>
+        <strong>1.2</strong> Emotii 기반 AI 다국어 교육 플랫폼 3개 언어 운영 (우즈벡/바하사/텔루구)<br>
+        <strong>2.1</strong> 32주 CBT 커리큘럼 현지어 3종 개발 완료<br>
+        <strong>2.2</strong> 현지 마스터 트레이너 각 사이트 6명 이상 ToT 완료<br>
+        <strong>2.3</strong> 연간 600명 (사이트별 200명) IEG 인증 취득 배출
+      </div>
+    </div>
+    <div class="pdm-row">
+      <div class="pdm-level">ACTIVITIES<br>(활동)</div>
+      <div class="pdm-content">
+        A1: IEG 장비 조달·설치·시운전 (3개 사이트 순차) | A2: Emotii 플랫폼 현지어 커스터마이징 및 기술 용어 DB 구축<br>
+        A3: 현지어 CBT 커리큘럼 개발 (이노비즈협회·IEG 공동) | A4: 한국 마스터 트레이너 파견 (각 Y1 4주)<br>
+        A5: ToT — 현지 강사 6명/사이트 양성 | A6: 코호트 운영 (25~50명/기, 연 4기) | A7: M&amp;E 보고 및 후속 사이트 복제
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 04 컨소시엄 ── -->
+<section class="sec" id="s04">
+  <div class="sec-header">
+    <div class="sec-num">04</div>
+    <div class="sec-title">컨소시엄 구조 및 역할 분담</div>
+  </div>
+
+  <div class="consortium-row">
+    <div class="cons-card lead">
+      <div class="cons-role">주관기업 (Lead)</div>
+      <div class="cons-name">주식회사 아이지 (IEG Co., Ltd.)</div>
+      <ul class="cons-body">
+        <li>사업 총괄 · 법적·재정적 책임</li>
+        <li>스마트팩토리 훈련 장비 제조·공급·설치 (IEG 3432·3430·4000·4100·6050)</li>
+        <li>IEG Level 1·2 인증 체계 운영</li>
+        <li>한국 마스터 트레이너 파견 (각 사이트 Y1)</li>
+        <li>32주 CBT 커리큘럼 개발 주도</li>
+        <li><strong>분담금: 장비 현물 출자 + 인건비</strong></li>
+      </ul>
+    </div>
+    <div class="cons-card assoc">
+      <div class="cons-role">협력기관 (ODA 역량)</div>
+      <div class="cons-name">이노비즈협회</div>
+      <ul class="cons-body">
+        <li>KOICA 사업 경험·행정 역량 제공</li>
+        <li>K-SmartTVET™ 공동 브랜드 운영</li>
+        <li>PDM 기반 M&amp;E 보고 체계 구축</li>
+        <li>현지 정부기관 네트워크 연결</li>
+        <li>사업 종료 후 자립화 컨설팅</li>
+        <li><strong>분담금: PM 인건비 · 행정비 현물</strong></li>
+      </ul>
+    </div>
+    <div class="cons-card tech">
+      <div class="cons-role">기술 공급사 (Sub-vendor)</div>
+      <div class="cons-name">Emotii AI</div>
+      <ul class="cons-body">
+        <li>AI 실시간 다국어 동시통역 플랫폼 제공</li>
+        <li>한국어↔우즈벡/바하사/텔루구 3개 언어쌍</li>
+        <li>스마트 제조 기술 용어 커스텀 엔진 셋업</li>
+        <li>IEG와 기술 서비스 계약(하도급 구조)</li>
+        <li>70+ 언어 확장 가능 → 후속 사이트 즉시 적용</li>
+        <li><strong>구조: IEG의 하도급 · 사업비 내 기술 용역비 계상</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout callout-green">
+    <span class="callout-label">현지 파트너 (필수 첨부 서류)</span>
+    <strong>우즈베키스탄:</strong> ADM Jizzakh LLC (CEO 명의 파트너십 확약 레터) + 지작 폴리테크닉 협력의향서<br>
+    <strong>인도네시아:</strong> PT. HMID 또는 치카랑 입주 한국 기업 협회 (KOCHAM Indonesia) 협력의향서<br>
+    <strong>인도:</strong> Kia India KMMIL 또는 AP Skill Development Mission (ASDM) 협력의향서<br>
+    → 각 현지 파트너의 서한은 KOICA 심사에서 "실행 가능성" 항목 점수를 결정하는 핵심 서류입니다.
+  </div>
+</section>
+
+<!-- ── 05 Emotii ── -->
+<section class="sec" id="s05">
+  <div class="sec-header">
+    <div class="sec-num">05</div>
+    <div class="sec-title">Emotii 기술 통합 방식 — "언어 장벽 제로" 기술 전수 시스템</div>
+  </div>
+
+  <div class="emotii-panel">
+    <div class="ep-head">
+      <div class="ep-title">Emotii = 한국 기술을 3개국 현지어로 전달하는 교육 인프라</div>
+      <div class="ep-tag">하도급 기술 용역 구조 (IEG → Emotii)</div>
+    </div>
+    <div class="ep-body">
+      <div class="ep-col">
+        <div class="ep-col-label">🇺🇿 Y1 · 지작 (우즈베키스탄)</div>
+        <div style="margin-bottom:8px">
+          <span class="ep-lang-tag">한국어</span>
+          <span class="ep-lang-tag">→</span>
+          <span class="ep-lang-tag">우즈벡어</span>
+          <span class="ep-lang-tag">러시아어</span>
+        </div>
+        <div class="ep-text">Profibus 네트워크, PLC 사다리 논리, 유압 회로 등 스마트 제조 기술 용어 우즈벡/러시아 특화 엔진 구축. ADM 생산라인 용어와 1:1 매핑.</div>
+      </div>
+      <div class="ep-col">
+        <div class="ep-col-label">🇮🇩 Y2 · 치카랑 (인도네시아)</div>
+        <div style="margin-bottom:8px">
+          <span class="ep-lang-tag">한국어</span>
+          <span class="ep-lang-tag">→</span>
+          <span class="ep-lang-tag">바하사</span>
+        </div>
+        <div class="ep-text">HMID Ioniq 5 EV 생산 공정 용어, BNSP 인증 기준 용어 바하사 엔진 추가. Y1 우즈벡 엔진 자산 재활용 → 구축 기간 단축.</div>
+      </div>
+      <div class="ep-col">
+        <div class="ep-col-label">🇮🇳 Y3 · 안드라프라데시 (인도)</div>
+        <div style="margin-bottom:8px">
+          <span class="ep-lang-tag">한국어</span>
+          <span class="ep-lang-tag">→</span>
+          <span class="ep-lang-tag">텔루구어</span>
+          <span class="ep-lang-tag">힌디어</span>
+        </div>
+        <div class="ep-text">기아 KMMIL Seltos/EV6 공정 기준 텔루구어 엔진 구축. ASDC (Automotive Skill Development Council) 표준 용어 통합.</div>
+      </div>
+    </div>
+  </div>
+
+  <table class="doc-table">
+    <tr>
+      <th>비교 항목</th>
+      <th class="num">전문 통역사 파견 방식</th>
+      <th class="num">Emotii AI 통합 방식</th>
+      <th class="num">개선 효과</th>
+    </tr>
+    <tr>
+      <td>사이트당 연간 통역 비용</td>
+      <td class="num" style="color:var(--red)">$24,000~36,000</td>
+      <td class="num g">Emotii 구독료 $12,000~18,000</td>
+      <td class="num g">40~65% 절감</td>
+    </tr>
+    <tr>
+      <td>3개 사이트 동시 확장 시</td>
+      <td class="num" style="color:var(--red)">통역사 3명 × $30K = $90K+/yr</td>
+      <td class="num g">엔진 추가만으로 확장 (한계비용↓)</td>
+      <td class="num g">규모의 경제 작동</td>
+    </tr>
+    <tr>
+      <td>교실 동시 운영 수</td>
+      <td class="num" style="color:var(--red)">통역사 수 = 교실 수 제한</td>
+      <td class="num g">동시 다교실 지원 (제한 없음)</td>
+      <td class="num g">연간 교육 수용량 3배+</td>
+    </tr>
+    <tr>
+      <td>교재·교안 현지어 번역</td>
+      <td class="num" style="color:var(--red)">$15K~25K (사이트당 1회성)</td>
+      <td class="num g">Emotii 자동 초번역 + 검수 $2K~3K</td>
+      <td class="num g">$12K~22K 절감/사이트</td>
+    </tr>
+    <tr>
+      <td>한국 마스터 트레이너 현지 체재기간</td>
+      <td class="num" style="color:var(--red)">4주 (통역 세팅·조율 포함)</td>
+      <td class="num g">2주 (Emotii가 언어 처리)</td>
+      <td class="num g">체재비 50% 절감</td>
+    </tr>
+    <tr class="subtotal">
+      <td><strong>3개 사이트 3년 통역 관련 누적 절감</strong></td>
+      <td class="num">총 $270K~450K 지출</td>
+      <td class="num">총 $108K~162K 지출</td>
+      <td class="num"><strong>$162K~288K 누적 절감 (약 60%)</strong></td>
+    </tr>
+  </table>
+</section>
+
+<!-- ── 06 실행 계획 ── -->
+<section class="sec" id="s06">
+  <div class="sec-header">
+    <div class="sec-num">06</div>
+    <div class="sec-title">3개 사이트 연차별 실행 계획</div>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-col">
+      <div class="tl-head tl-y1">
+        <span class="tl-year">Year 1 (2027) · 파일럿</span>
+        🇺🇿 우즈베키스탄 · 지작 FEZ
+      </div>
+      <div class="tl-body">
+        <div class="tl-item"><span class="tl-site tl-uz">Q1</span> ADM MOU 체결 → 시설 준비</div>
+        <div class="tl-item"><span class="tl-site tl-uz">Q1</span> IEG 3432×2, 4000×1, 6050×1 설치</div>
+        <div class="tl-item"><span class="tl-site tl-uz">Q1</span> Emotii 우즈벡/러시아 엔진 셋업</div>
+        <div class="tl-item"><span class="tl-site tl-uz">Q2</span> 커리큘럼 현지어 개발 완료</div>
+        <div class="tl-item"><span class="tl-site tl-uz">Q2</span> 한국 마스터 트레이너 파견 2주</div>
+        <div class="tl-item"><span class="tl-site tl-uz">Q2~4</span> 코호트 1~3기 운영 (50명/기)</div>
+        <div class="tl-item"><span class="tl-site tl-uz">Q4</span> ToT 완료 → 현지 강사 6명 인증</div>
+        <div class="tl-item"><span class="tl-site tl-uz">KPI</span> 150명 IEG 인증 취득 · ADM 직고용</div>
+      </div>
+    </div>
+    <div class="tl-col">
+      <div class="tl-head tl-y2">
+        <span class="tl-year">Year 2 (2028) · 복제 1호</span>
+        🇮🇩 인도네시아 · 치카랑
+      </div>
+      <div class="tl-body">
+        <div class="tl-item"><span class="tl-site tl-id">Q1</span> 지작 Y1 검증 완료 → 치카랑 착수</div>
+        <div class="tl-item"><span class="tl-site tl-id">Q1</span> HMID / 한국기업 협회 MOU</div>
+        <div class="tl-item"><span class="tl-site tl-id">Q1</span> IEG 3432×2, 4100×1, 6050×1 설치</div>
+        <div class="tl-item"><span class="tl-site tl-id">Q1</span> Emotii 바하사 엔진 추가 (Y1 자산 재활용)</div>
+        <div class="tl-item"><span class="tl-site tl-id">Q2~4</span> 코호트 1~3기 운영 (50명/기)</div>
+        <div class="tl-item"><span class="tl-site tl-id">Q4</span> BNSP 연계 이중 인증 추진</div>
+        <div class="tl-item"><span class="tl-site tl-uz">계속</span> 지작 자립 4기 운영 (현지 강사)</div>
+        <div class="tl-item"><span class="tl-site tl-id">KPI</span> 지작 200명 + 치카랑 150명 = 350명</div>
+      </div>
+    </div>
+    <div class="tl-col">
+      <div class="tl-head tl-y3">
+        <span class="tl-year">Year 3 (2029) · 복제 2호</span>
+        🇮🇳 인도 · 안드라프라데시
+      </div>
+      <div class="tl-body">
+        <div class="tl-item"><span class="tl-site tl-in">Q1</span> Kia KMMIL ASDM MOU 기반 착수</div>
+        <div class="tl-item"><span class="tl-site tl-in">Q1</span> IEG 3432×2, 3430×1, 6050×1 설치</div>
+        <div class="tl-item"><span class="tl-site tl-in">Q1</span> Emotii 텔루구/힌디 엔진 추가</div>
+        <div class="tl-item"><span class="tl-site tl-in">Q2~4</span> 코호트 1~2기 운영 (50명/기)</div>
+        <div class="tl-item"><span class="tl-site tl-in">Q4</span> NSDC·ASDC 이중 인증 연계</div>
+        <div class="tl-item"><span class="tl-site tl-uz">자립</span> 지작 완전 자립 운영</div>
+        <div class="tl-item"><span class="tl-site tl-id">자립</span> 치카랑 자립 전환</div>
+        <div class="tl-item"><span class="tl-site tl-in">KPI</span> 3개 사이트 연간 600명 배출 체계</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 07 예산 ── -->
+<section class="sec" id="s07">
+  <div class="sec-header">
+    <div class="sec-num">07</div>
+    <div class="sec-title">예산 계획 — 파트너 분담금 현물 최대화 구조</div>
+  </div>
+
+  <p class="body-p">총 사업비 18억 원 (3년), KOICA 분담금 12.6억 원(70%), 파트너 분담금 5.4억 원(30%). 파트너 분담금 내 현물출자 최대화 전략으로 현금 지출을 1.4억 원 이하로 압축합니다.</p>
+
+  <table class="doc-table">
+    <tr>
+      <th>구분</th>
+      <th>세부 항목</th>
+      <th>출자 유형</th>
+      <th>주체</th>
+      <th class="num">금액 (만 원)</th>
+    </tr>
+    <tr>
+      <td rowspan="3"><strong>KOICA<br>분담금<br>(70%)</strong></td>
+      <td>장비 조달 및 설치 (3개 사이트)</td>
+      <td>현금</td>
+      <td>KOICA</td>
+      <td class="num">7,560</td>
+    </tr>
+    <tr>
+      <td>커리큘럼 개발 및 현지어 번역</td>
+      <td>현금</td>
+      <td>KOICA</td>
+      <td class="num">1,890</td>
+    </tr>
+    <tr>
+      <td>현지 강사 ToT, M&amp;E, 운영비</td>
+      <td>현금</td>
+      <td>KOICA</td>
+      <td class="num">2,970</td>
+    </tr>
+    <tr class="subtotal">
+      <td colspan="4"><strong>KOICA 분담금 소계</strong></td>
+      <td class="num"><strong>12,600</strong></td>
+    </tr>
+
+    <tr>
+      <td rowspan="6"><strong>파트너<br>분담금<br>(30%)</strong></td>
+      <td>IEG 교육 장비 현물 (IEG 3432 총 6대 · 시장가 기준)</td>
+      <td style="color:var(--green-light)">현물 (장비)</td>
+      <td>IEG</td>
+      <td class="num">2,100~2,730</td>
+    </tr>
+    <tr>
+      <td>IEG 프로젝트 담당자 인건비 (Kelly Cho 등 3년)</td>
+      <td style="color:var(--green-light)">현물 (인건비)</td>
+      <td>IEG</td>
+      <td class="num">720</td>
+    </tr>
+    <tr>
+      <td>IEG 마스터 트레이너 인건비 (3개 사이트 파견)</td>
+      <td style="color:var(--green-light)">현물 (인건비)</td>
+      <td>IEG</td>
+      <td class="num">540</td>
+    </tr>
+    <tr>
+      <td>이노비즈협회 PM 인건비 + 행정 지원 (3년)</td>
+      <td style="color:var(--green-light)">현물 (인건비)</td>
+      <td>이노비즈</td>
+      <td class="num">540</td>
+    </tr>
+    <tr>
+      <td>Emotii AI 플랫폼 기술 용역비 (하도급 — 3년 3개 사이트)</td>
+      <td>현금</td>
+      <td>IEG→Emotii</td>
+      <td class="num">360~540</td>
+    </tr>
+    <tr>
+      <td>현지 출장비·통관·설치비·예비비 (현금)</td>
+      <td>현금</td>
+      <td>IEG</td>
+      <td class="num">540~810</td>
+    </tr>
+    <tr class="subtotal">
+      <td colspan="4"><strong>파트너 분담금 중 현물 소계</strong></td>
+      <td class="num"><strong>~3,900만 (72%)</strong></td>
+    </tr>
+    <tr class="cash-row">
+      <td colspan="4">💰 파트너 분담금 중 현금 (Emotii 용역 + 출장·예비비)</td>
+      <td class="num">~900~1,350만 (17~25%)</td>
+    </tr>
+    <tr class="total">
+      <td colspan="4"><strong>총 사업비</strong></td>
+      <td class="num"><strong>18,000만 원</strong></td>
+    </tr>
+  </table>
+
+  <div class="callout callout-red">
+    <span class="callout-label">⚠ 컨설팅 확인 필수 — 예산 전제 조건</span>
+    ① <strong>현물 상한 비율</strong>: 파트너 분담금 내 현물이 몇 % 이하로 제한되는지 → 상한이 있다면 장비 현물 일부를 KOICA 장비 조달비로 전환 조정 필요<br>
+    ② <strong>장비 가격 산정 기준</strong>: IEG가 제조사이므로 원가 vs. 시장가 기준 여부 → 시장가 기준 시 Festo Didactic 비교표 제출로 입증<br>
+    ③ <strong>Emotii 하도급 비용 인정</strong>: 외국 기술 서비스 업체에 대한 하도급 비용이 KOICA 사업비 내 인정되는지
+  </div>
+</section>
+
+<!-- ── 08 M&E ── -->
+<section class="sec" id="s08">
+  <div class="sec-header">
+    <div class="sec-num">08</div>
+    <div class="sec-title">성과 지표 (M&amp;E) 프레임워크</div>
+  </div>
+
+  <table class="doc-table">
+    <tr>
+      <th>성과 단계</th>
+      <th>핵심 성과 지표 (KPI)</th>
+      <th class="num">Y1 목표</th>
+      <th class="num">Y2 목표</th>
+      <th class="num">Y3 목표 (누적)</th>
+    </tr>
+    <tr>
+      <td rowspan="3"><strong>산출</strong></td>
+      <td>훈련 센터 구축·운영 수</td>
+      <td class="num">1개 (지작)</td>
+      <td class="num">2개 (+ 치카랑)</td>
+      <td class="num">3개 (+ AP)</td>
+    </tr>
+    <tr>
+      <td>현지 마스터 트레이너 ToT 완료 수</td>
+      <td class="num">6명</td>
+      <td class="num">12명</td>
+      <td class="num">18명</td>
+    </tr>
+    <tr>
+      <td>Emotii 언어 엔진 구축 수</td>
+      <td class="num">2개 (우즈벡·러시아)</td>
+      <td class="num">3개 (+ 바하사)</td>
+      <td class="num">5개 (+ 텔루구·힌디)</td>
+    </tr>
+    <tr>
+      <td rowspan="3"><strong>성과</strong></td>
+      <td>IEG 인증 취득 훈련생 수 (누적)</td>
+      <td class="num">150명</td>
+      <td class="num">500명</td>
+      <td class="num">1,000명</td>
+    </tr>
+    <tr>
+      <td>앵커기업 직고용률</td>
+      <td class="num">≥ 85%</td>
+      <td class="num">≥ 85%</td>
+      <td class="num">≥ 85%</td>
+    </tr>
+    <tr>
+      <td>훈련생 평균 임금 증가율 (취업 6개월 후)</td>
+      <td class="num">기준선 설정</td>
+      <td class="num">≥ 40% 상승</td>
+      <td class="num">≥ 50% 상승</td>
+    </tr>
+    <tr>
+      <td rowspan="2"><strong>임팩트</strong></td>
+      <td>앵커기업 해외 연수비 절감액 (ADM 기준)</td>
+      <td class="num">$400K~600K</td>
+      <td class="num">$800K~1.2M</td>
+      <td class="num">$1.6M~2.4M</td>
+    </tr>
+    <tr>
+      <td>사업 종료 후 자립 운영 사이트 수</td>
+      <td class="num">—</td>
+      <td class="num">1개 (지작)</td>
+      <td class="num">2개 (+ 치카랑)</td>
+    </tr>
+    <tr>
+      <td><strong>젠더</strong></td>
+      <td>여성 훈련생 비율</td>
+      <td class="num">≥ 25%</td>
+      <td class="num">≥ 30%</td>
+      <td class="num">≥ 30%</td>
+    </tr>
+  </table>
+</section>
+
+<!-- ── 09 지속가능성 ── -->
+<section class="sec" id="s09">
+  <div class="sec-header">
+    <div class="sec-num">09</div>
+    <div class="sec-title">지속가능성 및 글로벌 선순환 구조</div>
+  </div>
+
+  <div class="flywheel-box">
+    <div class="fw-title">HMG 글로벌 TVET 자기 강화형 선순환 구조</div>
+    <div class="fw-steps">
+      <div class="fw-step">
+        <div class="fw-step-num">01</div>
+        <div class="fw-step-text">KOICA IBS 파일럿<br>지작 FEZ 구축<br>(2027)</div>
+      </div>
+      <div class="fw-arrow">→</div>
+      <div class="fw-step">
+        <div class="fw-step-num">02</div>
+        <div class="fw-step-text">BOP 청년<br>취업·소득 증가<br>ADM 부품 내재화</div>
+      </div>
+      <div class="fw-arrow">→</div>
+      <div class="fw-step">
+        <div class="fw-step-num">03</div>
+        <div class="fw-step-text">KOICA 레퍼런스<br>치카랑·AP<br>복제 수주</div>
+      </div>
+      <div class="fw-arrow">→</div>
+      <div class="fw-step">
+        <div class="fw-step-num">04</div>
+        <div class="fw-step-text">IEG 수출 매출<br>Emotii 확산<br>K-SmartTVET™</div>
+      </div>
+      <div class="fw-arrow">→</div>
+      <div class="fw-step">
+        <div class="fw-step-num">05</div>
+        <div class="fw-step-text">HMG 공식<br>TVET 파트너<br>→ 추가 사이트</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="kpi-strip">
+    <div class="kpi-box">
+      <div class="kpi-num" style="color:var(--gold)">8.4×</div>
+      <div class="kpi-label">KOICA 투입 대비<br>5년 BOP 소득 창출 배수<br>(1,000명 × $4,800)</div>
+    </div>
+    <div class="kpi-box">
+      <div class="kpi-num" style="color:var(--green)">1,000명</div>
+      <div class="kpi-label">3개 사이트 3년<br>BOP 청년 취업<br>(KOICA 종료 후에도 지속)</div>
+    </div>
+    <div class="kpi-box">
+      <div class="kpi-num" style="color:var(--navy3)">$1.1M+</div>
+      <div class="kpi-label">IEG 장비 수출 매출<br>3개 사이트 합산<br>(복제 사이트 추가 시 증가)</div>
+    </div>
+    <div class="kpi-box">
+      <div class="kpi-num" style="color:var(--red)">1/7</div>
+      <div class="kpi-label">유럽 경쟁사 대비<br>IEG 가격 경쟁력<br>(Festo Didactic 기준)</div>
+    </div>
+  </div>
+
+  <p class="body-p">사업 지속가능성의 핵심은 세 가지입니다. 첫째, <strong>Y2부터 지작이 현지 강사에 의해 자립 운영</strong>되므로 KOICA 예산 종료와 무관하게 연간 200명 배출이 지속됩니다. 둘째, ADM·HMID·Kia KMMIL이 절감하는 <strong>해외 연수비($400K~600K/년/사이트)가 사이트 운영비의 5~8배</strong>에 달하므로 앵커기업 자체 예산으로 운영 지속 유인이 충분합니다. 셋째, IEG가 스페어파츠·커리큘럼 업데이트·추가 장비 수요를 통해 <strong>지속적 수익을 창출</strong>하므로 영리 기반의 자립 모델이 성립합니다.</p>
+</section>
+
+<!-- ── 10 내러티브 ── -->
+<section class="sec" id="s10">
+  <div class="sec-header">
+    <div class="sec-num">10</div>
+    <div class="sec-title">KOICA 심사 설득 — 제안서 핵심 내러티브 (추진배경·기대효과)</div>
+  </div>
+
+  <div class="proposal-quote">
+    <div class="pq-label">📝 KOICA IBS-STC 추진배경 + 기대효과 — 제안서 본문 직접 활용 가능</div>
+    <div class="pq-text">
+      우즈베키스탄 지작, 인도네시아 치카랑, 인도 안드라프라데시는 현대·기아 자동차 그룹(HMG)의 핵심 해외 생산거점이지만, 세 지역 모두 <em>한국 OEM 스펙에 정렬된 스마트 제조 산업기술 교육 인프라가 전무</em>하다는 공통된 구조적 공백을 안고 있습니다. ADM Jizzakh 한 곳만 해도 연간 USD 80만~120만 달러의 해외 연수 비용을 지출하며 5,000명의 엔지니어를 한국과 중국으로 보내야 하지만, 지식은 해외에 남고 인력은 귀국 후 이탈합니다.
+      <br><br>
+      <strong>IEG는 유럽 경쟁사 대비 7분의 1 가격</strong>의 한국산 스마트팩토리 훈련 장비와 Emotii AI 다국어 동시통역 플랫폼을 결합하여 이 문제를 정면으로 해결합니다. 한국인 마스터 트레이너 1명이 우즈벡어·바하사·텔루구어 언어 장벽 없이 현지 기술 인력을 교육하고, 양성된 현지 강사가 KOICA 사업 종료 후에도 자력으로 프로그램을 이어갑니다.
+      <br><br>
+      <em>KOICA 12.6억 원의 투자는 세 앵커기업의 3년간 해외 연수비 절감액 USD 250만~380만 달러(약 33억~50억 원)로 회수</em>되며, 배출된 1,000명의 저소득 청년이 HMG 생산라인에 직고용되어 지역 소득·소비·제조 투자 유입의 자기 강화형 선순환을 만들어냅니다. 이것은 단일 TVET 프로젝트가 아닙니다. <strong>한국 ODA 1억 원이 HMG 글로벌 생산거점 전체의 TVET 표준이 되는 전략적 레버리지</strong>입니다.
+    </div>
+  </div>
+</section>
+
+</main>
+</div><!-- /body-wrap -->
+
+<div class="doc-footer">
+  <div class="df-item">
+    <div class="df-label">신청 유형</div>
+    <div class="df-val">KOICA IBS-STC (사업화 지원)</div>
+  </div>
+  <div class="df-item">
+    <div class="df-label">총 사업비</div>
+    <div class="df-val">18억 원 / 3년</div>
+  </div>
+  <div class="df-item">
+    <div class="df-label">파트너 현물 비중</div>
+    <div class="df-val">~72% (컨설팅 확인 후 조정)</div>
+  </div>
+  <div class="df-item">
+    <div class="df-label">작성</div>
+    <div class="df-val">IEG 해외마케팅팀 · Kelly Cho</div>
+  </div>
+  <div class="df-item">
+    <div class="df-label">IBS 마감</div>
+    <div class="df-val">2026년 6월 18일</div>
+  </div>
+</div>
+
+</body>
+</html>
