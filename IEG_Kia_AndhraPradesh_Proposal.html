@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IEG × Kia India — Andhra Pradesh Smart Training Center Proposal 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#FAF7F2;--cream2:#F2EDE4;--cream3:#E8E1D5;
+  --rule:#D4CBC0;--rule2:#BFB5A8;
+  --ink:#1A1410;--ink2:#3D342A;--ink3:#7A6E64;
+  --saffron:#E8821C;--sd:rgba(232,130,28,0.1);--sm:rgba(232,130,28,0.2);
+  --ap:#1A5C8A;--apd:rgba(26,92,138,0.1);--apm:rgba(26,92,138,0.2); /* Andhra Pradesh blue */
+  --green:#1A6B3A;--grd:rgba(26,107,58,0.1);
+  --red:#C0392B;--rd:rgba(192,57,43,0.1);
+  --gold:#8B6914;--gd:rgba(139,105,20,0.1);
+  --font-d:'Playfair Display',Georgia,serif;
+  --font-b:'DM Sans',sans-serif;
+  --font-m:'DM Mono',monospace;
+  --max:960px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-b);background:var(--cream);color:var(--ink);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 36px;position:relative;z-index:1}
+
+/* COVER */
+.cover{min-height:100vh;background:var(--ink);display:flex;flex-direction:column;position:relative;overflow:hidden}
+.cover::before{content:'';position:absolute;top:0;right:0;width:55%;height:100%;background:linear-gradient(to bottom left,rgba(232,130,28,0.08),transparent 60%);pointer-events:none}
+.cover::after{content:'';position:absolute;bottom:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--saffron),#fff,var(--ap))}
+
+.cv-top{padding:36px 52px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.07);position:relative;z-index:1}
+.cv-brand{font-family:var(--font-m);font-size:11px;color:var(--saffron);letter-spacing:2px;text-transform:uppercase}
+.cv-badge{font-family:var(--font-m);font-size:10px;color:rgba(255,255,255,0.25);border:1px solid rgba(255,255,255,0.1);padding:4px 10px;border-radius:3px;letter-spacing:1px}
+
+.cv-body{flex:1;display:flex;flex-direction:column;justify-content:center;padding:64px 52px 52px;position:relative;z-index:1}
+.cv-eyebrow{font-family:var(--font-m);font-size:11px;color:var(--saffron);letter-spacing:2px;text-transform:uppercase;margin-bottom:24px;display:flex;align-items:center;gap:12px}
+.cv-eyebrow::after{content:'';flex:1;height:1px;background:rgba(232,130,28,0.3);max-width:80px}
+
+.cv-h1{font-family:var(--font-d);font-size:clamp(38px,6vw,70px);font-weight:700;color:#fff;line-height:1.05;margin-bottom:12px;letter-spacing:-.5px}
+.cv-h1 em{font-style:italic;color:var(--saffron)}
+.cv-h2{font-family:var(--font-d);font-size:clamp(15px,2.2vw,22px);font-weight:400;font-style:italic;color:rgba(255,255,255,0.45);margin-bottom:48px;letter-spacing:.3px}
+
+.kpi-strip{display:flex;gap:0;border:1px solid rgba(255,255,255,0.1);border-radius:4px;overflow:hidden;margin-bottom:40px;width:fit-content}
+.kpi{padding:18px 26px;border-right:1px solid rgba(255,255,255,0.08);text-align:center}
+.kpi:last-child{border-right:none}
+.kpi-val{font-family:var(--font-d);font-size:28px;font-weight:700;color:var(--saffron);line-height:1;margin-bottom:3px}
+.kpi-lbl{font-family:var(--font-m);font-size:9px;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:1px}
+
+.tag-row{display:flex;gap:8px;flex-wrap:wrap}
+.tag{font-family:var(--font-m);font-size:10px;padding:5px 12px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase;border:1px solid}
+.t-sf{background:var(--sd);color:var(--saffron);border-color:rgba(232,130,28,0.35)}
+.t-ap{background:var(--apd);color:var(--ap);border-color:rgba(26,92,138,0.35)}
+.t-wh{background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.5);border-color:rgba(255,255,255,0.12)}
+
+.print-btn{position:fixed;bottom:24px;right:24px;font-family:var(--font-m);font-size:10px;color:var(--ink3);background:var(--cream2);border:1px solid var(--rule);padding:9px 16px;border-radius:3px;cursor:pointer;z-index:200;letter-spacing:.8px;text-transform:uppercase;transition:all .2s;box-shadow:0 2px 8px rgba(0,0,0,0.08)}
+.print-btn:hover{color:var(--saffron);border-color:var(--saffron)}
+
+/* NAV */
+.nav{background:rgba(250,247,242,0.94);border-bottom:1px solid var(--rule);position:sticky;top:0;z-index:100;backdrop-filter:blur(12px)}
+.nav-inner{max-width:var(--max);margin:0 auto;padding:0 36px;display:flex;gap:0;overflow-x:auto;scrollbar-width:none}
+.nav-inner::-webkit-scrollbar{display:none}
+.nav-a{font-family:var(--font-m);font-size:10px;color:var(--ink3);text-decoration:none;padding:14px 12px;white-space:nowrap;letter-spacing:.8px;text-transform:uppercase;border-bottom:2px solid transparent;transition:all .15s;display:block}
+.nav-a:hover{color:var(--saffron);border-bottom-color:var(--saffron)}
+
+/* MAIN */
+main{padding:72px 0 96px}
+.section{margin-bottom:72px}
+
+.sh{display:flex;align-items:baseline;gap:16px;margin-bottom:28px;padding-bottom:16px;border-bottom:1px solid var(--rule)}
+.sh-num{font-family:var(--font-d);font-size:48px;font-weight:400;color:var(--rule2);line-height:1;flex-shrink:0}
+.sh-r{}
+.sh-eye{font-family:var(--font-m);font-size:9px;color:var(--ink3);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px}
+.sh-title{font-family:var(--font-d);font-size:24px;font-weight:700;color:var(--ink);line-height:1.15}
+.sh-title span{color:var(--saffron);font-style:italic}
+.sh-title .ap{color:var(--ap)}
+
+.lead{font-size:16px;color:var(--ink2);line-height:1.8;margin-bottom:22px;max-width:700px}
+.body-t{font-size:14px;color:var(--ink2);line-height:1.75;margin-bottom:14px}
+.subh{font-size:12px;font-weight:600;color:var(--ink);text-transform:uppercase;letter-spacing:1px;margin:26px 0 10px;display:flex;align-items:center;gap:10px}
+.subh::before{content:'';width:18px;height:2px;background:var(--saffron);flex-shrink:0}
+
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0}
+.cg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:18px 0}
+.card{background:#fff;border:1px solid var(--rule);border-radius:6px;padding:20px;border-top:3px solid;box-shadow:0 1px 4px rgba(0,0,0,0.04);transition:box-shadow .2s}
+.card:hover{box-shadow:0 4px 16px rgba(0,0,0,0.08)}
+.cs{border-top-color:var(--saffron)}
+.ca{border-top-color:var(--ap)}
+.cr{border-top-color:var(--red)}
+.cg2{border-top-color:var(--gold)}
+.cgr{border-top-color:var(--green)}
+.card-lbl{font-family:var(--font-m);font-size:9px;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:8px}
+.cs .card-lbl{color:var(--saffron)}
+.ca .card-lbl{color:var(--ap)}
+.cr .card-lbl{color:var(--red)}
+.cg2 .card-lbl{color:var(--gold)}
+.cgr .card-lbl{color:var(--green)}
+.card-title{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:7px}
+.card-body{font-size:13px;color:var(--ink3);line-height:1.6}
+.card-body strong{color:var(--ink);font-weight:600}
+
+.callout{border-radius:4px;padding:18px 22px;margin:18px 0;border-left:3px solid}
+.cl-sf{background:var(--sd);border-color:var(--saffron)}
+.cl-ap{background:var(--apd);border-color:var(--ap)}
+.cl-rd{background:var(--rd);border-color:var(--red)}
+.cl-go{background:var(--gd);border-color:var(--gold)}
+.cl-gr{background:var(--grd);border-color:var(--green)}
+.callout-lbl{font-family:var(--font-m);font-size:9px;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:6px}
+.cl-sf .callout-lbl{color:var(--saffron)}
+.cl-ap .callout-lbl{color:var(--ap)}
+.cl-rd .callout-lbl{color:var(--red)}
+.cl-go .callout-lbl{color:var(--gold)}
+.cl-gr .callout-lbl{color:var(--green)}
+.callout p{font-size:14px;color:var(--ink2);line-height:1.7}
+.callout strong{color:var(--ink);font-weight:600}
+
+.tw{overflow-x:auto;margin:16px 0}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead th{background:var(--ink);color:rgba(255,255,255,0.75);padding:10px 14px;text-align:left;font-family:var(--font-m);font-size:9px;text-transform:uppercase;letter-spacing:1px}
+thead th:first-child{border-radius:4px 0 0 0}
+thead th:last-child{border-radius:0 4px 0 0}
+tbody tr:nth-child(odd){background:#fff}
+tbody tr:nth-child(even){background:var(--cream2)}
+tbody tr:hover{background:var(--cream3)}
+td{padding:10px 14px;border-bottom:1px solid var(--rule);color:var(--ink2);vertical-align:top;line-height:1.55}
+tfoot td{background:var(--ink);color:rgba(255,255,255,0.8);font-weight:600;padding:11px 14px;border-bottom:none}
+tfoot td:last-child{color:var(--saffron);font-family:var(--font-d);font-size:15px}
+
+.badge{display:inline-block;font-family:var(--font-m);font-size:9px;padding:2px 8px;border-radius:3px;letter-spacing:.5px;text-transform:uppercase}
+.bs{background:var(--sd);color:var(--saffron);border:1px solid rgba(232,130,28,0.25)}
+.ba{background:var(--apd);color:var(--ap);border:1px solid rgba(26,92,138,0.25)}
+.bgr{background:var(--grd);color:var(--green);border:1px solid rgba(26,107,58,0.25)}
+.bn{background:var(--cream3);color:var(--ink3);border:1px solid var(--rule)}
+.bx{background:var(--saffron);color:#fff;font-weight:600}
+
+.tl{position:relative;margin:24px 0}
+.tl::before{content:'';position:absolute;left:18px;top:20px;bottom:20px;width:1px;background:linear-gradient(to bottom,var(--saffron),var(--ap));opacity:.25}
+.tl-row{display:grid;grid-template-columns:38px 1fr;gap:16px;margin-bottom:4px}
+.tl-dc{display:flex;flex-direction:column;align-items:center;padding-top:14px}
+.tl-dot{width:12px;height:12px;border-radius:50%;border:2px solid var(--cream);flex-shrink:0}
+.d1{background:var(--saffron);box-shadow:0 0 0 1px var(--saffron)}
+.d2{background:var(--ap);box-shadow:0 0 0 1px var(--ap)}
+.d3{background:var(--gold);box-shadow:0 0 0 1px var(--gold)}
+.tl-body{background:#fff;border:1px solid var(--rule);border-radius:6px;padding:16px 20px;margin-bottom:14px;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+.tl-per{font-family:var(--font-m);font-size:9px;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:4px}
+.ds .tl-per{color:var(--saffron)}
+.dt .tl-per{color:var(--ap)}
+.dg .tl-per{color:var(--gold)}
+.tl-title{font-family:var(--font-d);font-size:17px;font-weight:700;color:var(--ink);margin-bottom:10px}
+.tl-items{display:flex;flex-direction:column;gap:6px}
+.tl-item{display:flex;gap:8px;font-size:13px;color:var(--ink2);line-height:1.55;align-items:flex-start}
+.ti{font-family:var(--font-m);font-size:9px;padding:1px 6px;border-radius:3px;white-space:nowrap;flex-shrink:0;margin-top:3px}
+.ti-s{background:var(--sd);color:var(--saffron)}
+.ti-a{background:var(--apd);color:var(--ap)}
+.ti-g{background:var(--grd);color:var(--green)}
+.ti-k{background:var(--gd);color:var(--gold)}
+
+.ac-list{display:flex;flex-direction:column;gap:8px;margin:18px 0}
+.ac-row{display:grid;grid-template-columns:64px 64px 1fr 140px 80px;gap:10px;align-items:center;background:#fff;border:1px solid var(--rule);border-radius:4px;padding:11px 16px;transition:box-shadow .15s}
+.ac-row:hover{box-shadow:0 2px 8px rgba(0,0,0,0.07)}
+.ac-date{font-family:var(--font-m);font-size:11px;font-weight:500;color:var(--ink)}
+.ac-title{font-size:13px;color:var(--ink2);line-height:1.5}
+.ac-owner{font-family:var(--font-m);font-size:10px;color:var(--ink3);text-align:right}
+.ac-dl{text-align:right}
+
+.closing{background:var(--ink);border-radius:8px;padding:44px 48px;margin:36px 0;position:relative;overflow:hidden}
+.closing::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--saffron),#fff,var(--ap))}
+.cl-lbl{font-family:var(--font-m);font-size:9px;color:rgba(255,255,255,0.25);letter-spacing:2px;text-transform:uppercase;margin-bottom:28px}
+.cl-pt{display:flex;gap:16px;margin-bottom:22px;align-items:flex-start}
+.cl-pt:last-child{margin-bottom:0}
+.cl-n{font-family:var(--font-d);font-size:40px;font-weight:400;font-style:italic;color:var(--saffron);line-height:1;flex-shrink:0;padding-top:2px}
+.cl-t{font-size:16px;color:rgba(255,255,255,0.8);line-height:1.65}
+.cl-t strong{color:#fff}
+
+footer{background:var(--ink);padding:22px 0}
+.fi{max-width:var(--max);margin:0 auto;padding:0 36px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.fc{font-family:var(--font-m);font-size:10px;color:rgba(255,255,255,0.3)}
+.fc a{color:var(--saffron);text-decoration:none}
+.fb-r{display:flex;gap:6px;flex-wrap:wrap}
+.fb{font-family:var(--font-m);font-size:9px;padding:3px 7px;border:1px solid rgba(255,255,255,0.1);border-radius:3px;color:rgba(255,255,255,0.25)}
+
+@media(max-width:640px){
+  .cv-body{padding:40px 24px}.cv-top{padding:24px 24px}.wrap{padding:0 18px}
+  .cg,.cg3{grid-template-columns:1fr}
+  .ac-row{grid-template-columns:52px 1fr}.ac-owner,.ac-dl{display:none}
+  .closing{padding:26px 22px}.kpi-strip{flex-wrap:wrap}
+}
+@media print{body{background:#fff}.nav,.print-btn{display:none}.cover{min-height:auto;page-break-after:always;background:var(--ink)!important;-webkit-print-color-adjust:exact}}
+</style>
+</head>
+<body>
+<button class="print-btn" onclick="window.print()">PDF 저장</button>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cv-top">
+    <div class="cv-brand">IEG Co., Ltd. × Kia India — Andhra Pradesh</div>
+    <div class="cv-badge">제안서 · 2026년 5월 · 대외비</div>
+  </div>
+  <div class="cv-body">
+    <div class="cv-eyebrow">14.6819° N, 77.5984° E · ANANTAPUR, ANDHRA PRADESH, INDIA</div>
+    <h1 class="cv-h1">인도 #3 자동차 브랜드의<br><em>스마트팩토리 인재를</em><br>안드라프라데시에서</h1>
+    <p class="cv-h2">Kia India Anantapur × IEG — 안드라프라데시 스마트 트레이닝 센터 구축 제안<br>Anantapur Primary Campus · EV6 · EV9 · Seltos · Sonet · Carens</p>
+    <div class="kpi-strip">
+      <div class="kpi"><div class="kpi-val">300K</div><div class="kpi-lbl">Anantapur 연 생산능력</div></div>
+      <div class="kpi"><div class="kpi-val">3,000+</div><div class="kpi-lbl">Kia India 고용 인원</div></div>
+      <div class="kpi"><div class="kpi-val">#3</div><div class="kpi-lbl">인도 승용차 브랜드</div></div>
+      <div class="kpi"><div class="kpi-val">2018</div><div class="kpi-lbl">IEG 납품 이력</div></div>
+    </div>
+    <div class="tag-row">
+      <span class="tag t-sf">KOICA IBS 연계</span>
+      <span class="tag t-ap">APSSDC 협력</span>
+      <span class="tag t-sf">Pearson BTEC</span>
+      <span class="tag t-ap">JNTU Anantapur</span>
+      <span class="tag t-wh">인도 NSQF</span>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#s1" class="nav-a">01 · 현황</a>
+    <a href="#s2" class="nav-a">02 · 2018 납품 이력</a>
+    <a href="#s3" class="nav-a">03 · 훈련 공백</a>
+    <a href="#s4" class="nav-a">04 · 협력 기관</a>
+    <a href="#s5" class="nav-a">05 · STC 설계</a>
+    <a href="#s6" class="nav-a">06 · 커리큘럼</a>
+    <a href="#s7" class="nav-a">07 · 재원 전략</a>
+    <a href="#s8" class="nav-a">08 · 로드맵</a>
+    <a href="#s9" class="nav-a">09 · Next Steps</a>
+  </div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<!-- S1 -->
+<section class="section" id="s1">
+  <div class="sh"><div class="sh-num">01</div><div class="sh-r"><div class="sh-eye">Kia India · Andhra Pradesh</div><div class="sh-title">2026년 현황 — <span>Anantapur 플랜트의 급성장</span></div></div></div>
+  <p class="lead">Kia India는 2024년 인도 승용차 시장 3위로 성장했으며, EV6 현지화 완료·EV9 출시를 준비 중입니다. Anantapur는 Kia의 유일한 인도 생산 거점으로, 플랜트 규모와 인력 수요가 빠르게 확대되고 있습니다.</p>
+
+  <div class="cg">
+    <div class="card cs">
+      <div class="card-lbl">Plant Status 2026</div>
+      <div class="card-title">Kia India Anantapur 플랜트</div>
+      <div class="card-body">연 300,000대 생산능력. 3,000+ 정규직 고용. <strong>현재 생산 모델: Seltos, Sonet, Carens, EV6(현지화), Syros.</strong> EV9 출시 준비 중. 인도 2nd 최대 글로벌 시장.</div>
+    </div>
+    <div class="card ca">
+      <div class="card-lbl">Andhra Pradesh Context</div>
+      <div class="card-title">안드라프라데시 산업 맥락</div>
+      <div class="card-body">Kia India는 안드라프라데시(AP) 주정부와 긴밀한 협력 관계. APSSDC(AP 기술개발공사)가 기술 인력 공급 주관. 주정부의 <strong>EV·스마트제조 인력 양성 정책</strong>과 정렬.</div>
+    </div>
+    <div class="card cr">
+      <div class="card-lbl">Training Gap</div>
+      <div class="card-title">현재 교육의 한계</div>
+      <div class="card-body">ASDC 파트너십(2025)은 <strong>딜러십·서비스 레벨에 집중.</strong> 플랜트 생산직의 PLC 고급 제어, EV 파워트레인, AI 비전 QC, MES/SCADA 훈련은 체계적으로 부재.</div>
+    </div>
+    <div class="card cgr">
+      <div class="card-lbl">IEG Advantage</div>
+      <div class="card-title">IEG의 포지션</div>
+      <div class="card-body"><strong>2018년 Kia India Anantapur에 직접 납품·검수</strong>한 유일한 한국 Tech-Edu 파트너. 8년 신뢰 자산을 기반으로 2026 EV·스마트팩토리 레벨로 업그레이드합니다.</div>
+    </div>
+  </div>
+</section>
+
+<!-- S2 -->
+<section class="section" id="s2">
+  <div class="sh"><div class="sh-num">02</div><div class="sh-r"><div class="sh-eye">Delivery Track Record</div><div class="sh-title">2018 납품 이력 — <span>신뢰의 증명</span></div></div></div>
+  <p class="lead">IEG는 2018년 Kia India Anantapur 플랜트에 실납품·생산검수를 완료한 검증된 파트너입니다. 이 신뢰 자산이 2026년 업그레이드 제안의 출발점입니다.</p>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>납품 장비</th><th>모델</th><th>검수 내용</th><th>비고</th></tr></thead>
+      <tbody>
+        <tr><td style="color:var(--ink);font-weight:600">PLC SMPS 전원 모듈</td><td>IEG 3260-9</td><td>AC 220V → DC 24V; 보조 접점 단자 검수 완료</td><td><span class="badge bs">검수 완료</span></td></tr>
+        <tr><td style="color:var(--ink);font-weight:600">3상 유도 모터 트레이너</td><td>IEG 6010-31</td><td>모터 명판(kW/A/V/극/슬립) 부착·확인</td><td><span class="badge bs">검수 완료</span></td></tr>
+        <tr><td style="color:var(--ink);font-weight:600">인버터 훈련 시스템</td><td>인버터 유닛</td><td>NPN→PNP 신호 변경; 통신 카드 슬롯3 설치</td><td><span class="badge bs">검수 완료</span></td></tr>
+        <tr><td style="color:var(--ink);font-weight:600">산업용 이더넷 스위치</td><td>SCALANCE</td><td>v5.2.2 버전 스티커 확인</td><td><span class="badge bs">검수 완료</span></td></tr>
+        <tr><td style="color:var(--ink);font-weight:600">광전 안전 트레이너</td><td>F3SJ-B 시리즈</td><td>브래킷 위치 검수 후 조정</td><td><span class="badge bs">검수 완료</span></td></tr>
+        <tr><td style="color:var(--ink);font-weight:600">케이블·커넥터 세트</td><td>부속품 일체</td><td>4Ø 케이블 80ea; 모터/인버터 안전 단자; 안전 모듈 케이블 30ea</td><td><span class="badge bs">검수 완료</span></td></tr>
+      </tbody>
+      <tfoot><tr><td colspan="2">1차 생산검수</td><td colspan="2">2018년 4월 10일 — Hyundai Motor / IEG / GOPK 공동 검수</td></tr></tfoot>
+    </table>
+  </div>
+
+  <div class="callout cl-sf">
+    <div class="callout-lbl">7년이 지났습니다</div>
+    <p>2018년 기본 PLC·모터 훈련 장비는 현재 Kia India의 EV6·EV9·스마트팩토리 시대에 더 이상 충분하지 않습니다. <strong>IEG는 8년의 신뢰를 기반으로, 2026년 수준의 장비로 업그레이드를 제안합니다.</strong></p>
+  </div>
+</section>
+
+<!-- S3 -->
+<section class="section" id="s3">
+  <div class="sh"><div class="sh-num">03</div><div class="sh-r"><div class="sh-eye">Gap Analysis</div><div class="sh-title">훈련 공백 분석 — <span>2018 vs. 2026</span></div></div></div>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>훈련 영역</th><th>2018 장비 (현재)</th><th>2026 필요 수준</th><th>업그레이드</th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight:600;color:var(--ink)">PLC 제어</td><td>Mitsubishi 단일 브랜드 SMPS 모듈</td><td>멀티브랜드 PLC (Siemens TIA Portal + Mitsubishi + OMRON) + CC-Link 네트워크</td><td><span class="badge bs">IEG 3200-M</span></td></tr>
+        <tr><td style="font-weight:600;color:var(--ink)">모터·전력</td><td>3상 유도 모터 기초 훈련</td><td>EV 드라이브트레인 + BLDC + 파워 일렉트로닉스 (EV6/EV9 파워트레인 시뮬)</td><td><span class="badge bs">IEG 6210 + 6410</span></td></tr>
+        <tr><td style="font-weight:600;color:var(--ink)">안전</td><td>광전 안전 센서 단순 실습</td><td>머신 비전 + AI 기반 QC 검사 + COGNEX 자동차 부품 검출</td><td><span class="badge bs">AI Vision System</span></td></tr>
+        <tr><td style="font-weight:600;color:var(--ink)">자동화</td><td>단일 인버터 실습</td><td>멀티축 서보 + 로봇 셀 운용 + 메카트로닉스 시스템</td><td><span class="badge bs">IEG 3432/3430</span></td></tr>
+        <tr><td style="font-weight:600;color:var(--ink)">스마트팩토리</td><td>수동 케이블 조립 실습</td><td>Smart Factory Testbed — IoT-MES 파이프라인 + 디지털 트윈 + OEE 측정</td><td><span class="badge bs">MPS 3400N</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- S4 -->
+<section class="section" id="s4">
+  <div class="sh"><div class="sh-num">04</div><div class="sh-r"><div class="sh-eye">Academic Partners · Andhra Pradesh</div><div class="sh-title">협력 기술 교육기관 — <span>안드라프라데시 4개 기관</span></div></div></div>
+
+  <div class="cg">
+    <div class="card cs">
+      <div class="card-lbl">1순위 — 핵심 파트너</div>
+      <div class="card-title">JNTU Anantapur (자와할랄 네루 기술대)</div>
+      <div class="card-body">Anantapur 소재. 기계·전기·전자공학 전문. <strong>Kia India 플랜트와 동일 도시.</strong> 안드라프라데시 주 기술대학 네트워크 핵심. IEG 장비 설치 시 학점 인정 협약 즉시 가능.</div>
+    </div>
+    <div class="card ca">
+      <div class="card-lbl">1순위 — 정부 파트너</div>
+      <div class="card-title">APSSDC (안드라프라데시 기술개발공사)</div>
+      <div class="card-body">주정부 직업훈련 총괄 기관. KOICA IBS 신청 시 정부 파트너로 참여. 졸업생 Kia India 취업 파이프라인 공식화. <strong>인도 NSQF 자격 연계.</strong></div>
+    </div>
+    <div class="card cg2">
+      <div class="card-lbl">2순위</div>
+      <div class="card-title">Government Polytechnic (Anantapur·Kurnool)</div>
+      <div class="card-body">NSQF 연계 2년제 디플로마. 자동화·메카트로닉스·전기 전자. Track A 단기 생산직 인력 공급 기지. 지역 SME 채용과도 연계.</div>
+    </div>
+    <div class="card cgr">
+      <div class="card-lbl">3순위 — 장기 파트너</div>
+      <div class="card-title">IIT Tirupati (인도공과대 티루파티)</div>
+      <div class="card-body">AP 최고 수준 공과대. 로보틱스·자동화·EV 연구 역량. Smart Factory Testbed 공동 R&D 파트너. Track B 고급 커리큘럼 감수.</div>
+    </div>
+  </div>
+</section>
+
+<!-- S5 -->
+<section class="section" id="s5">
+  <div class="sh"><div class="sh-num">05</div><div class="sh-r"><div class="sh-eye">STC Design</div><div class="sh-title">Anantapur STC 설계 — <span>장비·입지</span></div></div></div>
+
+  <div class="cg">
+    <div class="card cs"><div class="card-lbl">Option A — 추천</div><div class="card-title">Kia India 플랜트 내 교육동</div><div class="card-body">실제 생산라인과 동일 환경. 신입직원 온보딩 직접 연계. Kia 브랜드 STC로 공식 운영. 공공성·상업성 균형으로 KOICA IBS 심사 유리.</div></div>
+    <div class="card ca"><div class="card-lbl">Option B</div><div class="card-title">JNTU Anantapur 캠퍼스 내 IEG 전용 랩</div><div class="card-body">공공 대학 내 설치로 KOICA IBS 공공성 극대화. JNTU 학점 인정 즉시 적용. 지역 학생·기업 동시 수강 가능. EDCF 심사에서도 유리.</div></div>
+  </div>
+
+  <div class="subh">핵심 장비 구성 (415V 3상 50Hz 인도 표준)</div>
+  <div class="tw">
+    <table>
+      <thead><tr><th>장비</th><th>모델</th><th>교육 목적</th><th>Kia 연계</th></tr></thead>
+      <tbody>
+        <tr><td style="color:var(--ink);font-weight:600">Multi PLC Trainer</td><td>IEG 3200-M</td><td>Siemens TIA Portal + Mitsubishi + OMRON, CC-Link</td><td>Anantapur 조립라인 제어</td></tr>
+        <tr><td style="color:var(--ink);font-weight:600">EV6/EV9 드라이브트레인 시뮬</td><td>IEG 6210 (TMED)</td><td>BLDC 모터, BMS, DAQ 파형분석, HEV 모드</td><td>EV6·EV9 파워트레인</td></tr>
+        <tr><td style="color:var(--ink);font-weight:600">파워 일렉트로닉스 트레이너</td><td>IEG 6410</td><td>SCR, PWM 인버터, AC/DC 컨버터, EV 충전</td><td>EV 온보드 충전기 시스템</td></tr>
+        <tr><td style="color:var(--ink);font-weight:600">메카트로닉스 시스템</td><td>IEG 3432</td><td>공급·조립·QC·보관 시뮬레이션 셀</td><td>CKD 조립 공정</td></tr>
+        <tr><td style="color:var(--ink);font-weight:600">Smart Factory Testbed</td><td>MPS 3400N</td><td>IoT-MES 파이프라인, 디지털 트윈, OEE</td><td>플랜트 모니터링 시스템</td></tr>
+        <tr><td style="color:var(--ink);font-weight:600">AI 비전 QC (COGNEX)</td><td>연계 시스템</td><td>자동차 부품 AI 불량 검출 실습</td><td>Kia India QC 공정</td></tr>
+      </tbody>
+      <tfoot><tr><td colspan="2">BIS 인증 필수 (Bureau of Indian Standards)</td><td colspan="2">전력: 415V 3상 50Hz 인도 표준 — 모든 장비 반드시 적용</td></tr></tfoot>
+    </table>
+  </div>
+</section>
+
+<!-- S6 -->
+<section class="section" id="s6">
+  <div class="sh"><div class="sh-num">06</div><div class="sh-r"><div class="sh-eye">Curriculum</div><div class="sh-title">커리큘럼 — <span>Track A · B · 인증 연계</span></div></div></div>
+
+  <div class="cg">
+    <div class="card cs"><div class="card-lbl">Track A · 2~4주 · 생산직 신입</div><div class="card-title">Kia India 조립·QC 신입 인력</div><div class="card-body">
+      Week 1 — 자동차 전기 기초 (415V 3상), Seltos/EV6/Syros CKD 부품 식별<br>
+      Week 2 — CKD 조립 공정 + 공압·전자 지그, 토크 관리, 불량 태깅<br>
+      Week 3 — PLC 제어 조립라인 운용 (Siemens TIA Portal 기초)<br>
+      Week 4 — COGNEX AI 비전 QC + OBD 진단 + 안전 인터록 실습
+    </div></div>
+    <div class="card ca"><div class="card-lbl">Track B · 4~8주 · EV·스마트팩토리</div><div class="card-title">기술직·유지보수 엔지니어</div><div class="card-body">
+      Wk 1~2 — 고급 PLC (멀티브랜드), HMI·SCADA, Profibus/CC-Link 네트워크<br>
+      Wk 3~4 — EV6/EV9 드라이브트레인 시뮬, BLDC, 파워 일렉트로닉스<br>
+      Wk 5~6 — IoT-MES 파이프라인, AI QC, 디지털 트윈 OEE 측정<br>
+      Wk 7~8 — 고장 진단 실습 + NSQF / Pearson BTEC 준비
+    </div></div>
+  </div>
+
+  <div class="callout cl-ap">
+    <div class="callout-lbl">인증 연계</div>
+    <p>인도 <strong>NSQF(국가자격체계)</strong> 공식 연계 · JNTU Anantapur <strong>학점 인정</strong> 협약 · <strong>Pearson BTEC Level 2/3</strong> 국제 인증 · APSSDC 연계 졸업생 <strong>Kia India 우선 채용</strong> 협약 · 교육 언어: 영어 / 힌디어 / 텔루구어</p>
+  </div>
+</section>
+
+<!-- S7 -->
+<section class="section" id="s7">
+  <div class="sh"><div class="sh-num">07</div><div class="sh-r"><div class="sh-eye">Financing Strategy</div><div class="sh-title">재원 전략 — <span>KOICA IBS + APSSDC + EDCF</span></div></div></div>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>수단</th><th>규모</th><th>신청 주체</th><th>인도 파트너</th><th>타이밍</th></tr></thead>
+      <tbody>
+        <tr><td style="color:var(--ink);font-weight:600">KOICA IBS</td><td style="color:var(--saffron);font-weight:600">최대 15억 원</td><td>IEG 대표파트너</td><td>APSSDC + JNTU</td><td><span class="badge bx">5월 7일 마감</span></td></tr>
+        <tr><td style="color:var(--ink);font-weight:600">APSSDC 주정부 지원</td><td style="color:var(--saffron);font-weight:600">별도 협의</td><td>APSSDC</td><td>AP 주정부</td><td><span class="badge bn">MOU 후 논의</span></td></tr>
+        <tr><td style="color:var(--ink);font-weight:600">EDCF Compact Loan (Phase 2)</td><td style="color:var(--saffron);font-weight:600">USD 600~900만</td><td>인도 정부</td><td>MSDE + APSSDC</td><td><span class="badge bn">파일럿 후 12~18개월</span></td></tr>
+        <tr><td style="color:var(--ink);font-weight:600">SaaS 라이선스 수익</td><td style="color:var(--saffron);font-weight:600">연 5~10억 원</td><td>IEG 자체</td><td>—</td><td><span class="badge bn">2028년~</span></td></tr>
+      </tbody>
+      <tfoot><tr><td colspan="2">5년 IEG 누적 수익 예상</td><td colspan="3">Anantapur STC 기준 80억~110억 원+</td></tr></tfoot>
+    </table>
+  </div>
+
+  <div class="callout cl-gr">
+    <div class="callout-lbl">KOICA 연계 근거</div>
+    <p><strong>2025년 1월 한국-인도 정부 "메카트로닉스 직업교육 강화" Exchange of Notes 서명.</strong> 첫 KOICA-인도 기술협력 사례. IEG + Kia India + APSSDC 3자 PPP 구조로 자동차 분야 확장 적용. 물류: 인천 → 첸나이항 해상 → Anantapur 내륙 운반. <strong>BIS 인증 + 415V 3상 스펙 사전 확인 필수.</strong></p>
+  </div>
+</section>
+
+<!-- S8 -->
+<section class="section" id="s8">
+  <div class="sh"><div class="sh-num">08</div><div class="sh-r"><div class="sh-eye">Roadmap</div><div class="sh-title">실행 로드맵 — <span>4단계 10개월</span></div></div></div>
+
+  <div class="tl">
+    <div class="tl-row ds">
+      <div class="tl-dc"><div class="tl-dot d1"></div></div>
+      <div class="tl-body">
+        <div class="tl-per">Phase 01 · Month 1~2</div>
+        <div class="tl-title">계약 & 현지 실사</div>
+        <div class="tl-items">
+          <div class="tl-item"><span class="ti ti-s">IEG</span>Kia India HR·교육팀에 본 제안서 + 업데이트 P/O 초안 + 2025 카탈로그 발송</div>
+          <div class="tl-item"><span class="ti ti-s">IEG</span>KOICA IBS 1:1 컨설팅 신청 (5월 7일 마감) + PCP 초안 작성 착수</div>
+          <div class="tl-item"><span class="ti ti-a">APSSDC</span>APSSDC + JNTU Anantapur 접촉 — MOU 프레임 공유</div>
+          <div class="tl-item"><span class="ti ti-k">공통</span>2018 Anantapur 장비 현황 보고 — 업그레이드 vs 유지 목록 작성</div>
+        </div>
+      </div>
+    </div>
+    <div class="tl-row ds">
+      <div class="tl-dc"><div class="tl-dot d1"></div></div>
+      <div class="tl-body">
+        <div class="tl-per">Phase 02 · Month 3~5</div>
+        <div class="tl-title">KOICA 신청 & 정부 연계</div>
+        <div class="tl-items">
+          <div class="tl-item"><span class="ti ti-s">IEG</span>KOICA IBS 사업제안서 제출 — IEG + Kia India + JNTU + APSSDC 컨소시엄</div>
+          <div class="tl-item"><span class="ti ti-a">APSSDC</span>인도 MSDE(기술개발·기업가부) PPP 협약 체결</div>
+          <div class="tl-item"><span class="ti ti-s">IEG</span>BIS 인증 사전 신청 + 415V 3상 스펙 확정 → 장비 발주 사전 준비</div>
+        </div>
+      </div>
+    </div>
+    <div class="tl-row dt">
+      <div class="tl-dc"><div class="tl-dot d2"></div></div>
+      <div class="tl-body">
+        <div class="tl-per">Phase 03 · Month 6~9</div>
+        <div class="tl-title">장비 설치 & Train-the-Trainer</div>
+        <div class="tl-items">
+          <div class="tl-item"><span class="ti ti-s">IEG</span>인천 → 첸나이항 해상 운송 → Anantapur 내륙 납품·설치·커미셔닝</div>
+          <div class="tl-item"><span class="ti ti-k">공통</span>Train-the-Trainer — JNTU 교수진 + APSSDC 강사 IEG 장비 운용 교육</div>
+          <div class="tl-item"><span class="ti ti-s">IEG</span>2018 기존 장비 업그레이드 항목 동시 교체</div>
+        </div>
+      </div>
+    </div>
+    <div class="tl-row dg">
+      <div class="tl-dc"><div class="tl-dot d3"></div></div>
+      <div class="tl-body">
+        <div class="tl-per">Phase 04 · Month 10+ (지속)</div>
+        <div class="tl-title">교육 운영 & 인증 & EDCF 준비</div>
+        <div class="tl-items">
+          <div class="tl-item"><span class="ti ti-k">공통</span>Track A·B 교육 개시 — Kia India 신입·기술직 + JNTU 재학생 대상</div>
+          <div class="tl-item"><span class="ti ti-a">APSSDC</span>NSQF 자격 연계 + Pearson BTEC Level 2/3 인증 신청</div>
+          <div class="tl-item"><span class="ti ti-s">IEG</span>파일럿 OEE·숙련도 데이터 → F/S 문서화 → EDCF Compact Loan 준비</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S9 -->
+<section class="section" id="s9">
+  <div class="sh"><div class="sh-num">09</div><div class="sh-r"><div class="sh-eye">Next Steps</div><div class="sh-title">즉시 실행 — <span>30일 Action Plan</span></div></div></div>
+
+  <div class="ac-list">
+    <div class="ac-row"><div class="ac-date">D+0</div><div><span class="badge bx">즉시</span></div><div class="ac-title">Kia India HR·교육팀에 본 제안서 + 업데이트 P/O 초안 + 2025 IEG 카탈로그 발송</div><div class="ac-owner">Kelly Cho</div><div class="ac-dl"><span class="badge bx">즉시</span></div></div>
+    <div class="ac-row"><div class="ac-date">D+0</div><div><span class="badge bs">IBS</span></div><div class="ac-title">KOICA IBS 1:1 온라인 컨설팅 신청 — 5월 7일 마감</div><div class="ac-owner">Kelly Cho</div><div class="ac-dl"><span class="badge bx">5/7</span></div></div>
+    <div class="ac-row"><div class="ac-date">D+7</div><div><span class="badge ba">APSSDC</span></div><div class="ac-title">APSSDC + JNTU Anantapur 국제협력팀 접촉 — MOU 프레임 + IEG 소개 자료 발송</div><div class="ac-owner">Kelly Cho</div><div class="ac-dl">1주 내</div></div>
+    <div class="ac-row"><div class="ac-date">D+14</div><div><span class="badge bn">내부</span></div><div class="ac-title">BIS 인증 절차 + 415V 3상 장비 스펙 내부 검토. 2018 Anantapur 장비 현황 점검</div><div class="ac-owner">기술팀</div><div class="ac-dl">2주 내</div></div>
+    <div class="ac-row"><div class="ac-date">D+21</div><div><span class="badge bs">IBS</span></div><div class="ac-title">KOICA PCP 초안 — IEG + Kia India + JNTU + APSSDC 4자 PPP 구조 문서화</div><div class="ac-owner">Kelly Cho</div><div class="ac-dl">3주 내</div></div>
+    <div class="ac-row"><div class="ac-date">D+30</div><div><span class="badge ba">현지</span></div><div class="ac-title">Anantapur 현지 출장 — Kia India 플랜트 + JNTU 캠퍼스 STC 부지 실사</div><div class="ac-owner">Kelly Cho</div><div class="ac-dl">30일 내</div></div>
+  </div>
+
+  <div class="closing">
+    <div class="cl-lbl">Kia India Andhra Pradesh × IEG — 핵심 제안 메시지</div>
+    <div class="cl-pt"><div class="cl-n">1</div><div class="cl-t"><strong>"IEG는 2018년 Anantapur에 직접 납품·검수를 완료한 유일한 한국 파트너입니다."</strong> 새 벤더가 아닌, 8년의 신뢰를 갖고 2026 수준으로 업그레이드하는 검증된 파트너입니다.</div></div>
+    <div class="cl-pt"><div class="cl-n">2</div><div class="cl-t"><strong>"ASDC 파트너십(딜러십 레벨)과 경쟁하지 않습니다. 플랜트 생산직·기술직 스마트팩토리 훈련 레이어를 추가합니다."</strong> 두 파트너십은 완전한 보완 관계입니다.</div></div>
+    <div class="cl-pt"><div class="cl-n">3</div><div class="cl-t">KOICA IBS + APSSDC 지원으로 <strong>비용 50% 이상 절감, JNTU·APSSDC 협력으로 안드라프라데시 자동차 인재 생태계 전체의 허브</strong>가 됩니다.</div></div>
+  </div>
+</section>
+
+</div>
+</main>
+
+<footer>
+  <div class="fi">
+    <div class="fc">Kelly Cho · IEG Co., Ltd. · <a href="mailto:kellycho824@ieg.kr">kellycho824@ieg.kr</a> · +82-31-698-2200 · <a href="https://www.ieg.kr">www.ieg.kr</a></div>
+    <div class="fb-r"><span class="fb">ISO 9001</span><span class="fb">ISO 14001</span><span class="fb">ISO 45001</span><span class="fb">17+ Years</span></div>
+  </div>
+</footer>
+
+<script>
+const nl=document.querySelectorAll('.nav-a'),sc=document.querySelectorAll('section[id]');
+const ob=new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting){nl.forEach(a=>{a.style.color='';a.style.borderBottomColor='transparent'});const ac=document.querySelector(`.nav-a[href="#${en.target.id}"]`);if(ac){ac.style.color='var(--saffron)';ac.style.borderBottomColor='var(--saffron)'}}})},{threshold:.3});
+sc.forEach(s=>ob.observe(s));
+</script>
+</body>
+</html>
