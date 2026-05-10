@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IGE Ecosystem 글로벌 전략 보고서</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&family=Noto+Sans+KR:wght@300;400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap');
+
+:root {
+  --ink: #0e1117;
+  --ink2: #1e2535;
+  --paper: #f5f2ec;
+  --paper2: #edeae2;
+  --paper3: #e3dfd5;
+  --rule: #c8c2b4;
+  --rule2: #d8d3c8;
+  --accent: #1a3a5c;
+  --accent2: #c8391a;
+  --gold: #9a7a2e;
+  --c-uzb: #0d7a9e;
+  --c-kaz: #c89a1e;
+  --c-ind: #b8440e;
+  --c-idn: #2a8a4e;
+  --c-usa: #5a2e8a;
+  --muted: #7a7060;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 400;
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+/* ── 인쇄/문서 레이아웃 ── */
+.page-wrap {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 1.5rem 6rem;
+}
+
+/* ── 커버 ── */
+.cover {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 4rem 0 3rem;
+  border-bottom: 3px solid var(--ink);
+  margin-bottom: 4rem;
+  position: relative;
+}
+.cover::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -1.5rem; right: -1.5rem;
+  height: 6px;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent) 60%, var(--accent2) 60%, var(--accent2) 100%);
+}
+
+.cover-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 4rem;
+}
+.cover-org {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  line-height: 1.8;
+}
+.cover-doc-id {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--muted);
+  text-align: right;
+  line-height: 1.8;
+}
+
+.cover-main { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+
+.cover-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  color: var(--accent2);
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+
+.cover-title {
+  font-family: 'Noto Serif KR', serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 900;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 1rem;
+}
+.cover-title span { color: var(--accent); }
+
+.cover-subtitle {
+  font-size: 1rem;
+  color: var(--muted);
+  font-weight: 300;
+  margin-bottom: 2.5rem;
+  max-width: 560px;
+  line-height: 1.7;
+}
+
+.cover-route {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  padding: 1rem 1.25rem;
+  background: var(--ink);
+  border-radius: 4px;
+  width: fit-content;
+  max-width: 100%;
+}
+.route-node {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+.route-node.uzb { color: #5ad4ff; }
+.route-node.kaz { color: #ffd46e; }
+.route-node.ind { color: #ff9d6e; }
+.route-node.idn { color: #6edd9e; }
+.route-node.usa { color: #c09efc; }
+.route-arrow { color: #4a5568; font-size: 0.8rem; }
+
+.cover-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-top: 2rem;
+  border-top: 1px solid var(--rule);
+}
+.cover-footer-left { font-size: 0.75rem; color: var(--muted); line-height: 1.8; }
+.cover-footer-left strong { color: var(--ink); font-weight: 700; }
+.cover-conf {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  color: var(--accent2);
+  border: 1px solid var(--accent2);
+  padding: 0.25rem 0.6rem;
+  border-radius: 2px;
+}
+
+/* ── 섹션 공통 ── */
+.section { margin-bottom: 3.5rem; }
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 2px solid var(--ink);
+}
+.section-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--accent2);
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+.section-title {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.sub-section { margin-bottom: 2rem; }
+.sub-title {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--ink2);
+  margin-bottom: 0.75rem;
+  padding-left: 0.75rem;
+  border-left: 3px solid var(--accent);
+}
+
+p {
+  font-size: 0.875rem;
+  line-height: 1.85;
+  color: #2a2a35;
+  margin-bottom: 0.9rem;
+}
+
+/* ── 인용/핵심 박스 ── */
+.key-box {
+  background: var(--ink);
+  color: #e8e4dc;
+  border-radius: 4px;
+  padding: 1.5rem 1.75rem;
+  margin: 1.5rem 0;
+  font-size: 0.85rem;
+  line-height: 1.85;
+}
+.key-box .kb-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: #7a9abf;
+  margin-bottom: 0.6rem;
+}
+.key-box strong { color: #5ad4ff; }
+
+.callout {
+  background: var(--paper2);
+  border: 1px solid var(--rule);
+  border-left: 4px solid var(--accent);
+  padding: 1rem 1.25rem;
+  margin: 1.25rem 0;
+  font-size: 0.83rem;
+  color: var(--ink2);
+  line-height: 1.75;
+}
+.callout.warn { border-left-color: var(--accent2); }
+.callout.gold { border-left-color: var(--gold); }
+
+/* ── 핵심 원칙 플로우 ── */
+.principle-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 1.5rem 0;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.principle-step {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  border-bottom: 1px solid var(--rule);
+}
+.principle-step:last-child { border-bottom: none; }
+.ps-num {
+  background: var(--ink2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #9ab8d4;
+}
+.ps-body {
+  padding: 0.85rem 1rem;
+  background: var(--paper);
+}
+.ps-title { font-weight: 700; font-size: 0.83rem; color: var(--ink); margin-bottom: 0.25rem; }
+.ps-desc { font-size: 0.77rem; color: var(--muted); line-height: 1.6; }
+
+/* ── TTC 3단계 ── */
+.ttc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 1.25rem 0;
+}
+.ttc-col {
+  background: var(--paper);
+  padding: 1.25rem 1rem;
+}
+.ttc-col.s2 { background: var(--paper2); }
+.ttc-col.s3 { background: var(--ink2); }
+.ttc-stage-badge {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.6rem;
+  font-weight: 600;
+}
+.ttc-col.s1 .ttc-stage-badge { color: var(--c-uzb); }
+.ttc-col.s2 .ttc-stage-badge { color: var(--c-kaz); }
+.ttc-col.s3 .ttc-stage-badge { color: #9ab4d4; }
+.ttc-stage-title {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.ttc-col.s1 .ttc-stage-title { color: var(--ink); }
+.ttc-col.s2 .ttc-stage-title { color: var(--ink); }
+.ttc-col.s3 .ttc-stage-title { color: #e8e4dc; }
+.ttc-list { list-style: none; }
+.ttc-list li {
+  font-size: 0.74rem;
+  line-height: 1.6;
+  padding: 0.2rem 0;
+  padding-left: 0.8rem;
+  position: relative;
+}
+.ttc-col.s1 .ttc-list li { color: #3a4a5a; }
+.ttc-col.s2 .ttc-list li { color: #3a3a2a; }
+.ttc-col.s3 .ttc-list li { color: #b0bcd0; }
+.ttc-list li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  font-size: 0.6rem;
+}
+.ttc-col.s1 .ttc-list li::before { color: var(--c-uzb); }
+.ttc-col.s2 .ttc-list li::before { color: var(--c-kaz); }
+.ttc-col.s3 .ttc-list li::before { color: #6a8aaa; }
+
+/* ── 거점 카드 ── */
+.site-cards { display: flex; flex-direction: column; gap: 1.5rem; }
+.site-card {
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.site-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1.25rem;
+  gap: 1rem;
+}
+.sc-uzb .site-card-header { background: #e8f4fa; border-bottom: 2px solid var(--c-uzb); }
+.sc-kaz .site-card-header { background: #faf5e8; border-bottom: 2px solid var(--c-kaz); }
+.sc-ind .site-card-header { background: #faf0e8; border-bottom: 2px solid var(--c-ind); }
+.sc-idn .site-card-header { background: #e8f5ee; border-bottom: 2px solid var(--c-idn); }
+.sc-usa .site-card-header { background: #f0ebfa; border-bottom: 2px solid var(--c-usa); }
+
+.site-card-title {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1rem;
+  font-weight: 700;
+}
+.sc-uzb .site-card-title { color: var(--c-uzb); }
+.sc-kaz .site-card-title { color: var(--c-kaz); }
+.sc-ind .site-card-title { color: var(--c-ind); }
+.sc-idn .site-card-title { color: var(--c-idn); }
+.sc-usa .site-card-title { color: var(--c-usa); }
+
+.site-phase-badge {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  padding: 0.2rem 0.55rem;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+.sc-uzb .site-phase-badge { background: rgba(13,122,158,0.12); color: var(--c-uzb); }
+.sc-kaz .site-phase-badge { background: rgba(200,154,30,0.12); color: var(--c-kaz); }
+.sc-ind .site-phase-badge { background: rgba(184,68,14,0.12); color: var(--c-ind); }
+.sc-idn .site-phase-badge { background: rgba(42,138,78,0.12); color: var(--c-idn); }
+.sc-usa .site-phase-badge { background: rgba(90,46,138,0.12); color: var(--c-usa); }
+
+.site-card-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0;
+  background: var(--rule2);
+}
+.site-col {
+  background: var(--paper);
+  padding: 1rem 1.1rem;
+  border-right: 1px solid var(--rule2);
+}
+.site-col:last-child { border-right: none; }
+.site-col-title {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.56rem;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  margin-bottom: 0.55rem;
+}
+.site-col ul { list-style: none; }
+.site-col ul li {
+  font-size: 0.77rem;
+  color: var(--ink2);
+  line-height: 1.6;
+  padding: 0.2rem 0;
+  padding-left: 0.75rem;
+  position: relative;
+}
+.site-col ul li::before {
+  content: '·';
+  position: absolute;
+  left: 0;
+  color: var(--muted);
+  font-weight: 700;
+}
+.ttc-status {
+  display: inline-block;
+  margin-top: 0.6rem;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 2px;
+  font-weight: 600;
+}
+.sc-uzb .ttc-status { background: rgba(13,122,158,0.1); color: var(--c-uzb); }
+.sc-kaz .ttc-status { background: rgba(200,154,30,0.1); color: var(--c-kaz); }
+.sc-ind .ttc-status { background: rgba(184,68,14,0.1); color: var(--c-ind); }
+.sc-idn .ttc-status { background: rgba(42,138,78,0.1); color: var(--c-idn); }
+.sc-usa .ttc-status { background: rgba(90,46,138,0.1); color: var(--c-usa); }
+
+/* ── 트리거 표 ── */
+.trigger-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.78rem;
+  margin: 1.25rem 0;
+}
+.trigger-table th {
+  background: var(--ink2);
+  color: #9ab4cc;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  padding: 0.65rem 0.85rem;
+  text-align: left;
+  font-weight: 600;
+}
+.trigger-table td {
+  padding: 0.65rem 0.85rem;
+  border-bottom: 1px solid var(--rule2);
+  color: var(--ink2);
+  vertical-align: top;
+  line-height: 1.6;
+}
+.trigger-table tr:last-child td { border-bottom: none; }
+.trigger-table tr:nth-child(odd) td { background: var(--paper); }
+.trigger-table tr:nth-child(even) td { background: var(--paper2); }
+.c-uzb { color: var(--c-uzb); font-weight: 700; }
+.c-kaz { color: var(--c-kaz); font-weight: 700; }
+.c-ind { color: var(--c-ind); font-weight: 700; }
+.c-idn { color: var(--c-idn); font-weight: 700; }
+.c-usa { color: var(--c-usa); font-weight: 700; }
+
+/* ── 리스크 표 ── */
+.risk-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.78rem;
+  margin: 1.25rem 0;
+}
+.risk-table th {
+  background: var(--ink2);
+  color: #9ab4cc;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  padding: 0.65rem 0.85rem;
+  text-align: left;
+}
+.risk-table td {
+  padding: 0.65rem 0.85rem;
+  border-bottom: 1px solid var(--rule2);
+  vertical-align: top;
+  line-height: 1.6;
+}
+.risk-table tr:last-child td { border-bottom: none; }
+.risk-table tr:nth-child(odd) td { background: var(--paper); }
+.risk-table tr:nth-child(even) td { background: var(--paper2); }
+.risk-high { color: var(--accent2); font-weight: 700; font-size: 0.7rem; }
+.risk-mid { color: var(--gold); font-weight: 700; font-size: 0.7rem; }
+.risk-low { color: var(--c-idn); font-weight: 700; font-size: 0.7rem; }
+
+/* ── KPI 그리드 ── */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 1.25rem 0;
+}
+.kpi-item { background: var(--paper); padding: 1.1rem; }
+.kpi-item:nth-child(even) { background: var(--paper2); }
+.kpi-l {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  margin-bottom: 0.35rem;
+}
+.kpi-v {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--accent);
+  line-height: 1.1;
+  margin-bottom: 0.25rem;
+}
+.kpi-desc { font-size: 0.7rem; color: var(--muted); line-height: 1.5; }
+
+/* ── 마일스톤 타임라인 ── */
+.timeline { margin: 1.25rem 0; }
+.tl-row {
+  display: grid;
+  grid-template-columns: 100px 16px 1fr;
+  gap: 0.75rem;
+  align-items: start;
+  margin-bottom: 0.5rem;
+}
+.tl-date {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--muted);
+  text-align: right;
+  padding-top: 0.15rem;
+  line-height: 1.5;
+}
+.tl-line {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.tl-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  background: var(--paper);
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+.tl-dot.filled { background: var(--accent); }
+.tl-dot.accent2 { border-color: var(--accent2); background: var(--accent2); }
+.tl-connector {
+  width: 1px;
+  flex: 1;
+  min-height: 20px;
+  background: var(--rule);
+  margin-top: 2px;
+}
+.tl-content { padding-bottom: 1rem; }
+.tl-title { font-weight: 700; font-size: 0.82rem; color: var(--ink); margin-bottom: 0.2rem; }
+.tl-desc { font-size: 0.75rem; color: var(--muted); line-height: 1.6; }
+
+/* ── 결론 ── */
+.conclusion {
+  background: var(--ink);
+  color: #e0dcd4;
+  padding: 2rem;
+  border-radius: 4px;
+  margin-top: 2rem;
+}
+.conclusion-title {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+.conclusion p {
+  color: #b0bcc8;
+  font-size: 0.85rem;
+  line-height: 1.85;
+  margin-bottom: 0.75rem;
+}
+.conclusion p:last-child { margin-bottom: 0; }
+.conclusion strong { color: #5ad4ff; }
+
+/* ── 페이지 구분선 ── */
+.page-break { border: none; border-top: 1px solid var(--rule); margin: 3rem 0; }
+
+/* ── 푸터 ── */
+.doc-footer {
+  margin-top: 4rem;
+  padding-top: 1.5rem;
+  border-top: 2px solid var(--ink);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+
+/* 애니메이션 */
+@keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
+.section { animation: fadeIn 0.4s ease both; }
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+<!-- ════════════════ COVER ════════════════ -->
+<div class="cover">
+  <div class="cover-meta">
+    <div class="cover-org">
+      아이지 (IGE)<br>
+      전략기획 / 글로벌 사업개발
+    </div>
+    <div class="cover-doc-id">
+      문서번호: IGE-STR-2026-001<br>
+      작성일: 2026. 05.<br>
+      등급: 내부 전략 보고용
+    </div>
+  </div>
+
+  <div class="cover-main">
+    <div class="cover-label">Internal Strategy Report · Confidential</div>
+    <h1 class="cover-title">
+      EV·Hybrid Technical Training<br>
+      <span>Ecosystem</span> 글로벌<br>구축 전략 보고서
+    </h1>
+    <p class="cover-subtitle">
+      우즈베키스탄 지작 센터를 기점으로, EV·Hybrid 자동차 생산 확대와
+      Technical Training Center(TTC) 구축을 동시에 추진하며,
+      5개국 거점을 통해 글로벌 표준 Ecosystem을 완성하는 실질적 로드맵
+    </p>
+    <div class="cover-route">
+      <span class="route-node uzb">🇺🇿 UZB 지작</span>
+      <span class="route-arrow">→</span>
+      <span class="route-node kaz">🇰🇿 KAZ 코스타나이</span>
+      <span class="route-arrow">→</span>
+      <span class="route-node ind">🇮🇳 IND 안드라프라데시</span>
+      <span class="route-arrow">→</span>
+      <span class="route-node idn">🇮🇩 IDN 치카랑</span>
+      <span class="route-arrow">→</span>
+      <span class="route-node usa">🇺🇸 USA</span>
+    </div>
+  </div>
+
+  <div class="cover-footer">
+    <div class="cover-footer-left">
+      보고 대상: <strong>경영진 / 전략기획팀</strong><br>
+      문서 형태: 내부 전략 보고서 (비공개)<br>
+      작성 기준: 2026년 5월 현재 전략 방향 기준
+    </div>
+    <div class="cover-conf">CONFIDENTIAL</div>
+  </div>
+</div>
+
+
+<!-- ════════════════ 1. 전략 배경 ════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">SECTION 01</span>
+    <h2 class="section-title">전략 배경 및 목적</h2>
+  </div>
+
+  <div class="sub-section">
+    <h3 class="sub-title">1.1 전략 수립 배경</h3>
+    <p>
+      글로벌 자동차 산업은 전동화(Electrification) 전환의 가속화와 함께, 생산 거점의 다변화 및
+      현지 기술 인력 확보가 핵심 경쟁력으로 부상하고 있다. 특히 중앙아시아·남아시아·동남아시아 시장은
+      EV 보급 초기 단계로, 선점적 생산 및 교육 인프라 구축이 장기적 시장 지배력으로 직결된다.
+    </p>
+    <p>
+      아이지(IGE)는 우즈베키스탄 지작 센터를 출발점으로, 기아(Kia) 브랜드 EV·Hybrid 차량의
+      현지 생산 역량을 구축하는 동시에, 생산량 증가에 연동된 <strong>Technical Training Center(TTC)</strong>를
+      각 거점에 순차 구축함으로써 기술 자립화와 생태계 확장을 동시에 달성하는 전략을 수립한다.
+    </p>
+  </div>
+
+  <div class="sub-section">
+    <h3 class="sub-title">1.2 IGE Ecosystem의 정의</h3>
+    <p>
+      IGE Ecosystem이란 단순한 차량 생산·판매 네트워크를 넘어, 각 거점이 <em>생산(Production)</em>,
+      <em>교육(Training)</em>, <em>인증(Certification)</em>의 세 축을 자체적으로 운영하며
+      상호 연결된 자생적 산업 생태계를 의미한다.
+    </p>
+
+    <div class="key-box">
+      <div class="kb-label">ECOSYSTEM DEFINITION</div>
+      IGE Ecosystem = <strong>EV·Hybrid 생산 확대</strong> × <strong>TTC 구축·운영</strong> × <strong>글로벌 인증 표준화</strong><br><br>
+      생산량 증가 → TTC 구축 트리거 → 현지 기술 인력 양성 → 생산 품질 향상 → 생산량 추가 증가의
+      선순환 구조(Virtuous Cycle)를 5개국에 걸쳐 단계적으로 구현한다.
+    </div>
+  </div>
+
+  <div class="sub-section">
+    <h3 class="sub-title">1.3 핵심 전략 원칙</h3>
+    <div class="principle-flow">
+      <div class="principle-step">
+        <div class="ps-num">01</div>
+        <div class="ps-body">
+          <div class="ps-title">생산량 연동 TTC 구축 (Production-Triggered TTC)</div>
+          <div class="ps-desc">각 거점의 월 EV·Hybrid 생산량이 사전 설정된 임계점(Threshold)에 도달하는 시점을 TTC 구축 트리거로 삼는다. 이는 TTC 구축 시기의 자의적 판단을 배제하고, 실제 사업 규모에 근거한 합리적 투자 의사결정을 가능케 한다.</div>
+        </div>
+      </div>
+      <div class="principle-step">
+        <div class="ps-num">02</div>
+        <div class="ps-body">
+          <div class="ps-title">시작 → 확산 → 표준화의 순서 불변 (Sequential Rollout)</div>
+          <div class="ps-desc">우즈벡 지작에서 검증된 TTC 모델을 카자흐스탄·인도·인도네시아로 확산하고, 미국에서 글로벌 표준으로 완성한다. 각 단계의 완성도가 다음 단계의 품질을 결정한다.</div>
+        </div>
+      </div>
+      <div class="principle-step">
+        <div class="ps-num">03</div>
+        <div class="ps-body">
+          <div class="ps-title">Collaboration 기반 실행 (Collaboration-First Execution)</div>
+          <div class="ps-desc">각국 현지 파트너사, 정부 기관, 교육 기관과의 협력 네트워크(Inner Circle)를 전략 실행의 중심에 놓는다. IGE 단독 실행이 아닌, 현지 파트너와의 공동 운영 모델을 채택한다.</div>
+        </div>
+      </div>
+      <div class="principle-step">
+        <div class="ps-num">04</div>
+        <div class="ps-body">
+          <div class="ps-title">Hybrid 우선, EV 병행 확대 (Hybrid-First, EV Expansion)</div>
+          <div class="ps-desc">충전 인프라가 미비한 중앙아시아·남아시아 시장에는 Hybrid를 우선 투입하여 시장 점유를 선확보하고, EV 인프라 성숙에 따라 EV 비중을 점진적으로 확대한다.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="page-break">
+
+<!-- ════════════════ 2. TTC 구축 모델 ════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">SECTION 02</span>
+    <h2 class="section-title">Technical Training Center (TTC) 구축 모델</h2>
+  </div>
+
+  <div class="sub-section">
+    <h3 class="sub-title">2.1 TTC의 역할과 목적</h3>
+    <p>
+      Technical Training Center(TTC)는 단순한 직업훈련 시설이 아닌,
+      IGE Ecosystem의 기술적 자생력을 담보하는 핵심 인프라이다.
+      각 거점의 EV·Hybrid 생산 현장에 즉시 투입 가능한 기술 인력을 지속적으로 공급함으로써,
+      생산 품질의 안정화와 생산량 확대의 선순환을 구현한다.
+    </p>
+
+    <div class="callout gold">
+      <strong>TTC 핵심 가치:</strong> "생산이 TTC를 만들고, TTC가 생산을 키운다"<br>
+      생산량 증가 → TTC 구축 → 인력 양성 → 생산 효율화 → 생산량 재증가의 자기강화(Self-reinforcing) 구조
+    </div>
+  </div>
+
+  <div class="sub-section">
+    <h3 class="sub-title">2.2 TTC 3단계 구축 모델</h3>
+    <div class="ttc-grid">
+      <div class="ttc-col s1">
+        <div class="ttc-stage-badge">STAGE 1 · 시작</div>
+        <div class="ttc-stage-title">🌱 파일럿 운영</div>
+        <ul class="ttc-list">
+          <li>EV·Hybrid 기초 정비·조립 과정 개설</li>
+          <li>현지 트레이너 1기 양성</li>
+          <li>한국 본사 기술 파견 지원</li>
+          <li>파일럿 수료생 생산 현장 투입</li>
+          <li>교육 효과 측정 및 커리큘럼 보완</li>
+        </ul>
+      </div>
+      <div class="ttc-col s2">
+        <div class="ttc-stage-badge">STAGE 2 · 확산</div>
+        <div class="ttc-stage-title">🌿 현지화·확대</div>
+        <ul class="ttc-list">
+          <li>커리큘럼 현지 언어 완전 번역</li>
+          <li>트레이너 복수 배치·자립화</li>
+          <li>EV 심화·Hybrid 특화 과정 추가</li>
+          <li>IGE 수료 인증 제도 도입</li>
+          <li>인접 거점 교육 수출 개시</li>
+        </ul>
+      </div>
+      <div class="ttc-col s3">
+        <div class="ttc-stage-badge">STAGE 3 · 표준화</div>
+        <div class="ttc-stage-title">🌳 글로벌 허브</div>
+        <ul class="ttc-list">
+          <li>5개국 공통 커리큘럼 최종 확정</li>
+          <li>IGE 글로벌 트레이너 인증 출범</li>
+          <li>5개국 상호 수료 인증 체계</li>
+          <li>미국 표준 모델 공식 채택</li>
+          <li>역방향 표준 확산 체계 완성</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub-section">
+    <h3 class="sub-title">2.3 TTC 구축 트리거 기준</h3>
+    <p>
+      TTC 구축 시점을 명확히 정의함으로써, 투자 의사결정의 객관성을 확보하고
+      각 거점 파트너사와의 협의 기준을 통일한다.
+    </p>
+    <table class="trigger-table">
+      <thead>
+        <tr>
+          <th>거점</th>
+          <th>Stage 1 착수 트리거</th>
+          <th>Stage 2 전환 기준</th>
+          <th>Stage 3 완성 조건</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="c-uzb">🇺🇿 지작 (UZB)</td>
+          <td>월 300대 생산 도달 시</td>
+          <td>월 500대 + 코스타나이 TTC 개소</td>
+          <td>해당 없음 (미국에서 완성)</td>
+        </tr>
+        <tr>
+          <td class="c-kaz">🇰🇿 코스타나이 (KAZ)</td>
+          <td>월 300대 처리 + 지작 Stage 1 완료</td>
+          <td>지작 Stage 2 전환 연동</td>
+          <td>해당 없음</td>
+        </tr>
+        <tr>
+          <td class="c-ind">🇮🇳 안드라프라데시 (IND)</td>
+          <td>MOU 체결 후 즉시 준비, 월 300대 시 개소</td>
+          <td>월 300대 달성 + 3개국 인증 연동</td>
+          <td>해당 없음</td>
+        </tr>
+        <tr>
+          <td class="c-idn">🇮🇩 치카랑 (IDN)</td>
+          <td>법인 설립 후 즉시 병행, 월 300대 시 개소</td>
+          <td>월 500대 달성 + 미국 표준화 착수</td>
+          <td>해당 없음</td>
+        </tr>
+        <tr>
+          <td class="c-usa">🇺🇸 미국 (USA)</td>
+          <td>4개국 Stage 2 완료 후 개소</td>
+          <td>—</td>
+          <td>월 1,000대 + 4개국 Stage 2 완료</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<hr class="page-break">
+
+<!-- ════════════════ 3. 5개국 거점별 실행 계획 ════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">SECTION 03</span>
+    <h2 class="section-title">5개국 거점별 실행 계획</h2>
+  </div>
+
+  <div class="site-cards">
+
+    <!-- UZB -->
+    <div class="site-card sc-uzb">
+      <div class="site-card-header">
+        <div class="site-card-title">🇺🇿 Phase 1 · 우즈베키스탄 지작 센터</div>
+        <div class="site-phase-badge">2026 Q2–Q3 · ECOSYSTEM 시작점</div>
+      </div>
+      <div class="site-card-body">
+        <div class="site-col">
+          <div class="site-col-title">EV·HYBRID 생산</div>
+          <ul>
+            <li>기아 지작 센터 생산 라인 현황 파악 및 월별 KPI 수립</li>
+            <li>CKD/SKD 방식 현지 부품 조달망 구축</li>
+            <li>Hybrid 우선 생산 → 월 300대 목표 달성 일정 확정</li>
+            <li>코스타나이行 컨테이너 물류 루트 계약 체결</li>
+            <li>EV·Hybrid 수출 인증 사전 준비 착수</li>
+          </ul>
+        </div>
+        <div class="site-col">
+          <div class="site-col-title">TTC 구축 계획</div>
+          <ul>
+            <li>지작 센터 내 TTC 전용 공간 확보</li>
+            <li>기초 EV·Hybrid 정비·조립 교육 과정 설계</li>
+            <li>현지 트레이너 선발 + 한국 본사 파견 교육</li>
+            <li>파일럿 수료생 배출 및 생산 현장 즉시 투입</li>
+            <li>교육 효과 측정 체계 수립</li>
+          </ul>
+          <div class="ttc-status">TTC STAGE 1 · 시작</div>
+        </div>
+        <div class="site-col">
+          <div class="site-col-title">협업·파트너십</div>
+          <ul>
+            <li>기아 본사 기술 지원 협약 체결</li>
+            <li>우즈벡 현지 파트너 Inner Circle 구성</li>
+            <li>우즈베키스탄 직업훈련부 협력 MOU</li>
+            <li>전담 TF 구성 및 역할 분담 확정</li>
+            <li>분기별 진척도 Sync 체계 수립</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- KAZ -->
+    <div class="site-card sc-kaz">
+      <div class="site-card-header">
+        <div class="site-card-title">🇰🇿 Phase 2 · 카자흐스탄 코스타나이</div>
+        <div class="site-phase-badge">2026 Q3–Q4 · 물류 중계 거점·TTC 확산 1호</div>
+      </div>
+      <div class="site-card-body">
+        <div class="site-col">
+          <div class="site-col-title">물류·생산</div>
+          <ul>
+            <li>코스타나이 컨테이너 물류 센터 운영 개시</li>
+            <li>지작→코스타나이 내륙 복합 루트 표준화</li>
+            <li>러시아 우회 물류 리스크 대응 대안 루트 확보</li>
+            <li>현지 SKD 소규모 조립 생산 타당성 검토</li>
+            <li>월 처리량 300대 목표 계획 수립</li>
+          </ul>
+        </div>
+        <div class="site-col">
+          <div class="site-col-title">TTC 확산</div>
+          <ul>
+            <li>지작 TTC 커리큘럼 카자흐어 현지화</li>
+            <li>코스타나이 TTC 개소 — 지작 1기 트레이너 파견</li>
+            <li>IGE 공동 수료 인증 제도 파일럿 운영</li>
+            <li>코스타나이 현지 트레이너 1기 양성 착수</li>
+            <li>지작 TTC Stage 2 전환 준비 병행</li>
+          </ul>
+          <div class="ttc-status">TTC 확산 1호 · Stage 1→2</div>
+        </div>
+        <div class="site-col">
+          <div class="site-col-title">협업·파트너십</div>
+          <ul>
+            <li>카자흐스탄 현지 물류·유통 파트너 계약</li>
+            <li>Inner Circle 카자흐 파트너 포함 확대</li>
+            <li>카자흐스탄 기술교육부 협력 채널 구축</li>
+            <li>2개국 TTC 운영 현황 통합 보고 체계</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- IND -->
+    <div class="site-card sc-ind">
+      <div class="site-card-header">
+        <div class="site-card-title">🇮🇳 Phase 3 · 인도 안드라프라데시</div>
+        <div class="site-phase-badge">2026 Q4–2027 Q1 · Hybrid 시장 진입·TTC 확산 2호</div>
+      </div>
+      <div class="site-card-body">
+        <div class="site-col">
+          <div class="site-col-title">생산·시장 진입</div>
+          <ul>
+            <li>현지 파트너 MOU 체결 — Hybrid 우선 협의</li>
+            <li>안드라프라데시 CKD 조립 거점 확보</li>
+            <li>인도 내수용 Hybrid 라인업 형식 인증 취득</li>
+            <li>코스타나이→인도 해상 공급망 확정</li>
+            <li>월 300대 생산 달성 일정 수립</li>
+          </ul>
+        </div>
+        <div class="site-col">
+          <div class="site-col-title">TTC 확산</div>
+          <ul>
+            <li>안드라프라데시 TTC 개소 (힌디·텔루구어 현지화)</li>
+            <li>지작·코스타나이 트레이너 순차 파견</li>
+            <li>Hybrid 특화 심화 과정 추가 개설</li>
+            <li>3개국 공통 수료 인증 체계 시범 운영</li>
+            <li>인도 현지 트레이너 자립화 로드맵 수립</li>
+          </ul>
+          <div class="ttc-status">TTC 확산 2호 · Stage 2</div>
+        </div>
+        <div class="site-col">
+          <div class="site-col-title">협업·파트너십</div>
+          <ul>
+            <li>안드라프라데시 주정부 산업부 협력 채널</li>
+            <li>인도 현지 자동차 딜러 네트워크 구축</li>
+            <li>Inner Circle 인도 파트너 정식 포함</li>
+            <li>3개국 분기 Sync 회의 정례화</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- IDN -->
+    <div class="site-card sc-idn">
+      <div class="site-card-header">
+        <div class="site-card-title">🇮🇩 Phase 4 · 인도네시아 치카랑</div>
+        <div class="site-phase-badge">2027 Q1–Q2 · EV 핵심 거점·TTC 확산 3호</div>
+      </div>
+      <div class="site-card-body">
+        <div class="site-col">
+          <div class="site-col-title">EV 생산 거점</div>
+          <ul>
+            <li>치카랑 EV 생산 거점 법인 설립 또는 합작</li>
+            <li>배터리·핵심 부품 현지 조달망 구축</li>
+            <li>인도·인도네시아 EV 플랫폼 공유 체계 수립</li>
+            <li>월 500대+ 목표 생산 계획 수립</li>
+            <li>동남아 EV 충전 인프라 파트너 연계</li>
+          </ul>
+        </div>
+        <div class="site-col">
+          <div class="site-col-title">TTC 확산</div>
+          <ul>
+            <li>치카랑 TTC 개소 (인도네시아어 현지화)</li>
+            <li>EV 고전압 시스템·배터리 관리 특화 과정</li>
+            <li>4개국 TTC 공통 인증 체계 확립</li>
+            <li>미국 Stage 3 대비 글로벌 커리큘럼 통합 초안</li>
+            <li>인도네시아 현지 트레이너 완전 자립화</li>
+          </ul>
+          <div class="ttc-status">TTC 확산 3호 · Stage 2</div>
+        </div>
+        <div class="site-col">
+          <div class="site-col-title">협업·파트너십</div>
+          <ul>
+            <li>인도네시아 산업부·직업훈련부 협력 MOU</li>
+            <li>동남아 딜러·서비스 네트워크 구축</li>
+            <li>Inner Circle 5개국 체계 완성 직전 단계</li>
+            <li>4개국 통합 생산량 모니터링 플랫폼 가동</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- USA -->
+    <div class="site-card sc-usa">
+      <div class="site-card-header">
+        <div class="site-card-title">🇺🇸 Phase 5 · 미국</div>
+        <div class="site-phase-badge">2027 Q3–2028 · Ecosystem 완성·TTC 글로벌 표준화</div>
+      </div>
+      <div class="site-card-body">
+        <div class="site-col">
+          <div class="site-col-title">시장 완성</div>
+          <ul>
+            <li>미국 전략 거점 EV 딜러망·서비스망 구축</li>
+            <li>5개국 Inner Circle 통합 운영 플랫폼 가동</li>
+            <li>EV 프리미엄 라인업 미국 정식 출시</li>
+            <li>미국-인도네시아 Inner Circle 연계 완성</li>
+            <li>IGE 글로벌 Ecosystem 완성 공식 선언</li>
+          </ul>
+        </div>
+        <div class="site-col">
+          <div class="site-col-title">TTC 표준화 완성</div>
+          <ul>
+            <li>미국 TTC 설립 — IGE 글로벌 표준 허브</li>
+            <li>5개국 공통 커리큘럼 최종 확정·공식 채택</li>
+            <li>IGE 글로벌 트레이너 인증 제도 출범</li>
+            <li>5개국 상호 인증 체계 완성</li>
+            <li>미국→각국 역방향 표준 확산 체계</li>
+          </ul>
+          <div class="ttc-status">TTC Stage 3 · 글로벌 표준화 완성</div>
+        </div>
+        <div class="site-col">
+          <div class="site-col-title">협업·완성</div>
+          <ul>
+            <li>5개국 Inner Circle 정례 연례 서밋 개최</li>
+            <li>IGE 글로벌 인증 기관 정식 등록</li>
+            <li>차기 Ecosystem 확장 거점 탐색 착수</li>
+            <li>Ecosystem 완성 성과 보고서 발간</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<hr class="page-break">
+
+<!-- ════════════════ 4. 통합 마일스톤 ════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">SECTION 04</span>
+    <h2 class="section-title">통합 마일스톤 및 타임라인</h2>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-row">
+      <div class="tl-date">2026 Q2</div>
+      <div class="tl-line"><div class="tl-dot filled"></div><div class="tl-connector"></div></div>
+      <div class="tl-content">
+        <div class="tl-title">🚀 Ecosystem 공식 착수 — 지작 센터 TTC Stage 1 개소</div>
+        <div class="tl-desc">전담 TF 구성, 지작 생산 KPI 수립, 트레이너 1기 양성 시작, 코스타나이 물류 루트 계약</div>
+      </div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-date">2026 Q3</div>
+      <div class="tl-line"><div class="tl-dot filled"></div><div class="tl-connector"></div></div>
+      <div class="tl-content">
+        <div class="tl-title">🇰🇿 코스타나이 물류 센터 가동 + TTC 확산 1호 개소</div>
+        <div class="tl-desc">지작→코스타나이 내륙 루트 표준화 완료, 코스타나이 TTC 개소, 지작 수료생 1기 배출</div>
+      </div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-date">2026 Q4</div>
+      <div class="tl-line"><div class="tl-dot filled"></div><div class="tl-connector"></div></div>
+      <div class="tl-content">
+        <div class="tl-title">🇮🇳 인도 안드라프라데시 MOU + TTC 확산 2호 준비</div>
+        <div class="tl-desc">인도 현지 파트너 MOU 체결, CKD 조립 거점 확보, IGE 3개국 공통 인증 체계 파일럿</div>
+      </div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-date">2027 Q1</div>
+      <div class="tl-line"><div class="tl-dot filled"></div><div class="tl-connector"></div></div>
+      <div class="tl-content">
+        <div class="tl-title">🇮🇩 치카랑 법인 설립 + TTC 확산 3호 개소 준비</div>
+        <div class="tl-desc">치카랑 합작법인 설립, 인도 TTC Stage 2 전환, 치카랑 TTC 개소 준비 착수</div>
+      </div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-date">2027 Q2</div>
+      <div class="tl-line"><div class="tl-dot"></div><div class="tl-connector"></div></div>
+      <div class="tl-content">
+        <div class="tl-title">🇮🇩 치카랑 TTC 개소 + 4개국 공통 인증 체계 확립</div>
+        <div class="tl-desc">치카랑 EV 생산 본격화, 4개국 TTC 통합 인증 시스템 가동, 글로벌 커리큘럼 초안 완성</div>
+      </div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-date">2027 Q3</div>
+      <div class="tl-line"><div class="tl-dot"></div><div class="tl-connector"></div></div>
+      <div class="tl-content">
+        <div class="tl-title">🇺🇸 미국 TTC 설립 착수 + EV 딜러망 구축 개시</div>
+        <div class="tl-desc">미국 TTC 글로벌 허브 설립 착수, EV 프리미엄 딜러망 구축, 5개국 Inner Circle 통합 플랫폼 가동</div>
+      </div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-date">2028</div>
+      <div class="tl-line"><div class="tl-dot accent2"></div></div>
+      <div class="tl-content">
+        <div class="tl-title">🏁 IGE Ecosystem 완성 — TTC Stage 3 표준화·EV 미국 출시</div>
+        <div class="tl-desc">5개국 공통 커리큘럼 공식 채택, IGE 글로벌 트레이너 인증 출범, Ecosystem 완성 공식 선언, EV 프리미엄 라인 미국 출시</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="page-break">
+
+<!-- ════════════════ 5. 리스크 분석 ════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">SECTION 05</span>
+    <h2 class="section-title">리스크 분석 및 대응 방안</h2>
+  </div>
+
+  <table class="risk-table">
+    <thead>
+      <tr>
+        <th>리스크 항목</th>
+        <th>등급</th>
+        <th>내용</th>
+        <th>대응 방안</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>생산량 미달</strong></td>
+        <td><span class="risk-high">HIGH</span></td>
+        <td>TTC 구축 트리거(300대/월) 미달 시 전체 일정 지연</td>
+        <td>Hybrid 우선 투입으로 생산량 조기 확보, 트리거 기준 하향 조정 권한을 위원회에 부여</td>
+      </tr>
+      <tr>
+        <td><strong>현지 파트너 이탈</strong></td>
+        <td><span class="risk-high">HIGH</span></td>
+        <td>각국 파트너사의 계약 파기 또는 역량 부족</td>
+        <td>Inner Circle 다중 파트너 구성, 파트너 평가 기준 및 교체 프로세스 사전 수립</td>
+      </tr>
+      <tr>
+        <td><strong>물류 루트 불안정</strong></td>
+        <td><span class="risk-high">HIGH</span></td>
+        <td>지정학적 리스크로 지작→코스타나이 내륙 루트 차단</td>
+        <td>대안 루트(항공·남부 해상) 사전 계약, 코스타나이 재고 버퍼 확보</td>
+      </tr>
+      <tr>
+        <td><strong>규제·인증 지연</strong></td>
+        <td><span class="risk-mid">MID</span></td>
+        <td>각국 EV·Hybrid 형식 인증 취득 지연</td>
+        <td>인증 전문 로컬 에이전시 선제 계약, 인증 일정 6개월 선행 관리</td>
+      </tr>
+      <tr>
+        <td><strong>TTC 인력 이탈</strong></td>
+        <td><span class="risk-mid">MID</span></td>
+        <td>양성된 현지 트레이너의 타사 이직</td>
+        <td>트레이너 장기 계약 + 인센티브 설계, 트레이너 2인 이상 복수 확보 원칙</td>
+      </tr>
+      <tr>
+        <td><strong>EV 인프라 미비</strong></td>
+        <td><span class="risk-mid">MID</span></td>
+        <td>인도·인도네시아 충전 인프라 부족으로 EV 판매 부진</td>
+        <td>Hybrid 우선 전략으로 대응, EV 비중 점진적 확대 원칙 유지</td>
+      </tr>
+      <tr>
+        <td><strong>미국 시장 진입 장벽</strong></td>
+        <td><span class="risk-low">LOW</span></td>
+        <td>미국 IRA 등 자국 우선 정책으로 수입 EV 불이익</td>
+        <td>현지 파트너 딜러망 활용, 장기적 미국 내 조립 가능성 검토</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout warn">
+    <strong>최우선 리스크 관리 항목:</strong> 지작 센터 월 300대 생산 달성 시기가 전체 Ecosystem 일정의
+    기준점이 되므로, 해당 지표를 월별 최우선 모니터링 KPI로 지정하고 미달 시 즉시 경영진에 에스컬레이션한다.
+  </div>
+</div>
+
+<hr class="page-break">
+
+<!-- ════════════════ 6. KPI ════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">SECTION 06</span>
+    <h2 class="section-title">핵심 성과 지표 (KPI)</h2>
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi-item">
+      <div class="kpi-l">ECOSYSTEM SPAN</div>
+      <div class="kpi-v">5</div>
+      <div class="kpi-desc">개국 · UZB·KAZ·IND·IDN·USA</div>
+    </div>
+    <div class="kpi-item">
+      <div class="kpi-l">TTC CENTERS</div>
+      <div class="kpi-v">5</div>
+      <div class="kpi-desc">개소 · 거점별 1센터, 미국 글로벌 허브</div>
+    </div>
+    <div class="kpi-item">
+      <div class="kpi-l">COMPLETION TARGET</div>
+      <div class="kpi-v">2028</div>
+      <div class="kpi-desc">미국 Stage 3 표준화 완성 목표 연도</div>
+    </div>
+    <div class="kpi-item">
+      <div class="kpi-l">TTC STAGE 1 트리거</div>
+      <div class="kpi-v">300</div>
+      <div class="kpi-desc">대/월 · 각 거점 TTC 착수 기준</div>
+    </div>
+    <div class="kpi-item">
+      <div class="kpi-l">TTC STAGE 2 트리거</div>
+      <div class="kpi-v">500</div>
+      <div class="kpi-desc">대/월 · Stage 2 전환 기준</div>
+    </div>
+    <div class="kpi-item">
+      <div class="kpi-l">PHASE ROADMAP</div>
+      <div class="kpi-v">5</div>
+      <div class="kpi-desc">단계 · 2026 Q2 착수 → 2028 완성</div>
+    </div>
+  </div>
+</div>
+
+<hr class="page-break">
+
+<!-- ════════════════ 7. 결론 ════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">SECTION 07</span>
+    <h2 class="section-title">결론 및 즉시 실행 권고</h2>
+  </div>
+
+  <div class="conclusion">
+    <div class="conclusion-title">IGE Ecosystem — 지금 시작해야 하는 이유</div>
+    <p>
+      IGE Ecosystem의 핵심은 <strong>생산과 교육의 동시 확장</strong>에 있다.
+      EV·Hybrid 생산량 증가가 TTC 구축을 촉진하고, TTC가 양성한 기술 인력이 다시 생산 효율을 높이는
+      선순환 구조는 단기적 수익보다 <strong>장기적 생태계 지배력</strong>을 목표로 한다.
+    </p>
+    <p>
+      우즈벡 지작 센터에서 시작된 이 모델이 카자흐스탄·인도·인도네시아를 거쳐 미국에서 완성될 때,
+      IGE는 단순한 차량 공급자가 아닌 <strong>글로벌 EV·Hybrid 기술 교육의 표준을 소유한 기업</strong>이 된다.
+      이는 경쟁사가 단기간에 복제할 수 없는 구조적 해자(Moat)로 기능한다.
+    </p>
+    <p>
+      <strong>즉시 실행 항목:</strong> ① 전담 TF 구성 및 지작 센터 생산량 KPI 확정,
+      ② TTC Stage 1 공간 확보 및 트레이너 선발 착수,
+      ③ 코스타나이 물류 루트 계약 체결,
+      ④ Inner Circle 1차 파트너사 선정 — 이 네 가지를 <strong>2026년 2분기 내 완료</strong>하는 것이
+      전체 Ecosystem 성패를 좌우하는 첫 방아쇠이다.
+    </p>
+  </div>
+</div>
+
+<!-- ════════════════ FOOTER ════════════════ -->
+<div class="doc-footer">
+  <div>IGE · 전략기획 / 글로벌 사업개발 · 문서번호 IGE-STR-2026-001</div>
+  <div>CONFIDENTIAL · 내부 전략 보고용 · 무단 배포 금지</div>
+</div>
+
+</div><!-- /page-wrap -->
+</body>
+</html>
