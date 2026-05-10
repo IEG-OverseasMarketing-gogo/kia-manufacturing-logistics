@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KOICA IBS-STC 사업 참여 검토 보고서</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: #e8e8e8;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 32px 16px;
+}
+
+.page {
+  width: 210mm;
+  min-height: 297mm;
+  background: white;
+  box-shadow: 0 4px 40px rgba(0,0,0,0.18);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── TOP BAR ── */
+.top-bar {
+  background: #0c1f3a;
+  padding: 22px 32px 18px;
+  position: relative;
+  overflow: hidden;
+}
+.top-bar::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #c8960a 0%, #f0c040 50%, #27a368 100%);
+}
+.top-grid {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.doc-type {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #c8960a;
+  margin-bottom: 6px;
+}
+.doc-title {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+  line-height: 1.3;
+}
+.doc-title span { color: #f0c040; }
+.doc-info {
+  text-align: right;
+}
+.di-line {
+  font-size: 10px;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 2px;
+}
+.di-line strong { color: rgba(255,255,255,0.75); }
+
+/* ── VERDICT STRIP ── */
+.verdict-strip {
+  background: #f7f9f7;
+  border-bottom: 1px solid #e0e8e0;
+  padding: 13px 32px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.vs-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #1a6b4a;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.vs-line {
+  width: 1px;
+  height: 20px;
+  background: #ccc;
+  flex-shrink: 0;
+}
+.vs-text {
+  font-size: 11.5px;
+  color: #0c1f3a;
+  line-height: 1.5;
+  font-weight: 500;
+}
+.vs-text em { color: #1a6b4a; font-style: normal; font-weight: 700; }
+
+/* ── BODY ── */
+.body {
+  flex: 1;
+  padding: 20px 32px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ── KPI ROW ── */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+.kpi-box {
+  border: 1px solid #e0e4ec;
+  padding: 11px 12px;
+  text-align: center;
+  position: relative;
+}
+.kpi-box::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+.kpi-box.gold::before { background: #c8960a; }
+.kpi-box.green::before { background: #27a368; }
+.kpi-box.navy::before { background: #1e3d6a; }
+.kpi-box.red::before { background: #b83232; }
+.kpi-num {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.kpi-box.gold .kpi-num { color: #c8960a; }
+.kpi-box.green .kpi-num { color: #1a6b4a; }
+.kpi-box.navy .kpi-num { color: #1e3d6a; }
+.kpi-box.red .kpi-num { color: #b83232; }
+.kpi-label {
+  font-size: 9.5px;
+  color: #6b7a90;
+  line-height: 1.4;
+}
+
+/* ── TWO COL ── */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.three-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
+
+/* ── CARD ── */
+.card {
+  border: 1px solid #e0e4ec;
+  overflow: hidden;
+}
+.card-head {
+  padding: 9px 14px;
+  font-size: 10.5px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.ch-gold { background: #fef9e7; color: #7a5a00; border-bottom: 1px solid #e8d080; }
+.ch-green { background: #edf7f2; color: #1a4a30; border-bottom: 1px solid #a8d8b8; }
+.ch-navy { background: #edf1f7; color: #0c1f3a; border-bottom: 1px solid #b0bcd8; }
+.ch-red { background: #fdf2f2; color: #7a1a1a; border-bottom: 1px solid #e0a8a8; }
+.card-body {
+  padding: 11px 14px;
+  font-size: 11px;
+  color: #2c3548;
+  line-height: 1.65;
+}
+.card-body li {
+  list-style: none;
+  padding-left: 14px;
+  position: relative;
+  margin-bottom: 3px;
+}
+.card-body li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  font-size: 9px;
+  color: #aab0c0;
+  top: 2px;
+}
+.card-body li strong { color: #0c1f3a; }
+.card-body li em { color: #1a6b4a; font-style: normal; font-weight: 600; }
+.card-body li.highlight { background: #f7f9f7; margin: 4px -14px; padding: 5px 14px 5px 28px; }
+
+/* ── COMPARISON TABLE ── */
+.comp-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 10.5px;
+}
+.comp-table th {
+  background: #0c1f3a;
+  color: rgba(255,255,255,0.85);
+  padding: 7px 10px;
+  text-align: left;
+  font-weight: 500;
+  font-size: 9.5px;
+}
+.comp-table td {
+  padding: 7px 10px;
+  border-bottom: 1px solid #eee;
+  vertical-align: top;
+}
+.comp-table tr:last-child td { border-bottom: none; }
+.comp-table tr.alt td { background: #fafafa; }
+.num { text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 10px; }
+.g { color: #1a6b4a; font-weight: 600; }
+.r { color: #b83232; }
+.b { color: #1e3d6a; font-weight: 600; }
+
+/* ── DOCUMENT LIST ── */
+.doc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+.doc-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 10px;
+  padding: 5px 8px;
+  border: 1px solid #eee;
+  line-height: 1.4;
+  color: #2c3548;
+}
+.doc-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px;
+  padding: 1px 5px;
+  border-radius: 2px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.db-ieg { background: #edf7f2; color: #1a6b4a; border: 1px solid #a8d8b8; }
+.db-innobiz { background: #fef9e7; color: #7a5a00; border: 1px solid #e8d080; }
+.db-common { background: #edf1f7; color: #0c1f3a; border: 1px solid #b0bcd8; }
+
+/* ── DECISION BOX ── */
+.decision-box {
+  background: #0c1f3a;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.db-left { flex: 1; }
+.db-question {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 4px;
+}
+.db-answer {
+  font-size: 10.5px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.6;
+}
+.db-answer strong { color: #f0c040; }
+.db-right {
+  text-align: center;
+  flex-shrink: 0;
+  border-left: 1px solid rgba(255,255,255,0.1);
+  padding-left: 20px;
+}
+.db-action {
+  font-size: 10px;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 4px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.1em;
+}
+.db-cta {
+  background: #c8960a;
+  color: white;
+  padding: 8px 16px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* ── FOOTER ── */
+.page-footer {
+  background: #f7f9f7;
+  border-top: 1px solid #e0e4ec;
+  padding: 9px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.pf-left { font-size: 9px; color: #aab0c0; font-family: 'JetBrains Mono', monospace; }
+.pf-right { font-size: 9px; color: #aab0c0; }
+
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #aab0c0;
+  margin-bottom: 6px;
+}
+
+@media print {
+  body { background: white; padding: 0; }
+  .page { box-shadow: none; width: 100%; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- TOP -->
+  <div class="top-bar">
+    <div class="top-grid">
+      <div>
+        <div class="doc-type">임원 보고 · 의사결정 요청 · CONFIDENTIAL</div>
+        <div class="doc-title">KOICA IBS-STC 사업 참여<br><span>지금 해야 하는 이유</span></div>
+      </div>
+      <div class="doc-info">
+        <div class="di-line">작성 <strong>해외마케팅팀 Kelly Cho</strong></div>
+        <div class="di-line">보고일 <strong>2026년 5월</strong></div>
+        <div class="di-line">마감 <strong>2026년 6월 18일</strong></div>
+        <div class="di-line">사업 기간 <strong>3년 (2027–2029)</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VERDICT -->
+  <div class="verdict-strip">
+    <div class="vs-label">결론</div>
+    <div class="vs-line"></div>
+    <div class="vs-text">
+      현금 실투자 <em>연 4,700만 원</em>으로 정부가 IEG 장비를 3개국에 설치해 주고, ADM·HMID·기아와 공식 파트너십이 맺어지며, 장비 수출 18억이 따라옵니다.
+      이노비즈협회가 서류 절반을 담당하므로 사내 준비 부담은 실질적으로 8종입니다.
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="body">
+
+    <!-- KPI ROW -->
+    <div>
+      <div class="section-label">핵심 숫자 4개</div>
+      <div class="kpi-row">
+        <div class="kpi-box gold">
+          <div class="kpi-num">4,700만</div>
+          <div class="kpi-label">IEG 연간 실현금 지출<br>(3년 총 1.4억 / 3년)</div>
+        </div>
+        <div class="kpi-box green">
+          <div class="kpi-num">18억</div>
+          <div class="kpi-label">통과 시 장비 수출 매출<br>(KOICA가 집행)</div>
+        </div>
+        <div class="kpi-box navy">
+          <div class="kpi-num">8종</div>
+          <div class="kpi-label">IEG 실준비 서류<br>(16종 중 이노비즈 담당 제외)</div>
+        </div>
+        <div class="kpi-box red">
+          <div class="kpi-num">6/18</div>
+          <div class="kpi-label">신청 마감일<br>지금 결정해야 하는 이유</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TWO COL: 비용 구조 + 서류 분담 -->
+    <div class="two-col">
+
+      <!-- 비용 -->
+      <div>
+        <div class="section-label">비용 구조 — 생각보다 적습니다</div>
+        <table class="comp-table">
+          <tr>
+            <th>구분</th>
+            <th class="num">금액</th>
+            <th>성격</th>
+          </tr>
+          <tr>
+            <td>IEG 장비 현물출자</td>
+            <td class="num b">~2.1억~2.7억</td>
+            <td style="font-size:9.5px;color:#1a6b4a">현물 (현금 X)</td>
+          </tr>
+          <tr class="alt">
+            <td>IEG 인건비 현물</td>
+            <td class="num b">~1.26억</td>
+            <td style="font-size:9.5px;color:#1a6b4a">현물 (현금 X)</td>
+          </tr>
+          <tr>
+            <td>이노비즈 현물 기여</td>
+            <td class="num b">~0.54억</td>
+            <td style="font-size:9.5px;color:#1a6b4a">현물 (현금 X)</td>
+          </tr>
+          <tr class="alt" style="background:#fff8e6">
+            <td><strong>현금 실지출</strong><br><span style="font-size:9px;color:#888">Emotii 용역 + 출장·예비비</span></td>
+            <td class="num" style="color:#c8960a;font-weight:700">~0.9억~1.4억<br><span style="font-size:9px">= 연 3,000~4,700만</span></td>
+            <td style="font-size:9.5px;color:#c8960a">현금 (실부담)</td>
+          </tr>
+          <tr style="background:#0c1f3a">
+            <td style="color:white;font-size:10px"><strong>총 파트너 분담금</strong></td>
+            <td class="num" style="color:#f0c040;font-weight:700">5.4억</td>
+            <td style="color:rgba(255,255,255,0.6);font-size:9.5px">현물 72% + 현금 28%</td>
+          </tr>
+        </table>
+        <div style="margin-top:7px;padding:8px 10px;background:#edf7f2;border-left:3px solid #27a368;font-size:10px;color:#1a3d2b;line-height:1.5;">
+          💡 <strong>비교:</strong> 하노버 메세 참가 1회 = 약 5,000만 원.<br>
+          이 사업의 연간 현금 부담과 같습니다. 대신 3개국 정부 보증 파트너십이 생깁니다.
+        </div>
+      </div>
+
+      <!-- 서류 분담 -->
+      <div>
+        <div class="section-label">16종 서류 — 누가 무엇을 준비하나</div>
+        <div class="doc-grid">
+          <div class="doc-item"><span class="doc-badge db-innobiz">이노비즈</span>KOICA 사업 실적 증빙</div>
+          <div class="doc-item"><span class="doc-badge db-innobiz">이노비즈</span>협력기관 법인 서류</div>
+          <div class="doc-item"><span class="doc-badge db-innobiz">이노비즈</span>M&amp;E 계획서 초안</div>
+          <div class="doc-item"><span class="doc-badge db-innobiz">이노비즈</span>컨소시엄 약정서</div>
+          <div class="doc-item"><span class="doc-badge db-innobiz">이노비즈</span>사업비 정산 계획</div>
+          <div class="doc-item"><span class="doc-badge db-common">공동</span>사업계획서 본문</div>
+          <div class="doc-item"><span class="doc-badge db-common">공동</span>현지 파트너 MOU/확약서</div>
+          <div class="doc-item"><span class="doc-badge db-ieg">IEG</span>법인등기부등본</div>
+          <div class="doc-item"><span class="doc-badge db-ieg">IEG</span>재무제표 (최근 3개년)</div>
+          <div class="doc-item"><span class="doc-badge db-ieg">IEG</span>장비 스펙서·가격 증빙</div>
+          <div class="doc-item"><span class="doc-badge db-ieg">IEG</span>커리큘럼 개요</div>
+          <div class="doc-item"><span class="doc-badge db-ieg">IEG</span>분담여력 자가점검표</div>
+          <div class="doc-item"><span class="doc-badge db-ieg">IEG</span>대표자 서명 신청서</div>
+          <div class="doc-item"><span class="doc-badge db-ieg">IEG</span>납세 증명서</div>
+          <div class="doc-item"><span class="doc-badge db-ieg">IEG</span>특허·인증 사본</div>
+          <div class="doc-item"><span class="doc-badge db-common">공동</span>PDM 논리 모델</div>
+        </div>
+        <div style="margin-top:7px;display:flex;gap:8px;font-size:9.5px;">
+          <span style="background:#edf7f2;padding:3px 8px;color:#1a4a30;border:1px solid #a8d8b8;">IEG 담당 8종</span>
+          <span style="background:#fef9e7;padding:3px 8px;color:#7a5a00;border:1px solid #e8d080;">이노비즈 담당 5종</span>
+          <span style="background:#edf1f7;padding:3px 8px;color:#0c1f3a;border:1px solid #b0bcd8;">공동 작성 3종</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- THREE COL: 안 하면 / 떨어져도 / 붙으면 -->
+    <div>
+      <div class="section-label">시나리오별 결과</div>
+      <div class="three-col">
+        <div class="card">
+          <div class="card-head ch-red">❌ 참여 안 하면</div>
+          <div class="card-body">
+            <ul>
+              <li>ADM·HMID·기아와 공식 접점 없이 <strong>개별 영업만 지속</strong></li>
+              <li>경쟁사가 먼저 KOICA 레퍼런스 확보</li>
+              <li>중앙아·동남아 TVET 시장에서 <strong>진입 명분 상실</strong></li>
+              <li>2028 IPO 스토리에 해외 사업 실적 공백</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head ch-gold">△ 참여했지만 탈락하면</div>
+          <div class="card-body">
+            <ul>
+              <li>ADM CEO 명의 파트너십 확약 레터 <strong>남음</strong></li>
+              <li>기아 KMMIL·HMID 협력의향서 <strong>남음</strong></li>
+              <li>이노비즈 ODA 네트워크 접속</li>
+              <li>서류 자산으로 <strong>독립 영업 즉시 전환</strong></li>
+              <li class="highlight">현금 손실: <em>최대 1.4억</em> (3년 기준)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head ch-green">✅ 통과하면</div>
+          <div class="card-body">
+            <ul>
+              <li><strong>KOICA 12.6억이 IEG 장비 구매비로 집행</strong></li>
+              <li>3개국 공식 설치 레퍼런스 확보</li>
+              <li>카자흐·베트남 추가 복제 수주 근거</li>
+              <li>Emotii 통합 모델 특허·브랜드 가치</li>
+              <li class="highlight">수출 매출: <em>장비 18억 + 스페어파츠 반복 수익</em></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DECISION BOX -->
+    <div class="decision-box">
+      <div class="db-left">
+        <div class="db-question">대표님, 결정해 주셔야 할 것은 하나입니다.</div>
+        <div class="db-answer">
+          컨설팅 1:1 세션 전까지 <strong>"참여 결정"</strong>만 내려주시면 됩니다.<br>
+          서류 준비·이노비즈 협의·Emotii 계약은 해외마케팅팀이 전담합니다.<br>
+          대표님 서명이 필요한 서류는 <strong>신청서 1종 + 법인 확인서 1종</strong>, 총 2종입니다.
+        </div>
+      </div>
+      <div class="db-right">
+        <div class="db-action">요청 사항</div>
+        <div class="db-cta">컨설팅 참여<br>승인 요청</div>
+      </div>
+    </div>
+
+  </div><!-- /body -->
+
+  <!-- FOOTER -->
+  <div class="page-footer">
+    <div class="pf-left">IEG-OVERSEAS-2026-KOICA-STC · CONFIDENTIAL · Kelly Cho · kellycho824@ieg.kr</div>
+    <div class="pf-right">KOICA IBS 2026 마감: 2026년 6월 18일 (D-<span id="dday"></span>)</div>
+  </div>
+
+</div>
+
+<script>
+const deadline = new Date('2026-06-18');
+const today = new Date();
+const diff = Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
+document.getElementById('dday').textContent = diff > 0 ? diff : '마감';
+</script>
+
+</body>
+</html>
