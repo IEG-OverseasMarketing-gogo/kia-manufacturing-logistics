@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IEG Global Market Proposals 2026 — 4개 시장 통합 전략</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:    #0D1F3C;
+  --navy2:   #0A1628;
+  --mid:     #1B3A6B;
+  --blue:    #2E5FAD;
+  --ice:     #D6E4F7;
+  --white:   #FFFFFF;
+  --off:     #F4F7FC;
+  --gray:    #64748B;
+  --ltgray:  #E2EAF4;
+  --gold:    #D4900A;
+  --goldlt:  #FEF9ED;
+  --uz:      #D4900A;
+  --kz:      #0082C8;
+  --in:      #B36A10;
+  --id:      #005BAB;
+  --green:   #1A7340;
+  --greenlt: #D4EDDA;
+  --red:     #C0392B;
+  --redlt:   #FFF0F0;
+  --ff-head: 'Playfair Display', Georgia, serif;
+  --ff-body: 'Plus Jakarta Sans', sans-serif;
+  --r:       12px;
+  --r-sm:    6px;
+  --sh:      0 4px 24px rgba(0,0,0,.10);
+  --sh-lg:   0 8px 48px rgba(0,0,0,.16);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { font-family: var(--ff-body); background: var(--off); color: var(--navy); line-height: 1.65; }
+
+/* ── SCROLLBAR ─────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--off); }
+::-webkit-scrollbar-thumb { background: var(--ltgray); border-radius: 3px; }
+
+/* ── NAV ───────────────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(10,22,40,.92); backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 32px; height: 60px;
+}
+.nav-logo { font-family: var(--ff-head); font-size: 1.15rem; color: var(--white); letter-spacing: .04em; }
+.nav-logo span { color: var(--gold); }
+.nav-links { display: flex; gap: 4px; }
+.nav-links a {
+  font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  color: rgba(255,255,255,.55); text-decoration: none; padding: 6px 12px; border-radius: 4px;
+  transition: all .2s; white-space: nowrap;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--white); background: rgba(255,255,255,.1); }
+.nav-links a.uz  { color: var(--uz);  } .nav-links a.uz.active  { background: rgba(212,144,10,.18); }
+.nav-links a.kz  { color: var(--kz);  } .nav-links a.kz.active  { background: rgba(0,130,200,.18); }
+.nav-links a.in  { color: #D4881A;    } .nav-links a.in.active  { background: rgba(179,106,16,.18); }
+.nav-links a.id  { color: #5098D4;    } .nav-links a.id.active  { background: rgba(0,91,171,.18); }
+
+/* ── HERO ──────────────────────────────────────────────────── */
+.hero {
+  min-height: 100vh; background: var(--navy2);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 100px 32px 80px; position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(46,95,173,.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-badge {
+  display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--gold); border: 1px solid rgba(212,144,10,.4);
+  padding: 5px 16px; border-radius: 20px; margin-bottom: 28px;
+}
+.hero h1 {
+  font-family: var(--ff-head); font-size: clamp(2.2rem, 5vw, 3.6rem);
+  color: var(--white); line-height: 1.2; max-width: 860px;
+  margin-bottom: 16px;
+}
+.hero h1 span { color: var(--gold); }
+.hero p {
+  font-size: 1.05rem; color: var(--ice); max-width: 640px;
+  margin: 0 auto 48px; opacity: .9;
+}
+.hero-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+  max-width: 900px; width: 100%;
+}
+.hero-card {
+  border: 1px solid rgba(255,255,255,.1); border-radius: var(--r);
+  padding: 18px 14px; text-align: center; cursor: pointer;
+  transition: all .25s; text-decoration: none; display: block;
+}
+.hero-card:hover { transform: translateY(-3px); border-color: rgba(255,255,255,.25); }
+.hero-card .flag { font-size: 1.8rem; margin-bottom: 8px; display: block; }
+.hero-card .cname { font-size: .8rem; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+.hero-card .cloc  { font-size: .72rem; color: rgba(255,255,255,.5); margin-bottom: 8px; }
+.hero-card .crev  { font-size: .75rem; font-weight: 600; border-radius: 4px; padding: 3px 8px; }
+.hz-divider { width: 60px; height: 2px; background: var(--gold); margin: 0 auto 48px; }
+
+/* ── OVERVIEW MATRIX ───────────────────────────────────────── */
+.section { padding: 80px 32px; }
+.section-label {
+  font-size: .72rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 10px;
+}
+.section-title {
+  font-family: var(--ff-head); font-size: clamp(1.6rem, 3vw, 2.4rem);
+  color: var(--navy); margin-bottom: 12px;
+}
+.section-sub { font-size: 1rem; color: var(--gray); max-width: 680px; margin-bottom: 48px; }
+.container { max-width: 1160px; margin: 0 auto; }
+
+/* comparison table */
+.comp-table { width: 100%; border-collapse: collapse; background: var(--white); border-radius: var(--r); overflow: hidden; box-shadow: var(--sh); }
+.comp-table th, .comp-table td { padding: 14px 16px; font-size: .88rem; text-align: left; border-bottom: 1px solid var(--ltgray); }
+.comp-table th { background: var(--navy); color: var(--white); font-size: .76rem; font-weight: 600; letter-spacing: .04em; }
+.comp-table td:first-child { font-weight: 600; color: var(--navy); background: var(--off); }
+.comp-table tr:last-child td { border-bottom: none; }
+.comp-table tr:hover td { background: var(--ice); }
+.badge-pill {
+  display: inline-block; font-size: .7rem; font-weight: 700; padding: 3px 10px;
+  border-radius: 20px; white-space: nowrap;
+}
+.badge-low    { background: var(--greenlt); color: var(--green); }
+.badge-mid    { background: #FEF3DC; color: #8A5700; }
+.badge-high   { background: var(--redlt); color: var(--red); }
+.badge-fast   { background: var(--greenlt); color: var(--green); }
+.badge-oda    { background: var(--ice); color: var(--mid); }
+
+/* ── MARKET SECTION ────────────────────────────────────────── */
+.market-wrap { margin-bottom: 6px; }
+
+.market-hero {
+  padding: 60px 32px; color: var(--white); position: relative; overflow: hidden;
+}
+.market-hero::after {
+  content: ''; position: absolute; right: -60px; top: -60px;
+  width: 360px; height: 360px; border-radius: 50%;
+  background: rgba(255,255,255,.04); pointer-events: none;
+}
+.market-hero-inner { max-width: 1160px; margin: 0 auto; }
+.market-flag { font-size: 3rem; margin-bottom: 12px; }
+.market-name { font-family: var(--ff-head); font-size: clamp(1.8rem,4vw,2.8rem); margin-bottom: 6px; }
+.market-sub  { font-size: .95rem; opacity: .75; margin-bottom: 32px; }
+.market-kpis { display: flex; flex-wrap: wrap; gap: 12px; }
+.kpi-card {
+  background: rgba(255,255,255,.1); backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,.15); border-radius: var(--r-sm);
+  padding: 14px 20px; min-width: 120px; text-align: center;
+}
+.kpi-num  { font-family: var(--ff-head); font-size: 1.7rem; font-weight: 700; color: var(--white); }
+.kpi-lbl  { font-size: .72rem; opacity: .7; margin-top: 2px; }
+
+.market-body { padding: 0 32px 60px; background: var(--white); }
+.market-body-inner { max-width: 1160px; margin: 0 auto; }
+
+/* tabs within market */
+.market-tabs { display: flex; gap: 0; border-bottom: 2px solid var(--ltgray); margin-bottom: 32px; padding-top: 32px; }
+.tab-btn {
+  font-size: .82rem; font-weight: 600; letter-spacing: .04em; padding: 10px 20px;
+  background: none; border: none; cursor: pointer; color: var(--gray);
+  border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all .2s;
+}
+.tab-btn.active { color: var(--navy); }
+.tab-pane { display: none; }
+.tab-pane.active { display: block; }
+
+/* challenge table */
+.ch-table { width: 100%; border-collapse: collapse; margin-bottom: 24px; }
+.ch-table th { background: var(--navy); color: var(--white); font-size: .78rem; padding: 10px 14px; text-align: left; }
+.ch-table td { font-size: .86rem; padding: 12px 14px; vertical-align: top; border-bottom: 1px solid var(--ltgray); }
+.ch-table td:first-child { font-weight: 600; color: var(--navy); background: var(--off); width: 22%; }
+.ch-table tr:nth-child(even) td:not(:first-child) { background: var(--off); }
+
+/* option cards */
+.opts-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-bottom: 24px; }
+.opt-card  {
+  border: 1px solid var(--ltgray); border-radius: var(--r);
+  padding: 24px; transition: box-shadow .2s;
+}
+.opt-card:hover { box-shadow: var(--sh); }
+.opt-card .opt-label { font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 8px; }
+.opt-card h4 { font-size: 1.05rem; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+.opt-card p  { font-size: .84rem; color: var(--gray); margin-bottom: 16px; line-height: 1.55; }
+.opt-card .opt-price { font-size: 1.15rem; font-weight: 700; margin-bottom: 4px; }
+.opt-card .opt-note  { font-size: .78rem; color: var(--gray); }
+.opt-rows { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; }
+.opt-row  { font-size: .8rem; color: #333; padding: 5px 0; border-bottom: 1px solid var(--ltgray); display: flex; gap: 10px; }
+.opt-row:last-child { border-bottom: none; }
+.opt-row span:first-child { color: var(--gray); min-width: 90px; flex-shrink: 0; }
+.opt-row span.hl { color: var(--green); font-weight: 600; }
+
+/* roadmap */
+.roadmap { display: flex; gap: 0; margin-bottom: 32px; }
+.phase-block { flex: 1; padding: 20px 18px; border-left: 3px solid var(--ltgray); position: relative; }
+.phase-block:first-child { border-left-width: 4px; }
+.phase-num   { font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 6px; }
+.phase-name  { font-size: .95rem; font-weight: 700; color: var(--navy); margin-bottom: 3px; }
+.phase-period{ font-size: .75rem; color: var(--gray); margin-bottom: 12px; font-style: italic; }
+.phase-items { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.phase-items li { font-size: .8rem; color: #333; padding-left: 12px; position: relative; }
+.phase-items li::before { content: '▸'; position: absolute; left: 0; }
+.phase-kpi   { font-size: .78rem; font-weight: 700; margin-top: 12px; padding: 5px 10px; border-radius: 4px; display: inline-block; }
+
+/* roi table */
+.roi-table { width: 100%; border-collapse: collapse; }
+.roi-table th { background: var(--off); color: var(--navy); font-size: .78rem; font-weight: 600; padding: 10px 14px; text-align: left; border-bottom: 2px solid var(--ltgray); }
+.roi-table td { font-size: .84rem; padding: 11px 14px; border-bottom: 1px solid var(--ltgray); vertical-align: top; }
+.roi-table td:first-child { font-weight: 600; color: var(--navy); }
+.roi-table .hl { color: var(--green); font-weight: 600; }
+.roi-table tr:hover td { background: var(--off); }
+
+/* callout */
+.callout {
+  border-radius: var(--r-sm); padding: 16px 20px; margin: 16px 0;
+  font-size: .88rem; line-height: 1.6; border-left: 4px solid;
+}
+.callout.gold  { background: var(--goldlt);  border-color: var(--gold);  color: #4A2800; }
+.callout.blue  { background: var(--ice);     border-color: var(--blue);  color: #0D2B5E; }
+.callout.green { background: var(--greenlt); border-color: var(--green); color: #0A3018; }
+
+/* status badge */
+.status-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; padding: 12px 16px; border-radius: var(--r-sm); font-size: .85rem; }
+.status-bar.done    { background: var(--greenlt); color: var(--green); }
+.status-bar.active  { background: #FEF3DC; color: #8A5700; }
+.status-bar.pending { background: var(--ice); color: var(--mid); }
+
+/* next steps */
+.steps-list { display: flex; flex-direction: column; gap: 12px; }
+.step-item  { display: flex; gap: 16px; align-items: flex-start; padding: 14px 18px; border-radius: var(--r-sm); background: var(--off); border: 1px solid var(--ltgray); }
+.step-num   { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .8rem; font-weight: 700; color: var(--white); flex-shrink: 0; }
+.step-body  { flex: 1; }
+.step-title { font-size: .9rem; font-weight: 600; color: var(--navy); margin-bottom: 3px; }
+.step-desc  { font-size: .82rem; color: var(--gray); }
+.step-time  { font-size: .75rem; font-weight: 700; padding: 2px 8px; border-radius: 3px; white-space: nowrap; flex-shrink: 0; }
+
+/* ── CONTACT ───────────────────────────────────────────────── */
+.contact-section {
+  background: var(--navy2); padding: 80px 32px; text-align: center; color: var(--white);
+}
+.contact-section h2 { font-family: var(--ff-head); font-size: 2.2rem; margin-bottom: 12px; }
+.contact-section p  { color: var(--ice); margin-bottom: 40px; }
+.contact-cards { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.contact-card {
+  background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12);
+  border-radius: var(--r); padding: 24px 28px; min-width: 200px; text-align: left;
+}
+.contact-card .cc-label { font-size: .7rem; color: var(--ice); opacity: .6; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 6px; }
+.contact-card .cc-val   { font-size: .95rem; color: var(--white); font-weight: 500; }
+.contact-card .cc-val a { color: var(--gold); text-decoration: none; }
+
+/* ── FOOTER ────────────────────────────────────────────────── */
+footer {
+  background: var(--navy2); border-top: 1px solid rgba(255,255,255,.06);
+  padding: 20px 32px; text-align: center; font-size: .78rem; color: rgba(255,255,255,.3);
+}
+
+/* ── UTIL ──────────────────────────────────────────────────── */
+.flex-between { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+.mt-24 { margin-top: 24px; }
+.mt-32 { margin-top: 32px; }
+.mb-16 { margin-bottom: 16px; }
+.divider { height: 1px; background: var(--ltgray); margin: 32px 0; }
+
+/* ── PRINT ─────────────────────────────────────────────────── */
+@media print {
+  nav, .hero-grid { display: none; }
+  .market-body { page-break-before: always; }
+  .opts-grid { grid-template-columns: 1fr 1fr 1fr; }
+}
+
+/* ── RESPONSIVE ────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .opts-grid { grid-template-columns: 1fr; }
+  .roadmap { flex-direction: column; }
+  .hero-grid { grid-template-columns: repeat(2,1fr); }
+  .nav-links { gap: 0; }
+  .nav-links a { font-size: .7rem; padding: 5px 8px; }
+  .comp-table { font-size: .8rem; }
+}
+@media (max-width: 600px) {
+  nav { padding: 0 16px; }
+  .section, .market-hero, .market-body { padding-left: 16px; padding-right: 16px; }
+  .hero-grid { grid-template-columns: 1fr 1fr; }
+  .market-tabs { overflow-x: auto; }
+  .tab-btn { font-size: .76rem; padding: 8px 14px; white-space: nowrap; }
+}
+
+/* ── ANIMATIONS ────────────────────────────────────────────── */
+@keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+.hero-badge, .hero h1, .hero p, .hero .hz-divider, .hero-grid { animation: fadeUp .7s ease both; }
+.hero h1 { animation-delay: .1s; } .hero p { animation-delay: .2s; }
+.hero .hz-divider { animation-delay: .3s; } .hero-grid { animation-delay: .4s; }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ────────────────────────────────────────────────────── -->
+<nav>
+  <div class="nav-logo">IEG<span>.</span> Global Proposals 2026</div>
+  <div class="nav-links">
+    <a href="#overview">Overview</a>
+    <a href="#uz" class="uz">🇺🇿 우즈벡</a>
+    <a href="#kz" class="kz">🇰🇿 카자흐</a>
+    <a href="#in" class="in">🇮🇳 인도</a>
+    <a href="#id" class="id">🇮🇩 인도네시아</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- ── HERO ──────────────────────────────────────────────────── -->
+<section class="hero" id="top">
+  <div class="hero-badge">주식회사 아이지 · 해외마케팅팀 · 2026년 4월</div>
+  <h1>글로벌 <span>스마트팩토리</span><br>인력 양성 파트너십</h1>
+  <p>우즈베키스탄 · 카자흐스탄 · 인도 · 인도네시아<br>4개 시장 동시 공략 — 훈련장비 수출 통합 전략</p>
+  <div class="hz-divider"></div>
+  <div class="hero-grid">
+    <a class="hero-card" href="#uz" style="border-color:rgba(212,144,10,.35);background:rgba(212,144,10,.08)">
+      <span class="flag">🇺🇿</span>
+      <div class="cname">ADM Global</div>
+      <div class="cloc">지직, 우즈베키스탄</div>
+      <div class="crev badge-pill" style="background:rgba(212,144,10,.25);color:#E8A020">🔥 접촉 완료</div>
+    </a>
+    <a class="hero-card" href="#kz" style="border-color:rgba(0,130,200,.35);background:rgba(0,130,200,.08)">
+      <span class="flag">🇰🇿</span>
+      <div class="cname">KIA Qazaqstan</div>
+      <div class="cloc">코스타나이, 카자흐스탄</div>
+      <div class="crev badge-pill" style="background:rgba(0,130,200,.2);color:#5BB8F5">#2 우선 타깃</div>
+    </a>
+    <a class="hero-card" href="#in" style="border-color:rgba(179,106,16,.35);background:rgba(179,106,16,.08)">
+      <span class="flag">🇮🇳</span>
+      <div class="cname">Kia India</div>
+      <div class="cloc">안단타푸르, 안드라프라데시</div>
+      <div class="crev badge-pill" style="background:rgba(179,106,16,.2);color:#D4881A">#3 중기 목표</div>
+    </a>
+    <a class="hero-card" href="#id" style="border-color:rgba(0,91,171,.35);background:rgba(0,91,171,.08)">
+      <span class="flag">🇮🇩</span>
+      <div class="cname">PT HMMI</div>
+      <div class="cloc">치카랑, 자바, 인도네시아</div>
+      <div class="crev badge-pill" style="background:rgba(0,91,171,.2);color:#7AC0F5">KOICA 최우선</div>
+    </a>
+  </div>
+</section>
+
+<!-- ── OVERVIEW ───────────────────────────────────────────────── -->
+<section class="section" id="overview" style="background:var(--white)">
+<div class="container">
+  <div class="section-label">4개 시장 비교</div>
+  <h2 class="section-title">핵심 비교 매트릭스</h2>
+  <p class="section-sub">수익 속도 · 진입장벽 · IEG 차별점 · 추천 진입 루트 한눈에 비교</p>
+  <table class="comp-table">
+    <thead>
+      <tr>
+        <th>평가 항목</th>
+        <th style="color:#E8A020">🇺🇿 우즈벡 (ADM)</th>
+        <th style="color:#5BB8F5">🇰🇿 카자흐 (KIA Qazaqstan)</th>
+        <th style="color:#D4881A">🇮🇳 인도 (Kia India)</th>
+        <th style="color:#7AC0F5">🇮🇩 인도네시아 (HMMI)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>첫 수익 시점</td><td><span class="badge-pill badge-fast">6~9개월</span></td><td>12~18개월</td><td>18~24개월</td><td>12~18개월</td></tr>
+      <tr><td>초도 계약 규모</td><td>$120K~1M</td><td>$80K~150K</td><td>$150K~220K</td><td>$120K~200K</td></tr>
+      <tr><td>연간 장기 수익</td><td>$300K~500K</td><td>$150K~250K</td><td>$400K~800K</td><td>$300K~600K</td></tr>
+      <tr><td>진입장벽</td><td><span class="badge-pill badge-low">★ 낮음</span></td><td><span class="badge-pill badge-mid">★★ 중간</span></td><td><span class="badge-pill badge-mid">★★★ 중~높음</span></td><td><span class="badge-pill badge-mid">★★ 중간</span></td></tr>
+      <tr><td>KOICA ODA 활용</td><td><span class="badge-pill badge-oda">✅ 즉시 가능</span></td><td><span class="badge-pill badge-oda">✅ 가능</span></td><td><span class="badge-pill" style="background:#FEF3DC;color:#8A5700">⚠️ 제한적</span></td><td><span class="badge-pill badge-oda">✅ 최우선국</span></td></tr>
+      <tr><td>의사결정 구조</td><td>민간기업 단순</td><td>Kia 직접투자 복잡</td><td>Kia 자회사 복잡</td><td>HMC 자회사 복잡</td></tr>
+      <tr><td>현재 접촉 상태</td><td><span class="badge-pill badge-fast">🔥 전화 완료</span></td><td>조사 착수 중</td><td>조사 예정</td><td>조사 예정</td></tr>
+      <tr><td>핵심 진입 루트</td><td>태웅로직스 소개 + 직접 접촉</td><td>KOTRA 알마티 + Satbayev대학</td><td>ASDC + APSSDC + IIT</td><td>KOICA Jakarta + HMMI HR</td></tr>
+      <tr><td>한국 브랜드 연계</td><td>Kia (HMG)</td><td>Kia Corporation 직접 투자</td><td>Kia Corporation 자회사</td><td>Hyundai Motor Company</td></tr>
+      <tr><td>종합 우선순위</td><td><strong>🥇 1순위 즉시 실행</strong></td><td><strong>🥈 2순위 병행</strong></td><td><strong>🥉 3순위 중기</strong></td><td><strong>🏆 KOICA ODA 최강</strong></td></tr>
+    </tbody>
+  </table>
+</div>
+</section>
+
+<!-- ─────────── MARKET SECTIONS ─────────────────────────────── -->
+<div id="markets"></div>
+
+<!-- ── CONTACT ────────────────────────────────────────────────── -->
+<section class="contact-section" id="contact">
+  <h2>문의 & 연락처</h2>
+  <p>파트너십 제안 문의, 방문 미팅 요청, KOICA IBS 컨소시엄 협의</p>
+  <div class="contact-cards">
+    <div class="contact-card">
+      <div class="cc-label">담당자</div>
+      <div class="cc-val">조 담당 (Kelly Cho)</div>
+    </div>
+    <div class="contact-card">
+      <div class="cc-label">이메일</div>
+      <div class="cc-val"><a href="mailto:kellycho824@ieg.kr">kellycho824@ieg.kr</a></div>
+    </div>
+    <div class="contact-card">
+      <div class="cc-label">전화</div>
+      <div class="cc-val">+82-1644-3263</div>
+    </div>
+    <div class="contact-card">
+      <div class="cc-label">웹사이트</div>
+      <div class="cc-val"><a href="https://www.ieg.kr" target="_blank">www.ieg.kr</a></div>
+    </div>
+    <div class="contact-card">
+      <div class="cc-label">소속</div>
+      <div class="cc-val">주식회사 아이지 · 해외마케팅팀</div>
+    </div>
+  </div>
+</section>
+<footer>© 2026 IEG Co., Ltd. (주식회사 아이지) · 대외비 — 파트너사 내부 참고용 전략 문서</footer>
+
+<script>
+// ════════════════════════════════════════════════════════════════
+// MARKET DATA
+// ════════════════════════════════════════════════════════════════
+const MARKETS = [
+{
+  id:'uz', flag:'🇺🇿',
+  company:'ADM Global (ADM Jizzakh LLC)',
+  location:'지직 자유경제구역, 우즈베키스탄',
+  accent:'#D4900A', accentDark:'#8A5700', accentBg:'rgba(212,144,10,.08)',
+  accentBorder:'rgba(212,144,10,.3)',
+  status:'done', statusMsg:'🔥 접촉 완료 — 4월 15일 직접 전화 + 이메일 전달 완료',
+  kpis:[
+    {n:'100,000대',l:'연간 CKD 생산'},
+    {n:'5,000명',l:'현재 고용'},
+    {n:'10,000명',l:'2027년 목표'},
+    {n:'$550M',l:'3단계 투자'},
+    {n:'33%',l:'자동화율'},
+    {n:'348종',l:'현지화 목표'},
+  ],
+  challengeIntro:'ADM Jizzakh의 훈련 체계는 4가지 외부 의존 채널로만 구성되어 있으며, 공장 내 자체 OJT 인프라가 전무합니다.',
+  challenges:[
+    ['해외 연수 의존','엔지니어 50명/회차 한국·중국 파견 — 연간 수억 원 + 운영 공백','비용 불감당 + 지식이 개인에게 귀속되어 이탈 시 손실'],
+    ['자체 OJT 전무','체계적 사내 훈련 시스템 부재','생산 리스크 — 장애 대응 인력 부족'],
+    ['자동화 인력 부족','33% 자동화이나 운영·정비 기능인력 절대 부족','설비 가동률 저하 직결'],
+    ['현지화 압박','2027년 348종 부품 현지화 — 정밀 엔지니어링 기술 필요','계획 지연 리스크'],
+  ],
+  challengeCallout:'어제 전화를 통해 직접 접촉을 완료했습니다. 지금 바로 팔로업 이메일 + 영문 제안서 발송으로 모멘텀을 이어가야 합니다.',
+  options:[
+    {label:'Option A', title:'ADM 내부 훈련센터', price:'$120K~180K',
+     note:'가장 빠른 ROI — 첫 코호트에서 손익분기',
+     desc:'ADM Jizzakh 공장 내 스마트 제조 훈련 유닛 설치. ADM HR팀이 자체 코호트 운영.',
+     color:'var(--uz)',
+     rows:[['장비','IEG 3432 × 2 + IEG 6030 × 1 + IEG 4000 × 1'],['커리큘럼','32주 CBT — 우즈벡어/러시아어/영어'],['코호트','25~50명/회차'],['ADM 절감',{hl:true,t:'해외 연수 대비 ~85% 비용 절감'}],['손익분기',{hl:true,t:'첫 코호트 이내'}]]},
+    {label:'Option B', title:'지직 폴리테크닉 스마트랩', price:'$200K~280K',
+     note:'연간 200+ 인재 파이프라인',
+     desc:'지직 폴리테크닉 내 스마트 자동화 실습랩 구축. 졸업생 ADM 우선 채용 트랙.',
+     color:'var(--blue)',
+     rows:[['장비','IEG 3432 × 3 + IEG 3430 × 2 + IEG 6030 × 1'],['이중 인증',{hl:true,t:'폴리테크닉 졸업 + IEG Level 2'}],['연간 배출','200명+'],['ADM 역할','취업 보장 인터뷰 + 우선 채용']]},
+    {label:'Option C', title:'KOICA IBS (ADM CAPEX 0)', price:'$500K~1M (ODA)',
+     note:'한-우즈벡 MOU 프레임 활용',
+     desc:'2024년 6월 한-우즈벡 산업인력 MOU 기반 KOICA IBS 제안서 제출. ADM 초기 비용 없음.',
+     color:'var(--green)',
+     rows:[['재원','KOICA ODA (한국 정부 보조금)'],['컨소시엄','IEG + 이노비즈협회'],['ADM 지출',{hl:true,t:'$0 — 공간 + 교육생 제공만'}],['장비 비용',{hl:true,t:'ODA로 전액 충당'}]]},
+  ],
+  phases:[
+    {num:'Phase 1',name:'접촉 & 관심 확인',period:'4월 3주~5월 2주',
+     items:['팔로업 이메일 오늘 발송','태웅로직스 소개 요청','LinkedIn 임원 접촉','Zoom 30분 미팅 약속'],kpi:'미팅 약속 확보',color:'#D4900A'},
+    {num:'Phase 2',name:'제안 & 현장 방문',period:'5월~6월',
+     items:['3가지 옵션 설명','현장 방문 (IEG 비용 부담)','스킬갭 분석 2일','LOI 취득'],kpi:'현장 방문 + LOI',color:'#B87800'},
+    {num:'Phase 3',name:'MOU 체결',period:'6월~8월',
+     items:['MOU 초안 작성','KOICA IBS 제안서','지직 폴리테크닉 연계','3자 MOU 검토'],kpi:'MOU 서명',color:'#1B3A6B'},
+    {num:'Phase 4',name:'계약 & 파일럿',period:'9월~12월',
+     items:['공급 계약 체결','IEG 3432 × 2 납품','현지 설치 + 커미셔닝','1차 코호트 50명'],kpi:'⭐ 첫 수익 $120K+',color:'#1A7340'},
+  ],
+  roi:[
+    ['엔지니어당 훈련 비용','$8,000~12,000 (항공+숙박+기회비용)','$1,200~2,000','~85% 절감'],
+    ['연간 코호트(50명)','$400,000~600,000','$60,000~100,000','$340K~500K 절감'],
+    ['지식 유지','낮음 — 개인에 귀속','높음 — CBT + 강사 풀 구축','시스템화'],
+    ['장비 투자','없음 (자산 미창출)','$120,000~180,000','영구 소유 자산'],
+    ['손익분기','해당 없음','첫 코호트 이내 (6개월)','ROI 140%+'],
+  ],
+  steps:[
+    {n:1,title:'팔로업 이메일 발송',desc:'오늘 업무 종료 전 — 어제 전화 24시간 내 발송이 핵심. 영문 제안서 PDF 첨부.',time:'오늘',timeColor:'#1A7340'},
+    {n:2,title:'Zoom 미팅 약속 확보',desc:'ADM HR/Training 임원과 30분 화상 미팅 — 3가지 옵션 설명.',time:'1~3주 내',timeColor:'#D4900A'},
+    {n:3,title:'지직 현장 방문',desc:'IEG 비용 전액 부담 — 2박 3일 공장 투어 + 스킬갭 분석.',time:'4~6주 내',timeColor:'#2E5FAD'},
+    {n:4,title:'MOU 체결',desc:'비구속적 MOU 서명 — KOICA ODA Option C 신청 전제 조건.',time:'8주 내',timeColor:'#2E5FAD'},
+    {n:5,title:'공급 계약 체결',desc:'3가지 옵션 중 확정 후 정식 계약 + 이노비즈협회 컨소시엄.',time:'12주 내',timeColor:'#1A7340'},
+  ],
+},
+{
+  id:'kz', flag:'🇰🇿',
+  company:'KIA Qazaqstan',
+  location:'코스타나이 산업단지, 카자흐스탄',
+  accent:'#0082C8', accentDark:'#004B80', accentBg:'rgba(0,130,200,.08)',
+  accentBorder:'rgba(0,130,200,.3)',
+  status:'active', statusMsg:'📋 즉시 착수 — KOTRA 알마티 + Satbayev대학 + LinkedIn 접촉 시작',
+  kpis:[
+    {n:'70,000대',l:'연간 생산'},
+    {n:'1,500명',l:'고용 목표'},
+    {n:'70대',l:'로봇'},
+    {n:'$270M',l:'투자 규모'},
+    {n:'10개',l:'파트너 직업대학'},
+    {n:'1호',l:'Kia 해외 직접투자'},
+  ],
+  challengeIntro:'KIA Qazaqstan은 2025년 10월 정식 개소했지만 현지 직업 교육 체계와의 정렬이 완성되지 않았습니다.',
+  challenges:[
+    ['직업대학 커리큘럼 불일치','10개 협력 대학이 있으나 Kia Sorento/Sportage 생산라인 PLC·로봇에 특화된 장비 없음','신입 직원 재교육 비용 + 온보딩 지연'],
+    ['Satbayev대학 협력','이론 위주 — 실습 장비 기반 교육 아님','졸업생 현장 즉시 투입 불가'],
+    ['부품 클러스터 스킬','KCC·Seoyon E-Hwa 부품 공장 건설 중 — 정밀 엔지니어링 인력 필요','현지화 목표 달성 지연 리스크'],
+    ['한국 전문가 의존','비공식 지식 이전 — 구조화된 현지 교육 시스템 없음','전문가 교체 시 기술 이탈'],
+  ],
+  challengeCallout:'전략적 타이밍: 2025년 10월 개소 이후 첫 1년 — 훈련 인프라 의사결정과 예산 배정이 이루어지는 시점입니다. 지금 접근해야 처음부터 프로그램을 설계할 수 있습니다.',
+  options:[
+    {label:'Option A', title:'KIA Qazaqstan 사내 훈련센터', price:'$80K~150K',
+     note:'ADM 우즈벡 레퍼런스 즉시 적용 가능',
+     desc:'동일 Kia 표준 장비 — ADM Jizzakh 납품 완료 레퍼런스로 신뢰 즉시 구축.',
+     color:'#D4900A',
+     rows:[['장비','IEG 3432 × 2 + IEG 4000 × 1 + IEG 6030 × 1'],['커리큘럼','32주 CBT — 카자흐어/러시아어/영어'],['레퍼런스',{hl:true,t:'ADM Jizzakh (Kia Sonet) 납품 완료 — 동일 표준'}],['손익분기',{hl:true,t:'첫 코호트 이내'}]]},
+    {label:'Option B', title:'코스타나이 직업대학 스마트랩', price:'$160K~240K',
+     note:'연간 150~200명 KIA 취업 파이프라인',
+     desc:'10개 파트너 대학 중 1개에 스마트 자동화 실습랩 구축.',
+     color:'#0082C8',
+     rows:[['장비','IEG 3432 × 3 + IEG 3430 × 2 + IEG 6030 × 1'],['연간 배출','150~200명'],['이중 인증',{hl:true,t:'대학 졸업장 + IEG Level 2'}],['정부 지원','노동부 TVET 장비 보조금 활용 가능']]},
+    {label:'Option C', title:'KOICA ODA (KIA Qazaqstan CAPEX 0)', price:'$400K~800K (ODA)',
+     note:'한-카자흐 전략 파트너십 프레임 활용',
+     desc:'카자흐스탄은 KOICA 적격 ODA 수혜국. KIA Qazaqstan이 산업 앵커 파트너.',
+     color:'#1A7340',
+     rows:[['재원','KOICA ODA (한국 정부 보조금)'],['컨소시엄','IEG + 이노비즈협회 + KOTRA 알마티'],['KIA 지출',{hl:true,t:'$0 — 공간 + 교육생 제공만'}],['소요 기간','MOU 이후 6~9개월']]},
+  ],
+  phases:[
+    {num:'Phase 1',name:'담당자 조사 & 접촉',period:'4월 3주~5월 1주',
+     items:['LinkedIn KIA Qazaqstan HR 검색','KOTRA 알마티 바이어 연결 신청','Satbayev대학 협력 담당 접촉','러시아어 1페이저 준비'],kpi:'담당자 이름+이메일 확보',color:'#0082C8'},
+    {num:'Phase 2',name:'제안서 발송',period:'5월',
+     items:['LinkedIn InMail + 이메일 발송','ADM 우즈벡 레퍼런스 첨부','Zoom 30분 미팅 제안','한국 방문 또는 코스타나이 방문'],kpi:'미팅 약속 확보',color:'#0070AA'},
+    {num:'Phase 3',name:'현장 방문 & 협상',period:'7월~9월',
+     items:['코스타나이 공장 방문','기업 훈련센터 임원 대면 미팅','직업대학 연계 협의','IEG 장비 데모'],kpi:'LOI 또는 MOU 초안',color:'#005A8C'},
+    {num:'Phase 4',name:'계약 체결',period:'10월~2027년 1분기',
+     items:['공급 계약 체결','장비 납품 + 설치','1차 코호트 운영','KOICA IBS 제안서 병행'],kpi:'⭐ 첫 수익 $80K~150K',color:'#1A7340'},
+  ],
+  roi:[
+    ['엔지니어당 비용','$6,000~10,000 (해외 파견)','$1,200~2,000','~80% 절감'],
+    ['연간 코호트(50명)','$300,000~500,000','$60,000~100,000','$240K~400K 절감'],
+    ['ADM 레퍼런스 신뢰','신규 공급사 검증 필요','Kia 공장 납품 검증 완료','즉시 신뢰'],
+    ['Option C 시 비용','해당 없음','$0 (ODA 전액)','장비 자산 무상 확보'],
+  ],
+  steps:[
+    {n:1,title:'담당자 조사 착수',desc:'LinkedIn: "KIA Qazaqstan" + "HR" / "Training" 검색. KOTRA 알마티 무역관 바이어 연결 서비스 신청.',time:'이번 주',timeColor:'#0082C8'},
+    {n:2,title:'KOTRA 알마티 소개 요청',desc:'KOTRA 해외무역관 바이어 상담 신청 — KIA Qazaqstan 소개 루트.',time:'이번 주',timeColor:'#0082C8'},
+    {n:3,title:'LinkedIn InMail + 이메일 발송',desc:'ADM 우즈벡 Kia 납품 레퍼런스 포함 — "Kia 생산 공장 검증 완료" 포지셔닝.',time:'1~2주 내',timeColor:'#D4900A'},
+    {n:4,title:'Zoom 미팅 + KZ 제안서',desc:'ADM 레퍼런스 + 코스타나이 맞춤 제안서 발송. 현장 방문 의향 표시.',time:'3~5주 내',timeColor:'#2E5FAD'},
+    {n:5,title:'코스타나이 현장 방문',desc:'KIA Qazaqstan 공장 + 파트너 직업대학 투어. ADM 방문과 중앙아시아 1회 투어 연계.',time:'7~9월',timeColor:'#1A7340'},
+  ],
+},
+{
+  id:'in', flag:'🇮🇳',
+  company:'Kia India Pvt. Ltd.',
+  location:'안단타푸르, 안드라프라데시, 인도',
+  accent:'#B36A10', accentDark:'#6A3C00', accentBg:'rgba(179,106,16,.08)',
+  accentBorder:'rgba(179,106,16,.3)',
+  status:'pending', statusMsg:'📌 중기 타깃 — 우즈벡·카자흐 레퍼런스 확보 후 접근 최적화',
+  kpis:[
+    {n:'300,000대',l:'연간 생산'},
+    {n:'12,835명',l:'총 고용(협력사 포함)'},
+    {n:'536에이커',l:'공장 면적'},
+    {n:'$2B',l:'투자 규모'},
+    {n:'₹35Cr',l:'IIT Tirupati MOU'},
+    {n:'2,000명',l:'연간 훈련 수용'},
+  ],
+  challengeIntro:'Kia India는 기초 BTC 교육(5일)을 갖추고 있으나 Industry 4.0 수준의 고급 기능인력 양성 시스템이 없습니다.',
+  challenges:[
+    ['BTC → 고급 기술 단절','5일 BTC는 입문 수준. PLC·로봇·SCADA 과정 없음','생산직은 있으나 고급 정비·자동화 엔지니어 부재'],
+    ['IIT Tirupati 협력 한계','₹35Cr Makers Lab — 연구·프로토타입 중심','생산직 기능인력 훈련 프로그램 아님'],
+    ['ASDC 파트너십 (2025.8)','협약은 맺었으나 장비 인프라 미구축','커리큘럼 프레임만 있고 실습 시스템 없음'],
+    ['EV 기술 공백','IONIQ EV 생산 → 고전압 안전·BMS 기술 필요','인도 내 EV 제조 기능인력 훈련 프로그램 전무'],
+  ],
+  challengeCallout:'IEG의 역할: Kia India는 이미 ASDC, IIT Tirupati, APSSDC와 파트너십을 맺었습니다. IEG는 이 파트너십들을 연결해 BTC→Level1→Level2→ASDC 인증의 4단계 사다리를 완성시켜주는 실질적 장비+커리큘럼 솔루션입니다.',
+  options:[
+    {label:'Option A', title:'Kia India 고급 훈련랩 업그레이드', price:'$150K~220K',
+     note:'BTC에서 Industry 4.0까지 4단계 연속 체계',
+     desc:'기존 5에이커 훈련 시설에 스마트 제조 훈련 시스템 추가. BTC 이후 과정 신설.',
+     color:'#B36A10',
+     rows:[['장비','IEG 3432 × 3 + IEG 6030 × 1 + IEG 3770 × 1(EV)'],['ASDC 연계',{hl:true,t:'IEG 커리큘럼 ASDC 인증 매핑 포함'}],['4단계 체계',{hl:true,t:'BTC → Level1 → Level2 → ASDC 인증'}],['EV 모듈','IONIQ 생산라인 고전압 드라이브 실습 포함']]},
+    {label:'Option B', title:'APSSDC 정부 기관 스마트랩', price:'$180K~260K',
+     note:'Skill India Mission + 정부 보조금 활용',
+     desc:'Kia India 기존 파트너 APSSDC와 협력, 안단타푸르 ITI에 스마트 제조랩 구축.',
+     color:'#8A5700',
+     rows:[['장비','IEG 3432 × 3 + IEG 3430 × 2 + IEG 6030 × 1'],['연간 배출','200명+ Kia 취업 준비 기능인력'],['정부 보조',{hl:true,t:'Skill India Mission 예산 활용 가능'}],['CSR 가치','Kia India Skill India 대표 사례 포지셔닝']]},
+    {label:'Option C', title:'EDCF/KOICA 협력 모델', price:'ODA 협의',
+     note:'한-인도 CEPA 프레임 활용',
+     desc:'한-인도 포괄적경제협력협정(CEPA) 기반 EDCF 저리차관 또는 KOICA 기술협력.',
+     color:'#1A7340',
+     rows:[['재원','한국 EDCF 저리차관 또는 KOICA 기술협력 보조금'],['IIT Tirupati 시너지',{hl:true,t:'Makers Lab 인접 IEG 장비 — 공동 활용 모델'}],['Skill India 정렬',{hl:true,t:'Kia India Skill India 대표 파트너 지위'}],['타임라인','중기 — 우즈벡·카자흐 레퍼런스 후 접근']]},
+  ],
+  phases:[
+    {num:'Phase 1',name:'레퍼런스 구축',period:'2026 하반기',
+     items:['우즈벡 ADM + 카자흐 KIA 납품 완료','Kia 글로벌 공급망 신뢰 자료 정리','ASDC 담당 임원 LinkedIn 접촉','APSSDC 정부 채널 조사'],kpi:'Kia 생산 공장 2곳 레퍼런스',color:'#B36A10'},
+    {num:'Phase 2',name:'초도 접촉',period:'2026 4분기~2027 1분기',
+     items:['Kia India Training 담당 임원 접촉','ASDC 파트너십 연계 제안','APSSDC CSR 채널 제안서 발송','인도 방문 일정 협의'],kpi:'미팅 약속 확보',color:'#8A5700'},
+    {num:'Phase 3',name:'제안 & 협상',period:'2027 1~2분기',
+     items:['안단타푸르 공장 방문','기술팀 + HR 임원 대면 미팅','ASDC 매핑 커리큘럼 시연','IIT Tirupati 시너지 제안'],kpi:'LOI 또는 MOU',color:'#5C3A00'},
+    {num:'Phase 4',name:'계약 체결',period:'2027 하반기',
+     items:['공급 계약 + 커리큘럼 라이선스','텔루구/힌디/영어 삼중 CBT 납품','IEG 기술팀 설치 지원','1차 코호트 운영'],kpi:'⭐ 첫 수익 $150K+',color:'#1A7340'},
+  ],
+  roi:[
+    ['BTC 대비 차별화','5일 입문 과정만 존재','32주 Level 1~2 + ASDC 인증 체계','질적 도약'],
+    ['엔지니어당 비용','$5,000~10,000 (외부 연수)','$1,200~2,000','~80% 절감'],
+    ['ASDC 인증 가치','별도 인증 기관 필요','IEG 커리큘럼에 ASDC 매핑 포함','원스톱 솔루션'],
+    ['EV 역량','훈련 과정 없음','IEG 3770 드라이브 트레이너 포함','인도 최초 EV 제조 기능인력'],
+  ],
+  steps:[
+    {n:1,title:'우즈벡·카자흐 레퍼런스 정리',desc:'ADM Jizzakh + KIA Qazaqstan 납품 완료 자료로 "Kia 글로벌 공급망 검증" 포지셔닝 자료 제작.',time:'2026 하반기',timeColor:'#B36A10'},
+    {n:2,title:'ASDC 담당 임원 LinkedIn 접촉',desc:'Kia India-ASDC 파트너십(2025.8) 담당자 통한 내부 소개 루트 확보.',time:'2026 4분기',timeColor:'#B36A10'},
+    {n:3,title:'APSSDC CSR 채널 접근',desc:'Skill India Mission 연계 장비 보조금 프레임으로 APSSDC에 IEG 제안서 제출.',time:'2027 1분기',timeColor:'#2E5FAD'},
+    {n:4,title:'안단타푸르 공장 방문',desc:'Kia India Training 팀 + IIT Tirupati Makers Lab 방문. IEG 장비 시너지 시연.',time:'2027 2분기',timeColor:'#1A7340'},
+    {n:5,title:'계약 체결',desc:'BTC→ASDC 4단계 체계 + EV 모듈 포함 종합 패키지 계약.',time:'2027 하반기',timeColor:'#1A7340'},
+  ],
+},
+{
+  id:'id', flag:'🇮🇩',
+  company:'PT Hyundai Motor Manufacturing Indonesia (HMMI)',
+  location:'코타 델타마스, 치카랑, 브카시, 서자바, 인도네시아',
+  accent:'#005BAB', accentDark:'#003366', accentBg:'rgba(0,91,171,.08)',
+  accentBorder:'rgba(0,91,171,.3)',
+  status:'pending', statusMsg:'🏆 KOICA ODA 최우선 — 인도네시아는 KOICA 최우선 파트너국, 현대차 투자 외교 의제급',
+  kpis:[
+    {n:'150,000대',l:'현재 연산 (→250K)'},
+    {n:'2,000명',l:'현재 고용'},
+    {n:'$1.55B',l:'총 투자(→2030)'},
+    {n:'77.6ha',l:'공장 면적'},
+    {n:'IONIQ5/6',l:'EV 모델 생산'},
+    {n:'ASEAN Hub',l:'HMC ASEAN 거점'},
+  ],
+  challengeIntro:'HMMI는 인도네시아 최고 수준의 자동화 공장이지만, 현지 TVET 시스템은 EV와 Industry 4.0 제조 기술을 아직 배출하지 못하고 있습니다.',
+  challenges:[
+    ['EV 고전압 기술 공백','인도네시아 직업교육은 내연기관 중심 — EV BMS·고전압 안전 훈련 전무','IONIQ 5/6 생산 정비 인력을 한국에서 수입해야 함'],
+    ['Industry 4.0 / PLC 기술','SMK 전기과는 기초 수준 — Siemens S7 PLC·SCADA 교육 없음','HMMI 자동화 인프라 정비에 한국 주재원 의존'],
+    ['OEM 기준 QC 엔지니어','Hyundai GPS(글로벌 생산 시스템) 품질 기준 교육 프로그램 전무','현지화 부품 확대 시 품질 리스크'],
+    ['지식 이전 구조화 부재','한국→인도네시아 비공식 전수 — 체계적 CBT·인증 체계 없음','주재원 교체 시 기술 이탈'],
+  ],
+  challengeCallout:'KOICA 전략적 적합성: 인도네시아는 KOICA 최우선 파트너국이고, 현대차의 인도네시아 투자는 한국 대통령 외교 의제에서 직접 거론되었습니다. HMMI 앵커 KOICA IBS 제안은 정치적·프로그램적으로 가장 강력한 조합입니다.',
+  options:[
+    {label:'Option A', title:'HMMI 내부 스마트 제조 훈련센터', price:'$120K~200K',
+     note:'EV 드라이브 모듈 포함 — 인도네시아 최초',
+     desc:'HMMI 치카랑 시설 내 스마트 제조 훈련 유닛. EV 시스템 모듈 Day 1부터 포함.',
+     color:'#D4900A',
+     rows:[['장비','IEG 3432 × 2 + IEG 6030 × 1 + IEG 3770 × 1(EV) + IEG 4000 × 1'],['커리큘럼','32주 CBT — 바하사 인도네시아/영어'],['EV 특화',{hl:true,t:'인도네시아 최초 EV 제조 기능인력 훈련 프로그램'}],['손익분기',{hl:true,t:'한국 주재원 출장비만으로도 손익분기 달성'}]]},
+    {label:'Option B', title:'치카랑 폴리테크닉 Industry 4.0 랩', price:'$180K~260K',
+     note:'BNSP 인증 연계 — 연간 200명 파이프라인',
+     desc:'Politeknik Cikarang 또는 인근 SMK에 Hyundai 기준 스마트 자동화랩 구축.',
+     color:'#005BAB',
+     rows:[['장비','IEG 3432 × 3 + IEG 3770 × 1 + IEG 6030 × 1'],['BNSP 매핑',{hl:true,t:'IEG Level 2 → 인도네시아 BNSP 국가 역량 기준 매핑'}],['연간 배출','200명 HMMI 취업 준비 기능인력'],['정부 지원','Kemenperin TVET 장비 보조금 검토']]},
+    {label:'Option C', title:'KOICA ODA (HMMI CAPEX 0)', price:'$400K~1M (ODA)',
+     note:'정치적으로 가장 강력한 KOICA IBS 조합',
+     desc:'인도네시아 KOICA 최우선국 + 현대차 투자 외교 의제급 → IBS 최강 앵커.',
+     color:'#1A7340',
+     rows:[['재원','KOICA ODA — 인도네시아 최우선 파트너국'],['컨소시엄','IEG + 이노비즈협회 + KOICA Jakarta 사무소'],['HMMI 지출',{hl:true,t:'$0 — 공간 + 교육생 제공만'}],['ODA 가치',{hl:true,t:'$400K~1M — 장비+커리큘럼+한국 강사 파견 전액'}]]},
+  ],
+  phases:[
+    {num:'Phase 1',name:'담당자 조사 & 접촉',period:'2026 하반기',
+     items:['HMMI HR/Training 담당 임원 LinkedIn 조사','KOICA Jakarta 사무소 IBS 사전 타진','현대차 한국 본사 → HMMI 소개 루트 검토','바하사 소개 자료 준비'],kpi:'담당자 + KOICA 타진 완료',color:'#005BAB'},
+    {num:'Phase 2',name:'제안서 발송',period:'2026 4분기',
+     items:['LinkedIn InMail + 이메일 발송','우즈벡·카자흐 Kia 레퍼런스 첨부','EV 훈련 특화 제안서 발송','KOICA IBS 의향서 준비'],kpi:'미팅 약속 확보',color:'#0050A0'},
+    {num:'Phase 3',name:'현장 방문 & MOU',period:'2027 1분기',
+     items:['치카랑 HMMI 공장 방문','HR/Training 임원 대면 미팅','BNSP 연계 방안 협의','KOICA Jakarta 공동 미팅'],kpi:'MOU + KOICA IBS 제출',color:'#003B7A'},
+    {num:'Phase 4',name:'계약 & 파일럿',period:'2027 2~3분기',
+     items:['공급 계약 또는 KOICA IBS 선정','IEG 3432 + IEG 3770 납품','바하사 인도네시아 CBT 운영','1차 코호트 25~50명'],kpi:'⭐ 첫 수익 $120K~1M',color:'#1A7340'},
+  ],
+  roi:[
+    ['한국 주재원 의존 비용','연간 $200,000~400,000 (파견비 + 주거비)','자체 훈련센터로 대체','인도네시아 현지화'],
+    ['EV 기술 희소성','전무 — 인도네시아 내 EV 훈련 프로그램 없음','인도네시아 최초 EV 제조 기능인력 과정','경쟁사 없음'],
+    ['KOICA ODA 시 비용','해당 없음','$0 (ODA 전액)','$400K~1M 자산 무상 확보'],
+    ['BNSP 인증 연계','없음','IEG Level 2 → BNSP 매핑 포함','정부 인증 경로'],
+    ['손익분기','해당 없음','한국 주재원 1명 절감으로 손익분기','ROI 즉시'],
+  ],
+  steps:[
+    {n:1,title:'KOICA Jakarta 사무소 타진',desc:'KOICA IBS 인도네시아 사업 공모 일정 확인 + HMMI 앵커 파트너 가능성 사전 문의.',time:'2026 하반기',timeColor:'#005BAB'},
+    {n:2,title:'HMMI HR/Training LinkedIn 접촉',desc:'우즈벡+카자흐 Kia/Hyundai 납품 레퍼런스 + EV 훈련 특화 제안으로 접촉.',time:'2026 하반기',timeColor:'#005BAB'},
+    {n:3,title:'현대차 한국 본사 소개 루트',desc:'IEG 내부 네트워크로 HMC 한국 본사 → HMMI 소개 루트 탐색.',time:'2026 4분기',timeColor:'#D4900A'},
+    {n:4,title:'치카랑 현장 방문',desc:'HMMI 공장 + Politeknik Cikarang 투어. KOICA Jakarta 사무소와 공동 미팅.',time:'2027 1분기',timeColor:'#1A7340'},
+    {n:5,title:'KOICA IBS 제출 또는 직접 계약',desc:'KOICA IBS 선정 또는 HMMI 직접 계약 — EV 모듈 포함 종합 패키지.',time:'2027 상반기',timeColor:'#1A7340'},
+  ],
+},
+];
+
+// ════════════════════════════════════════════════════════════════
+// RENDER
+// ════════════════════════════════════════════════════════════════
+function escH(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function renderMarket(M){
+  const ac = M.accent;
+
+  // status bar
+  const statusClass = M.status === 'done' ? 'done' : M.status === 'active' ? 'active' : 'pending';
+  const statusBar = `<div class="status-bar ${statusClass}">${escH(M.statusMsg)}</div>`;
+
+  // kpi cards
+  const kpis = M.kpis.map(k=>`<div class="kpi-card"><div class="kpi-num">${escH(k.n)}</div><div class="kpi-lbl">${escH(k.l)}</div></div>`).join('');
+
+  // challenge table
+  const chRows = M.challenges.map(([n,s,i],ri)=>`<tr>
+    <td>${escH(n)}</td>
+    <td>${escH(s)}</td>
+    <td>${escH(i)}</td>
+  </tr>`).join('');
+
+  // option cards
+  const opts = M.options.map(O=>{
+    const rows = O.rows.map(r=>{
+      const label = Array.isArray(r) ? r[0] : '';
+      const val = Array.isArray(r) ? r[1] : '';
+      const valStr = typeof val === 'object' && val.hl
+        ? `<span class="hl">${escH(val.t)}</span>`
+        : escH(val);
+      return `<div class="opt-row"><span>${escH(label)}</span><span>${valStr}</span></div>`;
+    }).join('');
+    return `<div class="opt-card">
+      <div class="opt-label" style="color:${O.color}">${escH(O.label)}</div>
+      <h4>${escH(O.title)}</h4>
+      <p>${escH(O.desc)}</p>
+      <div class="opt-price" style="color:${O.color}">${escH(O.price)}</div>
+      <div class="opt-note">${escH(O.note)}</div>
+      <div class="opt-rows">${rows}</div>
+    </div>`;
+  }).join('');
+
+  // phases
+  const phases = M.phases.map(ph=>`<div class="phase-block" style="border-left-color:${ph.color}">
+    <div class="phase-num" style="color:${ph.color}">${escH(ph.num)}</div>
+    <div class="phase-name">${escH(ph.name)}</div>
+    <div class="phase-period">${escH(ph.period)}</div>
+    <ul class="phase-items">${ph.items.map(i=>`<li>${escH(i)}</li>`).join('')}</ul>
+    <div class="phase-kpi" style="background:${ph.color}18;color:${ph.color}">${escH(ph.kpi)}</div>
+  </div>`).join('');
+
+  // roi
+  const roiRows = M.roi.map(([item,cur,ieg,sav],ri)=>`<tr>
+    <td>${escH(item)}</td>
+    <td>${escH(cur)}</td>
+    <td class="hl">${escH(ieg)}</td>
+    <td>${escH(sav||'')}</td>
+  </tr>`).join('');
+
+  // steps
+  const steps = M.steps.map(s=>`<div class="step-item">
+    <div class="step-num" style="background:${s.timeColor}">${s.n}</div>
+    <div class="step-body">
+      <div class="step-title">${escH(s.title)}</div>
+      <div class="step-desc">${escH(s.desc)}</div>
+    </div>
+    <div class="step-time" style="background:${s.timeColor}18;color:${s.timeColor}">${escH(s.time)}</div>
+  </div>`).join('');
+
+  return `
+<div class="market-wrap" id="${M.id}">
+  <div class="market-hero" style="background:linear-gradient(135deg,${M.accentDark} 0%,${M.accent} 60%,${M.accent}CC 100%)">
+    <div class="market-hero-inner">
+      <div class="market-flag">${M.flag}</div>
+      <div class="market-name">${escH(M.company)}</div>
+      <div class="market-sub">${escH(M.location)}</div>
+      <div class="market-kpis">${kpis}</div>
+    </div>
+  </div>
+  <div class="market-body">
+    <div class="market-body-inner">
+      ${statusBar}
+      <div class="market-tabs" id="tabs-${M.id}">
+        <button class="tab-btn active" data-tab="${M.id}-challenge" onclick="switchTab('${M.id}',this,'${M.id}-challenge')" style="border-bottom-color:${ac};color:${ac}">도전 과제</button>
+        <button class="tab-btn" data-tab="${M.id}-options" onclick="switchTab('${M.id}',this,'${M.id}-options')">협력 옵션 A/B/C</button>
+        <button class="tab-btn" data-tab="${M.id}-roadmap" onclick="switchTab('${M.id}',this,'${M.id}-roadmap')">로드맵</button>
+        <button class="tab-btn" data-tab="${M.id}-roi" onclick="switchTab('${M.id}',this,'${M.id}-roi')">ROI 분석</button>
+        <button class="tab-btn" data-tab="${M.id}-steps" onclick="switchTab('${M.id}',this,'${M.id}-steps')">다음 액션</button>
+      </div>
+
+      <div id="${M.id}-challenge" class="tab-pane active">
+        <p style="font-size:.9rem;color:var(--gray);margin-bottom:16px">${escH(M.challengeIntro)}</p>
+        <table class="ch-table">
+          <thead><tr><th>도전 영역</th><th>현황</th><th>IEG 진입 근거</th></tr></thead>
+          <tbody>${chRows}</tbody>
+        </table>
+        <div class="callout gold"><strong>전략적 시사점</strong>  ${escH(M.challengeCallout)}</div>
+      </div>
+
+      <div id="${M.id}-options" class="tab-pane">
+        <div class="opts-grid">${opts}</div>
+        <div class="callout blue"><strong>조합 전략:</strong> 3가지 옵션은 상호 배타적이지 않습니다. Option A로 빠른 상업적 성과를 내고, Option C ODA 자금이 확보되면 Option B 파이프라인으로 확장하는 순차 전개가 최적입니다.</div>
+      </div>
+
+      <div id="${M.id}-roadmap" class="tab-pane">
+        <div class="roadmap">${phases}</div>
+      </div>
+
+      <div id="${M.id}-roi" class="tab-pane">
+        <table class="roi-table">
+          <thead><tr><th>비교 항목</th><th>현재 방식</th><th>IEG 솔루션</th><th>절감 효과</th></tr></thead>
+          <tbody>${roiRows}</tbody>
+        </table>
+        <div class="callout green mt-24"><strong>투자 대비 수익:</strong> 현장 방문 비용(약 400만~500만원)을 포함해도, Option A 단일 계약으로 IEG의 전체 선투자는 3~6개월 내 회수됩니다.</div>
+      </div>
+
+      <div id="${M.id}-steps" class="tab-pane">
+        <div class="steps-list">${steps}</div>
+      </div>
+    </div>
+  </div>
+</div>`;
+}
+
+document.getElementById('markets').innerHTML = MARKETS.map(renderMarket).join('');
+
+// tab switcher
+function switchTab(marketId, btn, paneId) {
+  const wrapper = document.getElementById(marketId);
+  wrapper.querySelectorAll('.tab-btn').forEach(b=>{ b.classList.remove('active'); b.style.borderBottomColor='transparent'; b.style.color=''; });
+  wrapper.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  const ac = MARKETS.find(m=>m.id===marketId).accent;
+  btn.style.borderBottomColor = ac;
+  btn.style.color = ac;
+  document.getElementById(paneId).classList.add('active');
+}
+
+// nav highlight on scroll
+const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      navLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#'+id);
+      });
+    }
+  });
+}, { rootMargin:'-40% 0px -55% 0px' });
+document.querySelectorAll('[id]').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
