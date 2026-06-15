@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IEG · Предложение — локализованная инфраструктура технического обучения для Allur / Kia (Костанай)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-deep:#0c2236;
+    --navy:#163a5c;
+    --blue:#2f7fc1;
+    --ev-green:#1fab84;
+    --amber:#e3963e;
+    --violet:#8d6fd6;
+    --slate:#5b6b7c;
+    --bg:#f4f7fb;
+    --card:#ffffff;
+    --border:#e2e8f0;
+    --text:#1b2733;
+    --mono-bg:#eef3f9;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'IBM Plex Sans', Arial, sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.7;
+    font-size:16px;
+  }
+  h1,h2,h3,h4{font-family:'IBM Plex Sans', Arial, sans-serif; line-height:1.3;}
+  p{margin:0 0 14px;}
+  a{color:var(--blue);}
+
+  /* ===== Cover ===== */
+  .cover{
+    background:linear-gradient(155deg, var(--navy-deep), var(--navy) 75%);
+    color:#fff;
+    position:relative;
+    overflow:hidden;
+    padding:56px 32px 48px;
+  }
+  .cover::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.045) 0 1px, transparent 1px 56px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.045) 0 1px, transparent 1px 56px);
+    pointer-events:none;
+  }
+  .cover-content{position:relative; max-width:1280px; margin:0 auto;}
+  .brand{display:flex; align-items:baseline; gap:14px; margin-bottom:28px; flex-wrap:wrap;}
+  .brand-mark{
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:700; font-size:22px; letter-spacing:0.12em;
+    color:var(--ev-green);
+    border:1px solid rgba(31,171,132,0.5);
+    padding:6px 12px; border-radius:4px;
+  }
+  .brand-sub{font-size:13px; letter-spacing:0.06em; color:#a9c2da; text-transform:uppercase;}
+  .doc-tag{
+    display:inline-block; font-family:'IBM Plex Mono', monospace;
+    font-size:12px; letter-spacing:0.18em; text-transform:uppercase;
+    color:var(--ev-green); border:1px solid rgba(31,171,132,0.4);
+    padding:5px 12px; border-radius:4px; margin-bottom:18px;
+  }
+  .cover h1{
+    font-size:clamp(26px, 3.6vw, 40px);
+    font-weight:700; max-width:880px; margin:0 0 12px;
+  }
+  .cover-sub{
+    font-family:'IBM Plex Mono', monospace; font-size:14px;
+    color:#cfe0ef; margin-bottom:32px;
+  }
+  .cover-meta{display:flex; gap:36px; flex-wrap:wrap; border-top:1px solid rgba(255,255,255,0.15); padding-top:20px;}
+  .cover-meta div{display:flex; flex-direction:column; gap:4px;}
+  .meta-label{font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:#7f9bb5;}
+  .meta-value{font-size:14.5px; font-weight:600; color:#fff;}
+
+  /* ===== Layout ===== */
+  .page{
+    display:grid; grid-template-columns:230px minmax(0,1fr);
+    gap:48px; max-width:1280px; margin:0 auto; padding:48px 32px 80px;
+  }
+  @media (max-width:960px){
+    .page{grid-template-columns:1fr; padding:32px 20px 60px;}
+    .toc{display:none;}
+  }
+
+  /* ===== TOC ===== */
+  .toc{position:sticky; top:28px; align-self:start; font-size:13px;}
+  .toc-title{
+    font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.18em;
+    text-transform:uppercase; color:var(--slate); margin-bottom:10px;
+  }
+  .toc a{
+    display:flex; align-items:baseline; gap:10px; padding:8px 0;
+    color:var(--text); text-decoration:none; border-bottom:1px solid var(--border);
+  }
+  .toc a:hover{color:var(--blue);}
+  .toc-num{
+    font-family:'IBM Plex Mono', monospace; font-weight:700; font-size:12px;
+    color:var(--ev-green); min-width:22px;
+  }
+
+  /* ===== Sections ===== */
+  .section{margin-bottom:60px;}
+  .section-head{
+    display:flex; align-items:center; gap:18px; margin-bottom:22px;
+    border-bottom:2px solid var(--navy); padding-bottom:12px;
+  }
+  .section-head .num{
+    font-family:'IBM Plex Mono', monospace; font-size:13px; font-weight:700;
+    color:var(--ev-green); background:var(--navy-deep);
+    padding:6px 11px; border-radius:4px; flex-shrink:0;
+  }
+  .section-head h2{font-size:23px; color:var(--navy-deep); font-weight:700; margin:0;}
+  .lead{font-size:17px; font-weight:600; color:var(--navy-deep); margin-bottom:10px;}
+  .sub-title{font-size:18px; color:var(--navy-deep); font-weight:700; margin:30px 0 10px;}
+  .sub-title:first-of-type{margin-top:6px;}
+
+  /* ===== Checklist ===== */
+  .checklist{list-style:none; display:grid; gap:10px; margin:16px 0 22px; padding:0;}
+  .checklist li{
+    display:flex; gap:12px; align-items:flex-start; padding:13px 16px;
+    background:var(--card); border:1px solid var(--border);
+    border-left:4px solid var(--ev-green); border-radius:4px; font-size:15px;
+  }
+  .checklist li::before{
+    content:"✓"; color:var(--ev-green); font-weight:700;
+    font-family:'IBM Plex Mono', monospace; flex-shrink:0;
+  }
+
+  /* ===== Stats ===== */
+  .stats{display:flex; gap:20px; flex-wrap:wrap; margin:24px 0;}
+  .stat{
+    flex:1; min-width:220px; background:var(--navy-deep); color:#fff;
+    border-radius:6px; padding:24px 24px;
+  }
+  .stat .num{font-family:'IBM Plex Mono', monospace; font-size:38px; font-weight:700; color:var(--ev-green);}
+  .stat .label{font-size:13.5px; color:#c8d6e5; margin-top:8px; line-height:1.5;}
+
+  /* ===== Callouts ===== */
+  .callout{
+    background:linear-gradient(135deg, var(--navy), var(--navy-deep));
+    color:#fff; padding:24px 28px; border-radius:6px; font-size:17px;
+    font-weight:600; margin:18px 0; border-left:6px solid var(--ev-green);
+  }
+  .callout-light{
+    background:#eef6f2; color:var(--navy-deep); padding:20px 24px;
+    border-radius:6px; font-size:15px; font-weight:500; margin:18px 0 0;
+    border-left:5px solid var(--ev-green); line-height:1.65;
+  }
+
+  /* ===== Card grids ===== */
+  .card-grid{display:grid; grid-template-columns:repeat(2, 1fr); gap:18px; margin:18px 0;}
+  @media (max-width:680px){.card-grid{grid-template-columns:1fr;}}
+  .effect-grid{grid-template-columns:repeat(auto-fit, minmax(260px,1fr));}
+  .card{
+    background:var(--card); border:1px solid var(--border);
+    border-left:4px solid var(--blue); border-radius:4px; padding:20px 22px;
+  }
+  .card-amber{border-left-color:var(--amber);}
+  .card-num{
+    font-family:'IBM Plex Mono', monospace; font-size:12.5px; font-weight:700;
+    color:var(--blue); letter-spacing:0.06em;
+  }
+  .card-amber .card-num{color:var(--amber);}
+  .card h3{font-size:15.5px; margin:8px 0 8px; color:var(--navy-deep);}
+  .card p{font-size:14.5px; margin-bottom:0;}
+  .card ul{margin:8px 0 0; padding-left:18px; font-size:14.5px;}
+  .card ul li{margin-bottom:4px;}
+
+  /* ===== Bullet lists ===== */
+  .bullet-list{list-style:none; display:grid; gap:8px; margin:10px 0 22px; padding:0; font-size:15px;}
+  .bullet-list li{padding-left:22px; position:relative;}
+  .bullet-list li::before{content:"–"; position:absolute; left:0; color:var(--blue); font-weight:700;}
+  .bullet-list.two-col{grid-template-columns:repeat(2,1fr); column-gap:28px;}
+  @media (max-width:680px){.bullet-list.two-col{grid-template-columns:1fr;}}
+
+  /* ===== Stepper ===== */
+  .stepper{position:relative; padding-left:46px; margin-top:22px;}
+  .stepper::before{
+    content:""; position:absolute; left:16px; top:6px; bottom:14px;
+    width:2px; background:var(--border);
+  }
+  .step{position:relative; margin-bottom:30px;}
+  .step:last-child{margin-bottom:0;}
+  .step::before{
+    content:attr(data-step); position:absolute; left:-46px; top:0;
+    width:32px; height:32px; border-radius:50%; background:var(--navy-deep);
+    color:var(--ev-green); font-family:'IBM Plex Mono', monospace; font-weight:700;
+    font-size:13px; display:flex; align-items:center; justify-content:center;
+  }
+  .step h3{font-size:16.5px; color:var(--navy-deep); margin:2px 0 8px;}
+  .step ul{list-style:none; display:grid; gap:6px; margin:0; padding:0; font-size:14.5px;}
+  .step ul li{padding-left:20px; position:relative;}
+  .step ul li::before{content:"–"; position:absolute; left:0; color:var(--blue); font-weight:700;}
+
+  /* ===== CTA ===== */
+  .cta{background:var(--navy-deep); color:#fff; border-radius:8px; padding:28px 32px; margin-top:8px;}
+  .cta p{color:#dbe7f3; font-size:15.5px; font-weight:600; margin-bottom:8px;}
+  .cta ul{list-style:none; display:grid; gap:8px; margin:0 0 22px; padding:0; font-size:15px; color:#eaf2f8;}
+  .cta ul:last-child{margin-bottom:0;}
+  .cta ul li{padding-left:22px; position:relative;}
+  .cta ul li::before{content:"–"; position:absolute; left:0; color:var(--ev-green); font-weight:700;}
+
+  /* ===== Tables ===== */
+  .table-wrap{overflow-x:auto; margin:18px 0; border:1px solid var(--border); border-radius:6px;}
+  table{border-collapse:collapse; width:100%; font-size:13.5px;}
+  th{
+    background:var(--navy-deep); color:#fff; text-align:left;
+    padding:12px 14px; font-weight:600; white-space:nowrap;
+  }
+  td{padding:12px 14px; border-bottom:1px solid var(--border); vertical-align:top;}
+  tbody tr:nth-child(even){background:#f7fafd;}
+  tbody tr:last-child td{border-bottom:none;}
+  #a1 table{min-width:1620px;}
+  #a2 table{min-width:1380px;}
+  .tag-mono{
+    font-family:'IBM Plex Mono', monospace; font-weight:700; background:var(--mono-bg);
+    color:var(--navy); padding:3px 8px; border-radius:4px; font-size:12.5px; white-space:nowrap;
+  }
+  .badge{display:inline-block; padding:4px 10px; border-radius:4px; font-size:12px; font-weight:600; white-space:nowrap;}
+  .badge-ready{background:#e3f7ef; color:#1a8a66;}
+  .badge-gap{background:#fdf1e0; color:#b9711f;}
+  .badge-partial{background:#e8eef5; color:#46627d;}
+  .badge-partner{background:#f0ebfa; color:#6e4fc0;}
+  .table-note{font-size:13px; color:var(--slate); margin-top:6px; font-style:italic;}
+
+  /* ===== Footer ===== */
+  footer{background:var(--navy-deep); color:#cfe0ef; padding:44px 32px; margin-top:20px;}
+  .foot-grid{
+    max-width:1280px; margin:0 auto; display:flex; justify-content:space-between;
+    flex-wrap:wrap; gap:28px; font-size:14px;
+  }
+  .foot-grid h4{color:#fff; font-size:13px; letter-spacing:0.1em; text-transform:uppercase; margin:0 0 8px; font-weight:700;}
+  .foot-grid p{margin:0; color:#bcd0e3; line-height:1.7;}
+  footer a{color:var(--ev-green);}
+
+  /* ===== Print ===== */
+  @media print{
+    body{background:#fff;}
+    .toc{display:none;}
+    .page{grid-template-columns:1fr; padding:0 12px;}
+    .cover::before{display:none;}
+    .table-wrap{overflow:visible;}
+    table{min-width:0 !important;}
+    .section, .card, .step, tr{page-break-inside:avoid;}
+    .stat, .callout, .cta, footer, th, .badge, .tag-mono{
+      -webkit-print-color-adjust:exact; print-color-adjust:exact;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <div class="cover-content">
+    <div class="brand">
+      <span class="brand-mark">IEG</span>
+      <span class="brand-sub">Smart Factory Automation &amp; TVET Solutions</span>
+    </div>
+    <span class="doc-tag">Коммерческое предложение</span>
+    <h1>Предложение по созданию локализованной инфраструктуры технического обучения для завода Allur / Kia в Костанае</h1>
+    <p class="cover-sub">Pre-employment Training + On-site Workforce Standardization</p>
+    <div class="cover-meta">
+      <div><span class="meta-label">Дата</span><span class="meta-value">15 июня 2026 г.</span></div>
+      <div><span class="meta-label">Подготовлено</span><span class="meta-value">IEG Co., Ltd. (주식회사 아이지)</span></div>
+      <div><span class="meta-label">Контактное лицо</span><span class="meta-value">Kelly Cho — Overseas Marketing Manager</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="page">
+  <aside class="toc">
+    <div class="toc-title">Содержание</div>
+    <a href="#s1"><span class="toc-num">01</span>Краткое резюме</a>
+    <a href="#s2"><span class="toc-num">02</span>Логика подхода</a>
+    <a href="#s3"><span class="toc-num">03</span>Текущие вызовы</a>
+    <a href="#s4"><span class="toc-num">04</span>Концепция решения</a>
+    <a href="#s5"><span class="toc-num">05</span>Co-Development</a>
+    <a href="#s6"><span class="toc-num">06</span>Эффект для Allur</a>
+    <a href="#s7"><span class="toc-num">07</span>Архитектура внедрения</a>
+    <a href="#s8"><span class="toc-num">08</span>Следующий шаг</a>
+    <a href="#a1"><span class="toc-num">A1</span>Карта модулей</a>
+    <a href="#a2"><span class="toc-num">A2</span>GAP-области</a>
+  </aside>
+
+  <main class="content">
+
+    <!-- 1 -->
+    <section class="section" id="s1">
+      <div class="section-head"><span class="num">01</span><h2>Краткое резюме</h2></div>
+      <p class="lead">Уважаемые коллеги,</p>
+      <p>В условиях расширения высокотехнологичного автомобильного производства в Костанае ключевым фактором устойчивой операционной эффективности становится не только оснащение производственной площадки, но и <strong>системная подготовка локальных инженерно-технических кадров до выхода на реальную производственную линию</strong>.</p>
+      <p>IEG предлагает рассмотреть создание <strong>локализованной учебной инфраструктуры</strong> для подготовки и стандартизации компетенций персонала Allur / Kia в Костанае.</p>
+      <p>Цель проекта — обеспечить:</p>
+      <ul class="checklist">
+        <li>Ускоренную подготовку персонала без остановки производственной линии</li>
+        <li>Снижение ошибок и рисков на этапе ввода сотрудников в работу</li>
+        <li>Стандартизацию навыков по EV-направлению, включая высоковольтную безопасность, BMS и диагностические процедуры</li>
+        <li>Формирование объективной системы подтверждения технических компетенций локальных кадров</li>
+        <li>Поддержку задач по индустриальной локализации и развитию инженерной базы в Казахстане</li>
+      </ul>
+      <div class="stats">
+        <div class="stat">
+          <div class="num">70 000</div>
+          <div class="label">автомобилей в год — проектная мощность нового завода Kia в Костанае</div>
+        </div>
+        <div class="stat">
+          <div class="num">1 500</div>
+          <div class="label">новых рабочих мест в рамках проекта</div>
+        </div>
+      </div>
+      <p>Параллельно правительство Казахстана подчёркивает важность роста локализации, развития производства компонентов и освоения электромобильного направления — наряду с развитием центра локализации и локальной компонентной базы на самом предприятии.</p>
+    </section>
+
+    <!-- 2 -->
+    <section class="section" id="s2">
+      <div class="section-head"><span class="num">02</span><h2>Почему именно инфраструктура предварительной подготовки персонала</h2></div>
+      <p>Для современного автомобильного предприятия одна из главных операционных задач заключается в следующем:</p>
+      <div class="callout">Производственная линия не должна останавливаться из-за недостаточной подготовленности персонала.</div>
+      <p>Именно поэтому IEG предлагает подход, основанный на модели <strong>Pre-employment Training + On-site Workforce Standardization</strong>.</p>
+      <h3 class="sub-title">Ключевая логика предложения</h3>
+      <div class="card-grid">
+        <div class="card">
+          <span class="card-num">01</span>
+          <h3>Обучение без простоя линии</h3>
+          <p>Инженеры и технические специалисты осваивают сложные производственные и сервисные операции в контролируемой учебной среде — до выхода на реальный участок.</p>
+        </div>
+        <div class="card">
+          <span class="card-num">02</span>
+          <h3>Снижение количества ошибок при вводе в должность</h3>
+          <p>Практика на учебных стендах и симуляторах позволяет сократить период адаптации и уменьшить количество ошибок, влияющих на качество, безопасность и производственную дисциплину.</p>
+        </div>
+        <div class="card">
+          <span class="card-num">03</span>
+          <h3>Стандартизация EV-компетенций</h3>
+          <p>Для электромобилей и гибридных платформ критически важны навыки по высоковольтной безопасности, диагностике BMS, логике защитных процедур и корректной последовательности сервисных действий.</p>
+        </div>
+        <div class="card">
+          <span class="card-num">04</span>
+          <h3>Поддержка локализации через развитие локальных компетенций</h3>
+          <p>Современная локализация — это не только локальные компоненты, но и доказуемая способность местных кадров самостоятельно эксплуатировать, обслуживать и поддерживать высокотехнологичное производство.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 -->
+    <section class="section" id="s3">
+      <div class="section-head"><span class="num">03</span><h2>Текущие вызовы, на которые отвечает решение IEG</h2></div>
+      <div class="card-grid">
+        <div class="card card-amber">
+          <span class="card-num">3.1</span>
+          <h3>Дефицит подготовленных технических кадров</h3>
+          <p>При быстром масштабировании производства спрос на инженерно-технический персонал растёт быстрее, чем способность рынка обеспечивать работников с нужным уровнем EV- и automation-компетенций. Это увеличивает нагрузку на внутреннее обучение и удлиняет период выхода сотрудника на целевую производительность.</p>
+        </div>
+        <div class="card card-amber">
+          <span class="card-num">3.2</span>
+          <h3>Сложность адаптации к современному производству</h3>
+          <p>Переход к более автоматизированным и цифровым производственным процессам требует от персонала новых навыков: работы по стандартам, взаимодействия с автоматизированным оборудованием, соблюдения процедур диагностики, безопасности и качества.</p>
+        </div>
+        <div class="card card-amber">
+          <span class="card-num">3.3</span>
+          <h3>Критичность EV- и high-voltage safety-компетенций</h3>
+          <p>В электромобильном производстве и обслуживании особенно важны:</p>
+          <ul>
+            <li>безопасная работа с высоковольтными системами;</li>
+            <li>понимание архитектуры батарейных систем;</li>
+            <li>диагностика BMS;</li>
+            <li>корректное реагирование на типовые сбои и аварийные сценарии.</li>
+          </ul>
+        </div>
+        <div class="card card-amber">
+          <span class="card-num">3.4</span>
+          <h3>Необходимость формализованного подтверждения компетенций</h3>
+          <p>Для крупного промышленного проекта важна прозрачная система оценки того, какими навыками действительно обладает сотрудник, насколько он допущен к конкретным операциям и каким стандартам соответствует.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 -->
+    <section class="section" id="s4">
+      <div class="section-head"><span class="num">04</span><h2>Концепция решения IEG</h2></div>
+      <p>IEG предлагает создать <strong>корпоративную учебную инфраструктуру практического типа</strong>, ориентированную на подготовку сотрудников до и после выхода на производство.</p>
+
+      <h3 class="sub-title">4.1. Лаборатория симуляции для обучения без риска для линии</h3>
+      <p>Базовый принцип — обучение и отработка сложных операций в среде, максимально приближённой к реальной, но не влияющей на текущую выработку. В рамках такой среды персонал может пройти:</p>
+      <ul class="bullet-list">
+        <li>последовательность запуска и остановки процедур;</li>
+        <li>тренировку по стандартным и нестандартным кейсам;</li>
+        <li>отработку типовых ошибок;</li>
+        <li>сценарии диагностики и реагирования.</li>
+      </ul>
+
+      <h3 class="sub-title">4.2. Тренажёры для электромобилей и учебные модули BMS</h3>
+      <p>Учебные стенды IEG могут быть использованы для практической подготовки по следующим направлениям:</p>
+      <ul class="bullet-list two-col">
+        <li>архитектура EV-систем;</li>
+        <li>высоковольтная безопасность;</li>
+        <li>аккумуляторные системы;</li>
+        <li>BMS-логика и базовая диагностика;</li>
+        <li>симуляция неисправностей и устранение неполадок;</li>
+        <li>безопасная изоляция и сервисные процедуры.</li>
+      </ul>
+
+      <h3 class="sub-title">4.3. Обучение по производству, техническому обслуживанию и технической поддержке</h3>
+      <p>Решение может охватывать не только подготовку операторов и техников, но и:</p>
+      <ul class="bullet-list">
+        <li>обучение специалистов по техническому обслуживанию;</li>
+        <li>подготовку инструкторов;</li>
+        <li>унификацию процедуры допуска к операциям;</li>
+        <li>создание внутренних квалификационных уровней.</li>
+      </ul>
+
+      <h3 class="sub-title">4.4. Assessment &amp; Certification Framework</h3>
+      <p>Для повышения объективности результатов целесообразно встроить систему оценки, основанную на:</p>
+      <ul class="bullet-list two-col">
+        <li>проверке практических навыков;</li>
+        <li>чек-листах по операциям;</li>
+        <li>цифровом журнале прогресса;</li>
+        <li>сопоставлении с международными квалификационными рамками и отраслевыми стандартами.</li>
+      </ul>
+
+      <div class="callout-light">Казахстан официально подчёркивает необходимость дальнейшего роста локального содержания, расширения компонентной кооперации и освоения производства EV — наличие такой системы оценки усиливает аргументацию Allur в части развития локальных технических компетенций.</div>
+    </section>
+
+    <!-- 5 -->
+    <section class="section" id="s5">
+      <div class="section-head"><span class="num">05</span><h2>Предлагаемая модель сотрудничества: Co-Development Partnership</h2></div>
+      <p>IEG считает особенно важным не предлагать «жёсткое готовое решение», а работать с Allur в формате <strong>совместной разработки учебных модулей</strong>.</p>
+
+      <h3 class="sub-title">5.1. Принцип GAP-based Development</h3>
+      <p>Если на стороне IEG и на стороне предприятия существуют расхождения между типовыми учебными модулями и реальными производственными задачами, такие GAP-пункты не должны скрываться. Наоборот, именно они становятся основой для совместной инженерной и методической работы.</p>
+
+      <h3 class="sub-title">5.2. Что может разрабатываться совместно</h3>
+      <ul class="bullet-list two-col">
+        <li>модули по зарядной инфраструктуре;</li>
+        <li>модули по тепловому управлению (Thermal Management);</li>
+        <li>кейсы по диагностике неисправностей;</li>
+        <li>процедуры блокировки высокого напряжения / реагирования на безопасность (High-Voltage Lockout / Safety Response);</li>
+        <li>адаптация контента под реальные процессы и оборудование Allur;</li>
+        <li>локальная модель оценки и допуска сотрудников.</li>
+      </ul>
+
+      <h3 class="sub-title">5.3. Почему это важно для Allur</h3>
+      <div class="callout">Такой подход позволяет создать не просто учебный класс, а <strong>локализованный корпоративный центр компетенций</strong>, который работает в логике реального завода и реальных KPI предприятия.</div>
+    </section>
+
+    <!-- 6 -->
+    <section class="section" id="s6">
+      <div class="section-head"><span class="num">06</span><h2>Ожидаемый эффект для Allur</h2></div>
+      <div class="card-grid effect-grid">
+        <div class="card">
+          <span class="card-num">6.1</span>
+          <h3>Снижение операционных рисков</h3>
+          <p>Подготовка персонала до выхода на реальную линию снижает риск ошибок, брака, небезопасных действий и длительной адаптации.</p>
+        </div>
+        <div class="card">
+          <span class="card-num">6.2</span>
+          <h3>Рост эффективности ввода персонала</h3>
+          <p>Чем быстрее новый сотрудник достигает требуемого уровня уверенного выполнения операций, тем меньше нагрузка на линию и наставников.</p>
+        </div>
+        <div class="card">
+          <span class="card-num">6.3</span>
+          <h3>Поддержка OEE через снижение «человеческого фактора»</h3>
+          <p>Хотя обучение не заменяет производственную оптимизацию, оно прямо влияет на качество выполнения операций, дисциплину процедур и устойчивость запуска новых процессов.</p>
+        </div>
+        <div class="card">
+          <span class="card-num">6.4</span>
+          <h3>Усиление локализационной повестки</h3>
+          <p>Когда предприятие может показать, что местные кадры не просто наняты, а обучены, оценены и стандартизированы по понятной модели, это усиливает позицию компании в контексте индустриальной политики и долгосрочного развития.</p>
+        </div>
+        <div class="card">
+          <span class="card-num">6.5</span>
+          <h3>Формирование внутренней «in-house academy»</h3>
+          <p>В среднесрочной перспективе учебный центр может стать внутренней академией Allur для:</p>
+          <ul>
+            <li>адаптации новых сотрудников;</li>
+            <li>повышения квалификации действующего персонала;</li>
+            <li>переквалификации под EV-направление;</li>
+            <li>подготовки сервисных и технических специалистов.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 -->
+    <section class="section" id="s7">
+      <div class="section-head"><span class="num">07</span><h2>Предварительная архитектура решения</h2></div>
+      <p>На первом этапе IEG предлагает рассмотреть следующую структуру:</p>
+      <div class="stepper">
+        <div class="step" data-step="1">
+          <h3>Диагностика потребностей</h3>
+          <ul>
+            <li>интервью с технической и производственной командой Allur;</li>
+            <li>определение критичных компетенций и ролей;</li>
+            <li>определение приоритетных GAP (priority gaps).</li>
+          </ul>
+        </div>
+        <div class="step" data-step="2">
+          <h3>Mapping учебной программы</h3>
+          <ul>
+            <li>сопоставление международных модулей и реальных производственных задач Allur;</li>
+            <li>определение базовых, промежуточных и advanced-модулей;</li>
+            <li>формирование дорожной карты внедрения.</li>
+          </ul>
+        </div>
+        <div class="step" data-step="3">
+          <h3>Проектирование учебной инфраструктуры</h3>
+          <ul>
+            <li>состав учебных стендов и симуляторов;</li>
+            <li>требования к помещению;</li>
+            <li>модель практических упражнений;</li>
+            <li>система оценки и допуска.</li>
+          </ul>
+        </div>
+        <div class="step" data-step="4">
+          <h3>Пилотная реализация</h3>
+          <ul>
+            <li>запуск пилотной группы;</li>
+            <li>тестирование модулей;</li>
+            <li>сбор обратной связи;</li>
+            <li>корректировка программы.</li>
+          </ul>
+        </div>
+        <div class="step" data-step="5">
+          <h3>Полномасштабное развёртывание</h3>
+          <ul>
+            <li>развёртывание учебного центра;</li>
+            <li>подготовка внутренних инструкторов;</li>
+            <li>регулярная сертификация персонала.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8 -->
+    <section class="section" id="s8">
+      <div class="section-head"><span class="num">08</span><h2>Предлагаемый следующий шаг</h2></div>
+      <div class="cta">
+        <p>Мы будем признательны за возможность провести рабочую встречу, чтобы обсудить:</p>
+        <ul>
+          <li>приоритетные категории персонала для обучения;</li>
+          <li>EV / BMS / safety-модули, наиболее актуальные для площадки в Костанае;</li>
+          <li>возможный формат совместной разработки локализованного учебного центра;</li>
+          <li>пилотный план внедрения.</li>
+        </ul>
+        <p>IEG готова представить:</p>
+        <ul>
+          <li>предварительную карту модулей обучения;</li>
+          <li>модель учебной инфраструктуры;</li>
+          <li>поэтапный сценарий реализации под задачи Allur.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- A1 -->
+    <section class="section" id="a1">
+      <div class="section-head"><span class="num">A1</span><h2>Приложение 1. Предварительная карта учебных модулей для технического персонала Allur</h2></div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Код модуля</th>
+              <th>Направление обучения</th>
+              <th>Цель модуля</th>
+              <th>Решение / инфраструктура IEG</th>
+              <th>Привязка к задачам Allur</th>
+              <th>Формат обучения</th>
+              <th>Оценка результата</th>
+              <th>Статус</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="tag-mono">M1</span></td>
+              <td>Высоковольтная безопасность (High-Voltage Safety)</td>
+              <td>Сформировать безопасные навыки работы с высоковольтными системами EV</td>
+              <td>Safety Trainer, EV High-Voltage Training Board, практические сценарии LOTO</td>
+              <td>Снижение рисков при работе с EV-компонентами и батарейными узлами</td>
+              <td>Теория + практические тренировки + сценарии реагирования</td>
+              <td>Практический тест по процедурам безопасности и допуску к работам</td>
+              <td><span class="badge badge-ready">Готовый модуль</span></td>
+            </tr>
+            <tr>
+              <td><span class="tag-mono">M2</span></td>
+              <td>Базовая архитектура EV/HEV</td>
+              <td>Дать системное понимание конструкции электромобиля и гибридных систем</td>
+              <td>EV System Trainer, функциональные схемы, демонстрационные модули</td>
+              <td>Ускорение ввода новых сотрудников в EV-направление</td>
+              <td>Теория + демонстрация + guided practice</td>
+              <td>Тест по системной логике и назначению компонентов</td>
+              <td><span class="badge badge-ready">Готовый модуль</span></td>
+            </tr>
+            <tr>
+              <td><span class="tag-mono">M3</span></td>
+              <td>Основы батарейных систем</td>
+              <td>Обучить принципам устройства, функционирования и обслуживания батарейных пакетов</td>
+              <td>Battery Pack Trainer, Cell/Module Display Unit, диагностические панели</td>
+              <td>Повышение понимания критичных EV-узлов у производственного и сервисного персонала</td>
+              <td>Теория + лабораторные задания</td>
+              <td>Оценка знаний по структуре батареи и процедурам обращения</td>
+              <td><span class="badge badge-ready">Готовый модуль</span></td>
+            </tr>
+            <tr>
+              <td><span class="tag-mono">M4</span></td>
+              <td>Диагностика BMS</td>
+              <td>Развить навыки базовой диагностики Battery Management System и интерпретации сигналов</td>
+              <td>BMS Simulator, fault injection module, диагностическое ПО</td>
+              <td>Снижение ошибок при первичной диагностике неисправностей батарейных систем</td>
+              <td>Практика на симуляторе + кейс-анализ</td>
+              <td>Практический экзамен по поиску неисправностей</td>
+              <td><span class="badge badge-ready">Готовый модуль</span></td>
+            </tr>
+            <tr>
+              <td><span class="tag-mono">M5</span></td>
+              <td>Диагностика неисправностей и troubleshooting</td>
+              <td>Отработать типовые и нетиповые сценарии отказов EV-систем</td>
+              <td>Fault Simulation Platform, диагностические сценарии, troubleshooting workflow</td>
+              <td>Сокращение времени адаптации персонала и снижение количества ошибок на линии</td>
+              <td>Сценарное обучение + supervised practice</td>
+              <td>Оценка по скорости и точности выявления причины неисправности</td>
+              <td><span class="badge badge-ready">Готовый модуль</span></td>
+            </tr>
+            <tr>
+              <td><span class="tag-mono">M6</span></td>
+              <td>Стандартизированная производственная безопасность и SOP</td>
+              <td>Закрепить единый подход к выполнению операций по стандарту</td>
+              <td>Standard Operation Training Station, safety checklist modules</td>
+              <td>Стабилизация качества исполнения операций и снижение человеческого фактора</td>
+              <td>Инструктаж + повторяемая практика</td>
+              <td>Чек-лист соответствия процедурам</td>
+              <td><span class="badge badge-ready">Готовый модуль</span></td>
+            </tr>
+            <tr>
+              <td><span class="tag-mono">M7</span></td>
+              <td>Инфраструктура зарядки EV</td>
+              <td>Подготовить персонал по базовым принципам зарядной инфраструктуры и взаимодействию с EV-системами</td>
+              <td>Charging Interface Trainer, communication demo module</td>
+              <td>Важно для расширения EV-компетенций и сервисной готовности</td>
+              <td>Теория + прикладные упражнения</td>
+              <td>Оценка понимания логики зарядных интерфейсов и типовых сценариев</td>
+              <td><span class="badge badge-gap">GAP / Co-Development</span></td>
+            </tr>
+            <tr>
+              <td><span class="tag-mono">M8</span></td>
+              <td>Thermal Management Systems</td>
+              <td>Сформировать понимание логики теплового управления батареей и EV-системами</td>
+              <td>Thermal Management Trainer / simulation module</td>
+              <td>Актуально для повышения технической глубины EV-подготовки</td>
+              <td>Теория + моделирование + практический разбор</td>
+              <td>Тест по режимам работы и диагностическим признакам</td>
+              <td><span class="badge badge-gap">GAP / Co-Development</span></td>
+            </tr>
+            <tr>
+              <td><span class="tag-mono">M9</span></td>
+              <td>Основы smart factory и промышленной автоматизации</td>
+              <td>Подготовить персонал к работе в среде автоматизированного производства</td>
+              <td>Smart Factory Demo Cell, PLC/HMI basic trainer, industrial automation modules</td>
+              <td>Помощь в адаптации сотрудников к современной производственной среде</td>
+              <td>Теория + hands-on практика</td>
+              <td>Практическое задание по логике автоматизированного процесса</td>
+              <td><span class="badge badge-ready">Готовый модуль</span></td>
+            </tr>
+            <tr>
+              <td><span class="tag-mono">M10</span></td>
+              <td>Техническое обслуживание автоматизированного оборудования</td>
+              <td>Обучить базовым процедурам технического обслуживания, проверки и первичной диагностики оборудования</td>
+              <td>Industrial Maintenance Trainer, mechatronics modules, fault diagnosis kits</td>
+              <td>Повышение устойчивости эксплуатации оборудования и снижение простоев из-за ошибок обслуживания</td>
+              <td>Практика + guided maintenance routines</td>
+              <td>Оценка по выполнению ТО-процедур и базовой диагностике</td>
+              <td><span class="badge badge-partial">Частично готов / адаптация под площадку</span></td>
+            </tr>
+            <tr>
+              <td><span class="tag-mono">M11</span></td>
+              <td>Контроль качества и анализ причин дефектов</td>
+              <td>Развить навык выявления отклонений и первичного root cause analysis</td>
+              <td>Quality Control Training Set, defect sample kits, inspection workflow</td>
+              <td>Улучшение качества исполнения операций и снижение количества повторяющихся дефектов</td>
+              <td>Практика + кейс-метод</td>
+              <td>Оценка по корректности выявления дефекта и первичной классификации причин</td>
+              <td><span class="badge badge-ready">Готовый модуль</span></td>
+            </tr>
+            <tr>
+              <td><span class="tag-mono">M12</span></td>
+              <td>Подготовка внутренних инструкторов (Train-the-Trainer)</td>
+              <td>Создать устойчивую внутреннюю систему обучения на площадке Allur</td>
+              <td>Instructor Development Program, assessment templates, training governance package</td>
+              <td>Формирование внутренней академии / in-house training capability</td>
+              <td>Workshop + practice teaching + evaluation</td>
+              <td>Оценка по методике преподавания и качеству проведения обучения</td>
+              <td><span class="badge badge-ready">Готовый модуль</span></td>
+            </tr>
+            <tr>
+              <td><span class="tag-mono">M13</span></td>
+              <td>Assessment &amp; Certification Framework</td>
+              <td>Внедрить систему объективной оценки и фиксации компетенций</td>
+              <td>Skill Matrix, practical assessment sheets, digital training records</td>
+              <td>Подтверждение уровня локальных кадров и стандартизация допуска к работам</td>
+              <td>Оценка + верификация + запись результатов</td>
+              <td>Skill passport / competency record / internal certification</td>
+              <td><span class="badge badge-ready">Готовый модуль</span></td>
+            </tr>
+            <tr>
+              <td><span class="tag-mono">M14</span></td>
+              <td>Визуализация узлов EV / Digital Twin / Holographic Mock-up</td>
+              <td>Повысить наглядность обучения по сложным системам и внутренней архитектуре автомобиля</td>
+              <td>Интеграция аппаратных тренажёров IEG с внешней digital twin / holographic платформой</td>
+              <td>Усиление advanced training и демонстрационной ценности учебного центра</td>
+              <td>Interactive learning + visualization-based training</td>
+              <td>Оценка вовлечённости, понимания архитектуры, сценарного анализа</td>
+              <td><span class="badge badge-partner">Партнёрская разработка / Consortium Model</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="table-note">Прокрутите таблицу горизонтально для просмотра всех столбцов.</p>
+    </section>
+
+    <!-- A2 -->
+    <section class="section" id="a2">
+      <div class="section-head"><span class="num">A2</span><h2>Приложение 2. Таблица GAP-областей и совместной разработки с Allur</h2></div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Код GAP</th>
+              <th>Область</th>
+              <th>Почему это важно для Allur</th>
+              <th>Предлагаемый подход</th>
+              <th>Роль IEG</th>
+              <th>Предполагаемая роль Allur / партнёра</th>
+              <th>Ожидаемый результат</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="tag-mono">G1</span></td>
+              <td>Зарядная инфраструктура EV</td>
+              <td>Рост EV-направления требует понимания логики зарядки, интерфейсов и безопасности</td>
+              <td>Совместно разработать локализованный учебный модуль на основе реальных эксплуатационных сценариев</td>
+              <td>Методология, тренажёрная база, учебный дизайн</td>
+              <td>Предоставление требований, операционных сценариев, данных по применяемым системам</td>
+              <td>Практический модуль по зарядной инфраструктуре для техников и инженерного персонала</td>
+            </tr>
+            <tr>
+              <td><span class="tag-mono">G2</span></td>
+              <td>Thermal Management</td>
+              <td>Тепловое управление влияет на безопасность, ресурс батареи и корректность диагностики</td>
+              <td>Разработать модуль с учётом конкретных EV-конфигураций и рабочих сценариев</td>
+              <td>Концепция тренажёра, учебные задания, диагностика</td>
+              <td>Верификация применимости к производственным и сервисным процессам</td>
+              <td>Специализированный модуль по thermal management</td>
+            </tr>
+            <tr>
+              <td><span class="tag-mono">G3</span></td>
+              <td>Обслуживание автоматизированного оборудования</td>
+              <td>Для стабильности линии критична подготовка техников по безопасному и стандартизированному ТО</td>
+              <td>Настроить модуль под реальные типы оборудования и типовые неисправности площадки</td>
+              <td>Базовые maintenance trainers, методика оценки навыков</td>
+              <td>Предоставление перечня оборудования, критичных операций и maintenance pain points</td>
+              <td>Практический локализованный модуль для maintenance team</td>
+            </tr>
+            <tr>
+              <td><span class="tag-mono">G4</span></td>
+              <td>Advanced EV Fault Scenarios</td>
+              <td>Для сокращения времени диагностики нужны сценарии, близкие к реальным отказам</td>
+              <td>Совместно сформировать банк кейсов и fault logic</td>
+              <td>Платформа моделирования, методика troubleshooting</td>
+              <td>Реальные сценарии отказов, приоритетные кейсы, требования к точности</td>
+              <td>Библиотека кейсов для подготовки и оценки сотрудников</td>
+            </tr>
+            <tr>
+              <td><span class="tag-mono">G5</span></td>
+              <td>Digital Twin / Holographic Visualization</td>
+              <td>Для сложных технических узлов визуализация ускоряет понимание и повышает качество обучения</td>
+              <td>Реализовать гибридное решение с участием внешнего software / XR-партнёра</td>
+              <td>Интеграция hardware training с образовательной логикой</td>
+              <td>Предоставление use cases, согласование архитектуры</td>
+              <td>—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="table-note">Прокрутите таблицу горизонтально для просмотра всех столбцов.</p>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <div class="foot-grid">
+    <div>
+      <h4>IEG Co., Ltd. (주식회사 아이지)</h4>
+      <p>Производитель оборудования для автоматизации smart factory и TVET-обучения<br>Сонгнам-си, провинция Кёнгидо, Республика Корея</p>
+    </div>
+    <div>
+      <h4>Контактное лицо</h4>
+      <p>Kelly Cho — Overseas Marketing Manager<br>
+      Email: <a href="mailto:kellycho824@ieg.kr">kellycho824@ieg.kr</a><br>
+      Тел.: +82-1644-3263</p>
+    </div>
+    <div>
+      <h4>Документ</h4>
+      <p>Предложение по созданию локализованной инфраструктуры технического обучения<br>для завода Allur / Kia, Костанай · 15 июня 2026 г.</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
