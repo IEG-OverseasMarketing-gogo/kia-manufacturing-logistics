@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paint Shop Training Simulator | Kia Qazaqstan Kostanay | IEG Co., Ltd.</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;background:#F0F4F8;color:#1E293B;min-height:100vh;padding:0}
+#app{max-width:860px;margin:0 auto;padding:0 24px 60px}
+.hdr{display:flex;align-items:center;justify-content:space-between;padding:14px 24px 16px;border-bottom:2px solid #E2E8F0;margin-bottom:24px;background:#fff}
+.logo{display:flex;flex-direction:column;gap:2px}
+.logo-brand{font-size:10px;font-weight:700;letter-spacing:.1em;color:#2563EB;text-transform:uppercase}
+.logo-name{font-size:15px;font-weight:700;color:#1E293B}
+.hdr-right{display:flex;align-items:center;gap:12px}
+.dots{display:flex;gap:6px;align-items:center}
+.dot{width:10px;height:10px;border-radius:50%;background:#CBD5E1;transition:all .3s;display:inline-block}
+.dot.done{background:#2563EB}.dot.cur{background:#2563EB;box-shadow:0 0 0 3px rgba(37,99,235,.2)}
+.btn{padding:8px 20px;border-radius:8px;border:1.5px solid #CBD5E1;background:#fff;cursor:pointer;font-size:13px;font-family:inherit;color:#334155;font-weight:600;transition:all .15s}
+.btn:hover{background:#F1F5F9;border-color:#94A3B8}
+.btn.pri{background:#2563EB;color:#fff;border-color:#2563EB;font-weight:700}
+.btn.pri:hover{background:#1D4ED8}
+.btn.sm{padding:6px 14px;font-size:12px}
+.s{display:none}.s.on{display:block}
+.card{background:#fff;border-radius:12px;border:1px solid #E2E8F0;padding:20px}
+.metric-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px}
+.metric{background:#F8FAFC;border-radius:8px;border:1px solid #E2E8F0;padding:10px 12px}
+.metric-label{font-size:11px;color:#64748B;margin-bottom:4px;text-transform:uppercase;letter-spacing:.05em;font-weight:700}
+.metric-val{font-size:20px;font-weight:700;color:#1E293B}
+.bar-t{height:9px;border-radius:5px;background:#E2E8F0;overflow:hidden;margin-bottom:3px}
+.bar-f{height:100%;border-radius:5px;transition:width .2s;background:#2563EB}
+.bar-f.warn{background:#F59E0B}.bar-f.bad{background:#EF4444}.bar-f.ok{background:#10B981}
+.lbl{font-size:11px;color:#64748B;margin-bottom:5px;text-transform:uppercase;letter-spacing:.05em;font-weight:700}
+.tip{font-size:13px;padding:11px 14px;border-radius:8px;background:#EFF6FF;border:1.5px solid #BFDBFE;color:#1E40AF;line-height:1.5;min-height:44px;margin:10px 0;font-weight:600}
+.section-hdr{font-size:11px;font-weight:700;color:#2563EB;letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px;background:#fff;padding:16px 20px 0;border-radius:12px 12px 0 0}
+.opt{display:block;width:100%;text-align:left;padding:12px 16px;margin-bottom:6px;border-radius:8px;border:1.5px solid #E2E8F0;background:#fff;cursor:pointer;font-size:14px;font-family:inherit;color:#334155;font-weight:500;transition:all .15s}
+.opt:hover:not(:disabled){border-color:#2563EB;color:#1D4ED8;background:#EFF6FF}
+.opt.ok{background:#F0FDF4;border-color:#16A34A;color:#15803D;cursor:default;font-weight:700}
+.opt.no{background:#FEF2F2;border-color:#DC2626;color:#B91C1C;cursor:default}
+.step{padding:12px 16px;margin-bottom:6px;border-radius:8px;border:1.5px solid #E2E8F0;background:#fff;cursor:pointer;font-size:14px;color:#334155;font-weight:500;transition:all .2s}
+.step:hover:not(.placed){border-color:#2563EB;background:#EFF6FF;color:#1D4ED8}
+.step.sel{border-color:#2563EB;background:#EFF6FF;color:#1D4ED8;font-weight:600}
+.step.placed{opacity:.3;cursor:default}
+.step.ok2{border-color:#16A34A;background:#F0FDF4;color:#15803D;font-weight:700}
+.step.no2{border-color:#DC2626;background:#FEF2F2;color:#B91C1C}
+.slot{padding:12px 16px;margin-bottom:6px;border-radius:8px;border:1.5px dashed #CBD5E1;background:#F8FAFC;font-size:14px;color:#94A3B8;min-height:44px;transition:all .2s;font-weight:500}
+.slot.filled{border-style:solid;border-color:#2563EB;background:#fff;color:#1E293B;font-weight:600}
+.slot.ok2{border-color:#16A34A;background:#F0FDF4;color:#15803D;font-weight:700}
+.slot.no2{border-color:#DC2626;background:#FEF2F2;color:#B91C1C}
+.score-ring{width:96px;height:96px;border-radius:50%;border:5px solid #2563EB;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:24px;font-weight:700;color:#1E293B;background:#fff}
+.intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:520px;margin:0 auto 28px;text-align:left}
+.intro-card{background:#fff;border-radius:10px;border:1.5px solid #E2E8F0;padding:16px}
+.intro-card-icon{font-size:22px;margin-bottom:8px}
+.intro-card-t{font-size:13px;font-weight:700;margin-bottom:3px;color:#1E293B}
+.intro-card-s{font-size:12px;color:#64748B;font-weight:500}
+.cert-box{border:1.5px solid #BFDBFE;border-radius:12px;padding:20px;max-width:440px;margin:0 auto 20px;background:#EFF6FF}
+.result-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:520px;margin:0 auto 20px}
+.result-card{background:#fff;border-radius:8px;border:1px solid #E2E8F0;padding:12px;text-align:center}
+.result-card-lbl{font-size:11px;color:#64748B;margin-bottom:4px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.result-card-val{font-size:20px;font-weight:700;color:#1E293B}
+</style>
+</head>
+<body>
+<div id="app">
+
+<div class="hdr">
+  <div class="logo">
+    <span class="logo-brand">IEG Co., Ltd. &times; Kia Qazaqstan — Kostanay Plant</span>
+    <span class="logo-name" id="hdr-t">Paint Shop Training Simulator</span>
+  </div>
+  <div class="hdr-right">
+    <div class="dots">
+      <span class="dot cur" id="d0"></span>
+      <span class="dot" id="d1"></span>
+      <span class="dot" id="d2"></span>
+      <span class="dot" id="d3"></span>
+    </div>
+    <button class="btn sm" id="lbtn" onclick="toggleLang()">РУС</button>
+  </div>
+</div>
+
+<!-- Screen 0: Intro -->
+<div id="sc0" class="s on" style="text-align:center;padding:28px 0">
+  <div style="width:64px;height:64px;border-radius:50%;background:#0D1829;border:1px solid #2563EB;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:28px">&#9881;</div>
+  <div id="i-title" style="font-size:22px;font-weight:700;margin-bottom:8px">Paint Shop Training Simulator</div>
+  <div id="i-sub" style="font-size:14px;color:#6B7E9A;margin-bottom:30px">Kia Qazaqstan Kostanay &middot; Weeks 6&ndash;7 Onboarding Module</div>
+  <div class="intro-grid">
+    <div class="intro-card"><div class="intro-card-icon">&#127809;</div><div class="intro-card-t" data-i="m1c-t">M1: Spray Technique</div><div class="intro-card-s" data-i="m1c-s">Live paint simulation</div></div>
+    <div class="intro-card"><div class="intro-card-icon">&#128269;</div><div class="intro-card-t" data-i="m2c-t">M2: Defect Identification</div><div class="intro-card-s" data-i="m2c-s">Identify coating defects</div></div>
+    <div class="intro-card"><div class="intro-card-icon">&#128203;</div><div class="intro-card-t" data-i="m3c-t">M3: Process Sequence</div><div class="intro-card-s" data-i="m3c-s">Order the process steps</div></div>
+    <div class="intro-card"><div class="intro-card-icon">&#9888;</div><div class="intro-card-t" data-i="m4c-t">M4: Chemical Safety</div><div class="intro-card-s" data-i="m4c-s">Safety knowledge check</div></div>
+  </div>
+  <button class="btn pri" onclick="goTo(1)" data-i="start-btn" style="font-size:15px;padding:12px 32px">Start Training &#8594;</button>
+</div>
+
+<!-- Screen 1: Spray -->
+<div id="sc1" class="s">
+  <div class="section-hdr" data-i="m1-hdr">M1 &middot; Spray Technique</div>
+  <div style="display:grid;grid-template-columns:1fr 210px;gap:20px;align-items:start">
+    <div>
+      <canvas id="sc" style="width:100%;border-radius:10px;border:1px solid #1E2D45;display:block;touch-action:none;cursor:crosshair"></canvas>
+      <div class="tip" id="m1-tip">Hold and drag to spray paint the panel. Aim for &ge;80% coverage with minimal overspray.</div>
+    </div>
+    <div>
+      <div class="lbl" data-i="cov-l">Coverage</div>
+      <div class="bar-t"><div class="bar-f" id="cov-b" style="width:0%"></div></div>
+      <div style="font-size:13px;font-weight:600;margin-bottom:14px;color:#93C5FD" id="cov-v">0%</div>
+      <div class="lbl" data-i="over-l">Overspray</div>
+      <div class="bar-t"><div class="bar-f" id="over-b" style="width:0%"></div></div>
+      <div style="font-size:13px;font-weight:600;margin-bottom:14px;color:#93C5FD" id="over-v">0%</div>
+      <div class="lbl" data-i="spd-l">Speed</div>
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:18px">
+        <span style="font-size:10px;color:#4A6FA5" data-i="slow">Slow</span>
+        <div style="flex:1;height:8px;background:#1E2D45;border-radius:4px;position:relative;overflow:hidden">
+          <div id="spd-b" style="position:absolute;width:16px;height:100%;background:#2563EB;border-radius:4px;left:40%;transition:left .1s"></div>
+        </div>
+        <span style="font-size:10px;color:#4A6FA5" data-i="fast">Fast</span>
+      </div>
+      <div id="m1-pass" style="display:none">
+        <button class="btn pri" onclick="finishM1()" style="width:100%;margin-bottom:8px" data-i="pass-btn">Pass &mdash; Continue &#10003;</button>
+      </div>
+      <button class="btn" onclick="resetSpray()" style="width:100%" data-i="reset-btn">Reset</button>
+    </div>
+  </div>
+</div>
+
+<!-- Screen 2: Defect ID -->
+<div id="sc2" class="s">
+  <div class="section-hdr" data-i="m2-hdr">M2 &middot; Defect Identification</div>
+  <div id="m2-body"></div>
+</div>
+
+<!-- Screen 3: Sequence -->
+<div id="sc3" class="s">
+  <div class="section-hdr" data-i="m3-hdr">M3 &middot; Process Sequence</div>
+  <div id="m3-instr" style="font-size:13px;color:#6B7E9A;margin-bottom:16px">Click steps in the correct order to build the complete paint shop process sequence.</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+    <div>
+      <div style="font-size:11px;color:#4A6FA5;margin-bottom:8px;text-transform:uppercase;letter-spacing:.05em" data-i="pool-l">Available steps</div>
+      <div id="m3-pool"></div>
+    </div>
+    <div>
+      <div style="font-size:11px;color:#4A6FA5;margin-bottom:8px;text-transform:uppercase;letter-spacing:.05em" data-i="seq-l">Your sequence</div>
+      <div id="m3-slots"></div>
+      <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn pri" id="m3-chk" style="display:none" onclick="checkSeq()" data-i="m3-check">Check sequence</button>
+        <button class="btn" id="m3-nxt" style="display:none" onclick="goTo(4)" data-i="m3-next">Continue &#8594;</button>
+        <button class="btn" onclick="resetM3()" data-i="m3-reset">Reset</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Screen 4: Chemical Safety -->
+<div id="sc4" class="s">
+  <div class="section-hdr" data-i="m4-hdr">M4 &middot; Chemical Safety</div>
+  <div id="m4-body"></div>
+</div>
+
+<!-- Screen 5: Results -->
+<div id="sc5" class="s" style="text-align:center;padding:20px 0">
+  <div class="score-ring" id="score-ring">--</div>
+  <div style="font-size:18px;font-weight:700;margin-bottom:8px" data-i="res-title">Training Complete</div>
+  <div id="res-sub" style="font-size:14px;color:#6B7E9A;margin-bottom:24px"></div>
+  <div class="result-grid">
+    <div class="result-card"><div class="result-card-lbl">M1</div><div class="result-card-val" id="r1">-</div></div>
+    <div class="result-card"><div class="result-card-lbl">M2</div><div class="result-card-val" id="r2">-</div></div>
+    <div class="result-card"><div class="result-card-lbl">M3</div><div class="result-card-val" id="r3">-</div></div>
+    <div class="result-card"><div class="result-card-lbl">M4</div><div class="result-card-val" id="r4">-</div></div>
+  </div>
+  <div class="cert-box">
+    <div style="font-size:10px;color:#4A6FA5;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px">IEG Co., Ltd. &times; Kia Qazaqstan Kostanay</div>
+    <div style="font-size:14px;font-weight:600;margin-bottom:4px" data-i="cert-t">Paint Shop Module &mdash; Completion Record</div>
+    <div id="cert-date" style="font-size:13px;color:#6B7E9A"></div>
+  </div>
+  <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+    <button class="btn" onclick="restart()" data-i="restart">Restart &#8635;</button>
+    <button class="btn" onclick="window.print()" data-i="print-btn">Print Record</button>
+  </div>
+</div>
+
+</div>
+<script>
+const L={
+  en:{
+    'hdr-t':'Paint Shop Training Simulator',
+    'i-title':'Paint Shop Training Simulator',
+    'i-sub':'Kia Qazaqstan Kostanay \u00b7 Weeks 6\u20137 Onboarding Module',
+    'm1c-t':'M1: Spray Technique','m1c-s':'Live paint simulation',
+    'm2c-t':'M2: Defect Identification','m2c-s':'Identify coating defects',
+    'm3c-t':'M3: Process Sequence','m3c-s':'Order the process steps',
+    'm4c-t':'M4: Chemical Safety','m4c-s':'Safety knowledge check',
+    'start-btn':'Start Training \u2192',
+    'm1-hdr':'M1 \u00b7 SPRAY TECHNIQUE',
+    'cov-l':'Coverage','over-l':'Overspray','spd-l':'Speed','slow':'Slow','fast':'Fast',
+    'pass-btn':'Pass \u2014 Continue \u2713','reset-btn':'Reset',
+    'tip-start':'Hold and drag to spray paint the panel. Aim for \u226580% coverage with minimal overspray.',
+    'tip-slow':'Too slow \u2014 risk of runs and sags. Pick up the pace.','tip-fast':'Too fast \u2014 thin coverage and streaks likely. Slow down.',
+    'tip-good':'Good speed \u2014 keep it steady and overlap each pass.','tip-over':'Watch overspray \u2014 stay within the panel boundary.',
+    'tip-pass':'Target reached! Click Pass to proceed to the next module.',
+    'm2-hdr':'M2 \u00b7 DEFECT IDENTIFICATION',
+    'm3-hdr':'M3 \u00b7 PROCESS SEQUENCE',
+    'm3-instr':'Click steps in the correct order to build the complete paint shop process sequence.',
+    'pool-l':'Available steps','seq-l':'Your sequence',
+    'm3-check':'Check sequence','m3-next':'Continue \u2192','m3-reset':'Reset',
+    'm3-ok':'Correct sequence! All steps in the right order.',
+    'm3-no':'Some steps are out of order. Check the highlighted items and review the correct sequence.',
+    'm4-hdr':'M4 \u00b7 CHEMICAL SAFETY',
+    'res-title':'Training Complete',
+    'cert-t':'Paint Shop Module \u2014 Completion Record',
+    'restart':'Restart \u21BA','print-btn':'Print Record',
+    'res-pass':'Well done \u2014 you are ready for supervised line practice.',
+    'res-fail':'Review the modules below and retake before starting supervised line practice.',
+    'q-label':'Question','of':'of'
+  },
+  ru:{
+    'hdr-t':'\u0421\u0438\u043c\u0443\u043b\u044f\u0442\u043e\u0440: \u0426\u0435\u0445 \u043e\u043a\u0440\u0430\u0441\u043a\u0438',
+    'i-title':'\u0421\u0438\u043c\u0443\u043b\u044f\u0442\u043e\u0440 \u043e\u0431\u0443\u0447\u0435\u043d\u0438\u044f: \u0426\u0435\u0445 \u043e\u043a\u0440\u0430\u0441\u043a\u0438',
+    'i-sub':'Kia Qazaqstan \u041a\u043e\u0441\u0442\u0430\u043d\u0430\u0439 \u00b7 \u041c\u043e\u0434\u0443\u043b\u044c \u0430\u0434\u0430\u043f\u0442\u0430\u0446\u0438\u0438, \u043d\u0435\u0434\u0435\u043b\u0438 6\u20137',
+    'm1c-t':'\u041c1: \u0422\u0435\u0445\u043d\u0438\u043a\u0430 \u0440\u0430\u0441\u043f\u044b\u043b\u0435\u043d\u0438\u044f','m1c-s':'\u0416\u0438\u0432\u0430\u044f \u0441\u0438\u043c\u0443\u043b\u044f\u0446\u0438\u044f \u043e\u043a\u0440\u0430\u0441\u043a\u0438',
+    'm2c-t':'\u041c2: \u0412\u044b\u044f\u0432\u043b\u0435\u043d\u0438\u0435 \u0434\u0435\u0444\u0435\u043a\u0442\u043e\u0432','m2c-s':'\u041e\u043f\u0440\u0435\u0434\u0435\u043b\u0438\u0442\u0435 \u0434\u0435\u0444\u0435\u043a\u0442\u044b \u043f\u043e\u043a\u0440\u044b\u0442\u0438\u044f',
+    'm3c-t':'\u041c3: \u041f\u043e\u0441\u043b\u0435\u0434\u043e\u0432\u0430\u0442\u0435\u043b\u044c\u043d\u043e\u0441\u0442\u044c \u043f\u0440\u043e\u0446\u0435\u0441\u0441\u043e\u0432','m3c-s':'\u0423\u043f\u043e\u0440\u044f\u0434\u043e\u0447\u044c\u0442\u0435 \u044d\u0442\u0430\u043f\u044b',
+    'm4c-t':'\u041c4: \u0425\u0438\u043c\u0438\u0447\u0435\u0441\u043a\u0430\u044f \u0431\u0435\u0437\u043e\u043f\u0430\u0441\u043d\u043e\u0441\u0442\u044c','m4c-s':'\u041f\u0440\u043e\u0432\u0435\u0440\u043a\u0430 \u0437\u043d\u0430\u043d\u0438\u0439',
+    'start-btn':'\u041d\u0430\u0447\u0430\u0442\u044c \u043e\u0431\u0443\u0447\u0435\u043d\u0438\u0435 \u2192',
+    'm1-hdr':'\u041c1 \u00b7 \u0422\u0415\u0425\u041d\u0418\u041a\u0410 \u0420\u0410\u0421\u041f\u042b\u041b\u0415\u041d\u0418\u042f',
+    'cov-l':'\u041e\u0445\u0432\u0430\u0442 \u043f\u0430\u043d\u0435\u043b\u0438','over-l':'\u041f\u0435\u0440\u0435\u0440\u0430\u0441\u0445\u043e\u0434','spd-l':'\u0421\u043a\u043e\u0440\u043e\u0441\u0442\u044c','slow':'\u041c\u0435\u0434\u043b.','fast':'\u0411\u044b\u0441\u0442.',
+    'pass-btn':'\u041f\u0440\u043e\u0439\u0434\u0435\u043d\u043e \u2014 \u0414\u0430\u043b\u0435\u0435 \u2713','reset-btn':'\u0421\u0431\u0440\u043e\u0441\u0438\u0442\u044c',
+    'tip-start':'\u0417\u0430\u0436\u043c\u0438\u0442\u0435 \u043a\u043d\u043e\u043f\u043a\u0443 \u043c\u044b\u0448\u0438 \u0438 \u043f\u0435\u0440\u0435\u043c\u0435\u0449\u0430\u0439\u0442\u0435 \u0434\u043b\u044f \u043d\u0430\u043d\u0435\u0441\u0435\u043d\u0438\u044f \u043a\u0440\u0430\u0441\u043a\u0438. \u0426\u0435\u043b\u044c: \u043e\u0445\u0432\u0430\u0442 \u226580%.',
+    'tip-slow':'\u0421\u043b\u0438\u0448\u043a\u043e\u043c \u043c\u0435\u0434\u043b\u0435\u043d\u043d\u043e \u2014 \u0440\u0438\u0441\u043a \u043f\u043e\u0442\u0451\u043a\u043e\u0432. \u0423\u0432\u0435\u043b\u0438\u0447\u044c\u0442\u0435 \u0441\u043a\u043e\u0440\u043e\u0441\u0442\u044c.','tip-fast':'\u0421\u043b\u0438\u0448\u043a\u043e\u043c \u0431\u044b\u0441\u0442\u0440\u043e \u2014 \u043d\u0435\u0434\u043e\u0441\u0442\u0430\u0442\u043e\u0447\u043d\u044b\u0439 \u043e\u0445\u0432\u0430\u0442. \u0421\u043d\u0438\u0437\u044c\u0442\u0435 \u0441\u043a\u043e\u0440\u043e\u0441\u0442\u044c.',
+    'tip-good':'\u0425\u043e\u0440\u043e\u0448\u0430\u044f \u0441\u043a\u043e\u0440\u043e\u0441\u0442\u044c \u2014 \u0434\u0435\u0440\u0436\u0438\u0442\u0435 \u0440\u043e\u0432\u043d\u043e, \u043f\u0435\u0440\u0435\u043a\u0440\u044b\u0432\u0430\u0439\u0442\u0435 \u043f\u0440\u043e\u0445\u043e\u0434\u044b.','tip-over':'\u0421\u043b\u0435\u0434\u0438\u0442\u0435 \u0437\u0430 \u043f\u0435\u0440\u0435\u0440\u0430\u0441\u0445\u043e\u0434\u043e\u043c \u2014 \u043e\u0441\u0442\u0430\u0432\u0430\u0439\u0442\u0435\u0441\u044c \u0432 \u043f\u0440\u0435\u0434\u0435\u043b\u0430\u0445 \u043f\u0430\u043d\u0435\u043b\u0438.',
+    'tip-pass':'\u0426\u0435\u043b\u044c \u0434\u043e\u0441\u0442\u0438\u0433\u043d\u0443\u0442\u0430! \u041d\u0430\u0436\u043c\u0438\u0442\u0435 \u00ab\u041f\u0440\u043e\u0439\u0434\u0435\u043d\u043e\u00bb \u0434\u043b\u044f \u043f\u0440\u043e\u0434\u043e\u043b\u0436\u0435\u043d\u0438\u044f.',
+    'm2-hdr':'\u041c2 \u00b7 \u0412\u042b\u042f\u0412\u041b\u0415\u041d\u0418\u0415 \u0414\u0415\u0424\u0415\u041a\u0422\u041e\u0412',
+    'm3-hdr':'\u041c3 \u00b7 \u041f\u041e\u0421\u041b\u0415\u0414\u041e\u0412\u0410\u0422\u0415\u041b\u042c\u041d\u041e\u0421\u0422\u042c \u041f\u0420\u041e\u0426\u0415\u0421\u0421\u041e\u0412',
+    'm3-instr':'\u041d\u0430\u0436\u0438\u043c\u0430\u0439\u0442\u0435 \u044d\u0442\u0430\u043f\u044b \u0432 \u043f\u0440\u0430\u0432\u0438\u043b\u044c\u043d\u043e\u043c \u043f\u043e\u0440\u044f\u0434\u043a\u0435 \u0434\u043b\u044f \u043f\u043e\u0441\u0442\u0440\u043e\u0435\u043d\u0438\u044f \u043f\u043e\u043b\u043d\u043e\u0439 \u043f\u043e\u0441\u043b\u0435\u0434\u043e\u0432\u0430\u0442\u0435\u043b\u044c\u043d\u043e\u0441\u0442\u0438 \u043f\u0440\u043e\u0446\u0435\u0441\u0441\u0430 \u043e\u043a\u0440\u0430\u0441\u043a\u0438.',
+    'pool-l':'\u0414\u043e\u0441\u0442\u0443\u043f\u043d\u044b\u0435 \u044d\u0442\u0430\u043f\u044b','seq-l':'\u0412\u0430\u0448\u0430 \u043f\u043e\u0441\u043b\u0435\u0434\u043e\u0432\u0430\u0442\u0435\u043b\u044c\u043d\u043e\u0441\u0442\u044c',
+    'm3-check':'\u041f\u0440\u043e\u0432\u0435\u0440\u0438\u0442\u044c','m3-next':'\u0414\u0430\u043b\u0435\u0435 \u2192','m3-reset':'\u0421\u0431\u0440\u043e\u0441\u0438\u0442\u044c',
+    'm3-ok':'\u0412\u0435\u0440\u043d\u043e! \u0412\u0441\u0435 \u044d\u0442\u0430\u043f\u044b \u0432 \u043f\u0440\u0430\u0432\u0438\u043b\u044c\u043d\u043e\u043c \u043f\u043e\u0440\u044f\u0434\u043a\u0435.',
+    'm3-no':'\u041d\u0435\u043a\u043e\u0442\u043e\u0440\u044b\u0435 \u044d\u0442\u0430\u043f\u044b \u043d\u0435 \u043d\u0430 \u0441\u0432\u043e\u0438\u0445 \u043c\u0435\u0441\u0442\u0430\u0445. \u041f\u0440\u043e\u0432\u0435\u0440\u044c\u0442\u0435 \u0432\u044b\u0434\u0435\u043b\u0435\u043d\u043d\u044b\u0435 \u043f\u0443\u043d\u043a\u0442\u044b.',
+    'm4-hdr':'\u041c4 \u00b7 \u0425\u0418\u041c\u0418\u0427\u0415\u0421\u041a\u0410\u042f \u0411\u0415\u0417\u041e\u041f\u0410\u0421\u041d\u041e\u0421\u0422\u042c',
+    'res-title':'\u041e\u0431\u0443\u0447\u0435\u043d\u0438\u0435 \u0437\u0430\u0432\u0435\u0440\u0448\u0435\u043d\u043e',
+    'cert-t':'\u041c\u043e\u0434\u0443\u043b\u044c \u0446\u0435\u0445\u0430 \u043e\u043a\u0440\u0430\u0441\u043a\u0438 \u2014 \u0417\u0430\u043f\u0438\u0441\u044c \u043e \u0437\u0430\u0432\u0435\u0440\u0448\u0435\u043d\u0438\u0438',
+    'restart':'\u041d\u0430\u0447\u0430\u0442\u044c \u0437\u0430\u043d\u043e\u0432\u043e \u21BA','print-btn':'\u041d\u0430\u043f\u0435\u0447\u0430\u0442\u0430\u0442\u044c \u0437\u0430\u043f\u0438\u0441\u044c',
+    'res-pass':'\u041e\u0442\u043b\u0438\u0447\u043d\u043e \u2014 \u0432\u044b \u0433\u043e\u0442\u043e\u0432\u044b \u043a \u043f\u0440\u0430\u043a\u0442\u0438\u043a\u0435 \u043d\u0430 \u043b\u0438\u043d\u0438\u0438 \u043f\u043e\u0434 \u043d\u0430\u0431\u043b\u044e\u0434\u0435\u043d\u0438\u0435\u043c.',
+    'res-fail':'\u041f\u043e\u0432\u0442\u043e\u0440\u0438\u0442\u0435 \u043c\u043e\u0434\u0443\u043b\u0438 \u0438 \u043f\u0440\u043e\u0439\u0434\u0438\u0442\u0435 \u043e\u0446\u0435\u043d\u043a\u0443 \u043f\u043e\u0432\u0442\u043e\u0440\u043d\u043e.',
+    'q-label':'\u0412\u043e\u043f\u0440\u043e\u0441','of':'\u0438\u0437'
+  }
+};
+const M2d={
+  en:[{type:'run',q:'Which coating defect is shown?',opts:['Run / Sag','Fish Eye','Orange Peel','Blistering'],ans:0,fb:'A run or sag occurs when paint is applied too slowly or too close, causing paint to flow downward before it cures.'},
+    {type:'fish',q:'Which coating defect is shown?',opts:['Blushing','Dirt Inclusion','Fish Eye','Orange Peel'],ans:2,fb:'Fish eye craters are caused by surface contamination (oil, silicone). The paint cannot wet the surface uniformly.'},
+    {type:'peel',q:'Which coating defect is shown?',opts:['Fish Eye','Orange Peel','Run / Sag','Dirt Inclusion'],ans:1,fb:'Orange peel texture is caused by incorrect spray distance, speed, or viscosity. The paint cannot flow out to a flat film.'},
+    {type:'dirt',q:'Which coating defect is shown?',opts:['Orange Peel','Run / Sag','Dirt Inclusion','Fish Eye'],ans:2,fb:'Dirt inclusions are particles (dust, fibres) that land on wet paint and cure in place. Booth cleanliness and PPE are critical.'}],
+  ru:[{type:'run',q:'\u041a\u0430\u043a\u043e\u0439 \u0434\u0435\u0444\u0435\u043a\u0442 \u043f\u043e\u043a\u0440\u044b\u0442\u0438\u044f \u043f\u043e\u043a\u0430\u0437\u0430\u043d?',opts:['\u041f\u043e\u0442\u0451\u043a','\u0420\u044b\u0431\u0438\u0439 \u0433\u043b\u0430\u0437','\u0410\u043f\u0435\u043b\u044c\u0441\u0438\u043d\u043e\u0432\u0430\u044f \u043a\u043e\u0440\u043a\u0430','\u041f\u0443\u0437\u044b\u0440\u0435\u043d\u0438\u0435'],ans:0,fb:'\u041f\u043e\u0442\u0451\u043a \u0432\u043e\u0437\u043d\u0438\u043a\u0430\u0435\u0442 \u043f\u0440\u0438 \u0441\u043b\u0438\u0448\u043a\u043e\u043c \u043c\u0435\u0434\u043b\u0435\u043d\u043d\u043e\u043c \u043d\u0430\u043d\u0435\u0441\u0435\u043d\u0438\u0438 \u0438\u043b\u0438 \u0441\u043b\u0438\u0448\u043a\u043e\u043c \u0431\u043b\u0438\u0437\u043a\u043e\u043c \u0440\u0430\u0441\u0441\u0442\u043e\u044f\u043d\u0438\u0438 \u2014 \u043a\u0440\u0430\u0441\u043a\u0430 \u0441\u0442\u0435\u043a\u0430\u0435\u0442 \u0434\u043e \u043e\u0442\u0432\u0435\u0440\u0434\u0435\u0432\u0430\u043d\u0438\u044f.'},
+    {type:'fish',q:'\u041a\u0430\u043a\u043e\u0439 \u0434\u0435\u0444\u0435\u043a\u0442 \u043f\u043e\u043a\u0440\u044b\u0442\u0438\u044f \u043f\u043e\u043a\u0430\u0437\u0430\u043d?',opts:['\u041f\u043e\u043c\u0443\u0442\u043d\u0435\u043d\u0438\u0435','\u0412\u043a\u043b\u044e\u0447\u0435\u043d\u0438\u0435 \u0447\u0430\u0441\u0442\u0438\u0446','\u0420\u044b\u0431\u0438\u0439 \u0433\u043b\u0430\u0437','\u0410\u043f\u0435\u043b\u044c\u0441\u0438\u043d\u043e\u0432\u0430\u044f \u043a\u043e\u0440\u043a\u0430'],ans:2,fb:'\u0420\u044b\u0431\u0438\u0439 \u0433\u043b\u0430\u0437 \u0432\u044b\u0437\u044b\u0432\u0430\u0435\u0442\u0441\u044f \u0437\u0430\u0433\u0440\u044f\u0437\u043d\u0435\u043d\u0438\u0435\u043c \u043f\u043e\u0432\u0435\u0440\u0445\u043d\u043e\u0441\u0442\u0438 (\u043c\u0430\u0441\u043b\u043e, \u0441\u0438\u043b\u0438\u043a\u043e\u043d). \u041a\u0440\u0430\u0441\u043a\u0430 \u043d\u0435 \u043c\u043e\u0436\u0435\u0442 \u0440\u0430\u0432\u043d\u043e\u043c\u0435\u0440\u043d\u043e \u0441\u043c\u0430\u0447\u0438\u0432\u0430\u0442\u044c\u0441\u044f.'},
+    {type:'peel',q:'\u041a\u0430\u043a\u043e\u0439 \u0434\u0435\u0444\u0435\u043a\u0442 \u043f\u043e\u043a\u0440\u044b\u0442\u0438\u044f \u043f\u043e\u043a\u0430\u0437\u0430\u043d?',opts:['\u0420\u044b\u0431\u0438\u0439 \u0433\u043b\u0430\u0437','\u0410\u043f\u0435\u043b\u044c\u0441\u0438\u043d\u043e\u0432\u0430\u044f \u043a\u043e\u0440\u043a\u0430','\u041f\u043e\u0442\u0451\u043a','\u0412\u043a\u043b\u044e\u0447\u0435\u043d\u0438\u0435 \u0447\u0430\u0441\u0442\u0438\u0446'],ans:1,fb:'\u0410\u043f\u0435\u043b\u044c\u0441\u0438\u043d\u043e\u0432\u0430\u044f \u043a\u043e\u0440\u043a\u0430 \u0432\u043e\u0437\u043d\u0438\u043a\u0430\u0435\u0442 \u0438\u0437-\u0437\u0430 \u043d\u0435\u043f\u0440\u0430\u0432\u0438\u043b\u044c\u043d\u043e\u0433\u043e \u0440\u0430\u0441\u0441\u0442\u043e\u044f\u043d\u0438\u044f, \u0441\u043a\u043e\u0440\u043e\u0441\u0442\u0438 \u0438\u043b\u0438 \u0432\u044f\u0437\u043a\u043e\u0441\u0442\u0438. \u041a\u0440\u0430\u0441\u043a\u0430 \u043d\u0435 \u0443\u0441\u043f\u0435\u0432\u0430\u0435\u0442 \u0432\u044b\u0440\u043e\u0432\u043d\u044f\u0442\u044c\u0441\u044f \u0432 \u043f\u043b\u043e\u0441\u043a\u0438\u0439 \u0441\u043b\u043e\u0439.'},
+    {type:'dirt',q:'\u041a\u0430\u043a\u043e\u0439 \u0434\u0435\u0444\u0435\u043a\u0442 \u043f\u043e\u043a\u0440\u044b\u0442\u0438\u044f \u043f\u043e\u043a\u0430\u0437\u0430\u043d?',opts:['\u0410\u043f\u0435\u043b\u044c\u0441\u0438\u043d\u043e\u0432\u0430\u044f \u043a\u043e\u0440\u043a\u0430','\u041f\u043e\u0442\u0451\u043a','\u0412\u043a\u043b\u044e\u0447\u0435\u043d\u0438\u0435 \u0447\u0430\u0441\u0442\u0438\u0446','\u0420\u044b\u0431\u0438\u0439 \u0433\u043b\u0430\u0437'],ans:2,fb:'\u0412\u043a\u043b\u044e\u0447\u0435\u043d\u0438\u044f \u0447\u0430\u0441\u0442\u0438\u0446 (\u043f\u044b\u043b\u044c, \u0432\u043e\u043b\u043e\u043a\u043d\u0430) \u043f\u043e\u043f\u0430\u0434\u0430\u044e\u0442 \u043d\u0430 \u0441\u044b\u0440\u0443\u044e \u043a\u0440\u0430\u0441\u043a\u0443 \u0438 \u0437\u0430\u0442\u0432\u0435\u0440\u0434\u0435\u0432\u0430\u044e\u0442. \u0427\u0438\u0441\u0442\u043e\u0442\u0430 \u043a\u0430\u0431\u0438\u043d\u044b \u0438 \u0421\u0418\u0417 \u043a\u0440\u0438\u0442\u0438\u0447\u0435\u0441\u043a\u0438 \u0432\u0430\u0436\u043d\u044b.'}]
+};
+const STEPS={
+  en:['Pre-treatment (degreasing & phosphating)','E-coat (electrocoat / electrophoresis)','Sealer & deadener application','Primer coat','Top coat (base + clear)','Quality inspection & sign-off'],
+  ru:['\u041f\u0440\u0435\u0434\u043e\u0431\u0440\u0430\u0431\u043e\u0442\u043a\u0430 (\u043e\u0431\u0435\u0437\u0436\u0438\u0440\u0438\u0432\u0430\u043d\u0438\u0435 \u0438 \u0444\u043e\u0441\u0444\u0430\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435)','\u042d-\u043f\u043e\u043a\u0440\u044b\u0442\u0438\u0435 (\u044d\u043b\u0435\u043a\u0442\u0440\u043e\u0444\u043e\u0440\u0435\u0437)','\u041d\u0430\u043d\u0435\u0441\u0435\u043d\u0438\u0435 \u0433\u0435\u0440\u043c\u0435\u0442\u0438\u043a\u0430 \u0438 \u0448\u0443\u043c\u043e\u0438\u0437\u043e\u043b\u044f\u0446\u0438\u0438','\u041d\u0430\u043d\u0435\u0441\u0435\u043d\u0438\u0435 \u0433\u0440\u0443\u043d\u0442\u0430','\u0424\u0438\u043d\u0438\u0448\u043d\u043e\u0435 \u043f\u043e\u043a\u0440\u044b\u0442\u0438\u0435 (\u043e\u0441\u043d\u043e\u0432\u0430 + \u043b\u0430\u043a)','\u041a\u043e\u043d\u0442\u0440\u043e\u043b\u044c \u043a\u0430\u0447\u0435\u0441\u0442\u0432\u0430 \u0438 \u043f\u0440\u0438\u0451\u043c\u043a\u0430']
+};
+const M4d={
+  en:[{q:'When handling paint thinner or solvents, which PPE is required?',opts:['Gloves only','Hard hat and safety shoes only','Full PPE: respirator, chemical gloves, eye protection','No PPE required for brief exposure'],ans:2,fb:'Solvents require full PPE every time. Vapour inhalation damages the nervous system; skin and eye contact causes chemical burns.'},
+    {q:'The recommended spray gun distance from the panel surface is:',opts:['5\u201310 cm \u2014 close to maximise coverage','15\u201325 cm \u2014 standard atomisation distance','35\u201350 cm \u2014 wide fan for large panels','Any distance; only paint viscosity matters'],ans:1,fb:'15\u201325 cm gives correct atomisation, film build, and coverage. Too close causes runs; too far causes orange peel and wasted overspray.'},
+    {q:'If paint gets in your eyes, the first action is:',opts:['Rub eyes with a clean lint-free cloth','Apply specialist eye drops from the first-aid kit','Flush immediately with clean running water for at least 15 minutes','Return to work if the pain is mild and seek help later'],ans:2,fb:'Flush for \u226515 minutes continuously to dilute and remove the irritant. Seek medical attention immediately afterward, regardless of how the eye feels.'}],
+  ru:[{q:'\u041f\u0440\u0438 \u0440\u0430\u0431\u043e\u0442\u0435 \u0441 \u0440\u0430\u0437\u0431\u0430\u0432\u0438\u0442\u0435\u043b\u0435\u043c \u043a\u0440\u0430\u0441\u043a\u0438 \u0438\u043b\u0438 \u0440\u0430\u0441\u0442\u0432\u043e\u0440\u0438\u0442\u0435\u043b\u044f\u043c\u0438 \u043a\u0430\u043a\u0438\u0435 \u0421\u0418\u0417 \u043e\u0431\u044f\u0437\u0430\u0442\u0435\u043b\u044c\u043d\u044b?',opts:['\u0422\u043e\u043b\u044c\u043a\u043e \u043f\u0435\u0440\u0447\u0430\u0442\u043a\u0438','\u041a\u0430\u0441\u043a\u0430 \u0438 \u0437\u0430\u0449\u0438\u0442\u043d\u0430\u044f \u043e\u0431\u0443\u0432\u044c','\u041f\u043e\u043b\u043d\u044b\u0439 \u043a\u043e\u043c\u043f\u043b\u0435\u043a\u0442 \u0421\u0418\u0417: \u0440\u0435\u0441\u043f\u0438\u0440\u0430\u0442\u043e\u0440, \u0445\u0438\u043c\u0441\u0442\u043e\u0439\u043a\u0438\u0435 \u043f\u0435\u0440\u0447\u0430\u0442\u043a\u0438, \u0437\u0430\u0449\u0438\u0442\u0430 \u0433\u043b\u0430\u0437','\u0421\u0418\u0417 \u043d\u0435 \u043d\u0443\u0436\u043d\u044b \u043f\u0440\u0438 \u043a\u0440\u0430\u0442\u043a\u043e\u0439 \u0440\u0430\u0431\u043e\u0442\u0435'],ans:2,fb:'\u0420\u0430\u0441\u0442\u0432\u043e\u0440\u0438\u0442\u0435\u043b\u0438 \u0442\u0440\u0435\u0431\u0443\u044e\u0442 \u043f\u043e\u043b\u043d\u043e\u0433\u043e \u043a\u043e\u043c\u043f\u043b\u0435\u043a\u0442\u0430 \u0421\u0418\u0417 \u043a\u0430\u0436\u0434\u044b\u0439 \u0440\u0430\u0437. \u0412\u0434\u044b\u0445\u0430\u043d\u0438\u0435 \u043f\u0430\u0440\u043e\u0432 \u043f\u043e\u0432\u0440\u0435\u0436\u0434\u0430\u0435\u0442 \u043d\u0435\u0440\u0432\u043d\u0443\u044e \u0441\u0438\u0441\u0442\u0435\u043c\u0443; \u043a\u043e\u043d\u0442\u0430\u043a\u0442 \u0441 \u043a\u043e\u0436\u0435\u0439 \u0438 \u0433\u043b\u0430\u0437\u0430\u043c\u0438 \u0432\u044b\u0437\u044b\u0432\u0430\u0435\u0442 \u0445\u0438\u043c\u0438\u0447\u0435\u0441\u043a\u0438\u0435 \u043e\u0436\u043e\u0433\u0438.'},
+    {q:'\u0420\u0435\u043a\u043e\u043c\u0435\u043d\u0434\u0443\u0435\u043c\u043e\u0435 \u0440\u0430\u0441\u0441\u0442\u043e\u044f\u043d\u0438\u0435 \u043e\u0442 \u043f\u0438\u0441\u0442\u043e\u043b\u0435\u0442\u0430-\u0440\u0430\u0441\u043f\u044b\u043b\u0438\u0442\u0435\u043b\u044f \u0434\u043e \u043f\u0430\u043d\u0435\u043b\u0438:',opts:['5\u201310 \u0441\u043c \u2014 \u0431\u043b\u0438\u0437\u043a\u043e \u0434\u043b\u044f \u043c\u0430\u043a\u0441\u0438\u043c\u0430\u043b\u044c\u043d\u043e\u0433\u043e \u043e\u0445\u0432\u0430\u0442\u0430','15\u201325 \u0441\u043c \u2014 \u0441\u0442\u0430\u043d\u0434\u0430\u0440\u0442\u043d\u043e\u0435 \u0440\u0430\u0441\u0441\u0442\u043e\u044f\u043d\u0438\u0435','35\u201350 \u0441\u043c \u2014 \u0448\u0438\u0440\u043e\u043a\u0438\u0439 \u0444\u0430\u043a\u0435\u043b','\u041b\u044e\u0431\u043e\u0435; \u0432\u0430\u0436\u043d\u0430 \u0442\u043e\u043b\u044c\u043a\u043e \u0432\u044f\u0437\u043a\u043e\u0441\u0442\u044c'],ans:1,fb:'15\u201325 \u0441\u043c \u043e\u0431\u0435\u0441\u043f\u0435\u0447\u0438\u0432\u0430\u044e\u0442 \u043f\u0440\u0430\u0432\u0438\u043b\u044c\u043d\u044b\u0439 \u0444\u0430\u043a\u0435\u043b \u0440\u0430\u0441\u043f\u044b\u043b\u0435\u043d\u0438\u044f \u0438 \u043d\u0430\u0431\u043e\u0440 \u0442\u043e\u043b\u0449\u0438\u043d\u044b \u043f\u043b\u0451\u043d\u043a\u0438. \u0421\u043b\u0438\u0448\u043a\u043e\u043c \u0431\u043b\u0438\u0437\u043a\u043e \u2014 \u043f\u043e\u0442\u0451\u043a\u0438; \u0441\u043b\u0438\u0448\u043a\u043e\u043c \u0434\u0430\u043b\u0435\u043a\u043e \u2014 \u0430\u043f\u0435\u043b\u044c\u0441\u0438\u043d\u043e\u0432\u0430\u044f \u043a\u043e\u0440\u043a\u0430.'},
+    {q:'\u0415\u0441\u043b\u0438 \u043a\u0440\u0430\u0441\u043a\u0430 \u043f\u043e\u043f\u0430\u043b\u0430 \u0432 \u0433\u043b\u0430\u0437\u0430, \u043f\u0435\u0440\u0432\u043e\u0435 \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0435:',opts:['\u041f\u0440\u043e\u0442\u0435\u0440\u0435\u0442\u044c \u0433\u043b\u0430\u0437\u0430 \u0447\u0438\u0441\u0442\u043e\u0439 \u0441\u0430\u043b\u0444\u0435\u0442\u043a\u043e\u0439','\u0417\u0430\u043a\u0430\u043f\u0430\u0442\u044c \u043a\u0430\u043f\u043b\u0438 \u0438\u0437 \u0430\u043f\u0442\u0435\u0447\u043a\u0438','\u041d\u0435\u043c\u0435\u0434\u043b\u0435\u043d\u043d\u043e \u043f\u0440\u043e\u043c\u044b\u0442\u044c \u0447\u0438\u0441\u0442\u043e\u0439 \u043f\u0440\u043e\u0442\u043e\u0447\u043d\u043e\u0439 \u0432\u043e\u0434\u043e\u0439 \u043d\u0435 \u043c\u0435\u043d\u0435\u0435 15 \u043c\u0438\u043d\u0443\u0442','\u0412\u0435\u0440\u043d\u0443\u0442\u044c\u0441\u044f \u043a \u0440\u0430\u0431\u043e\u0442\u0435 \u0435\u0441\u043b\u0438 \u0431\u043e\u043b\u044c \u043d\u0435\u0437\u043d\u0430\u0447\u0438\u0442\u0435\u043b\u044c\u043d\u0430\u044f'],ans:2,fb:'\u041f\u0440\u043e\u043c\u044b\u0432\u0430\u0439\u0442\u0435 \u043d\u0435 \u043c\u0435\u043d\u0435\u0435 15 \u043c\u0438\u043d\u0443\u0442 \u043d\u0435\u043f\u0440\u0435\u0440\u044b\u0432\u043d\u043e. \u041f\u043e\u0441\u043b\u0435 \u044d\u0442\u043e\u0433\u043e \u043d\u0435\u043c\u0435\u0434\u043b\u0435\u043d\u043d\u043e \u043e\u0431\u0440\u0430\u0442\u0438\u0442\u0435\u0441\u044c \u043a \u0432\u0440\u0430\u0447\u0443.'}]
+};
+
+let lang='en',cur=0,scores={m1:0,m2:0,m3:0,m4:0};
+let spraying=false,paintedCells,isPanelCell,totalPanel=0,panelPainted=0,totalPainted=0;
+let lastPos=[],sprayCtx,SW,SH,GW=80,GH=50,CW,CH,PX,PY,PW,PH;
+let m2qi=0,m2score=0,m3placed=[],m3sel=null,m4qi=0,m4score=0;
+
+const t=k=>L[lang][k]||k;
+function ul(){
+  document.querySelectorAll('[data-i]').forEach(e=>{const v=L[lang][e.dataset.i];if(v)e.textContent=v;});
+  document.getElementById('lbtn').textContent=lang==='en'?'РУС':'ENG';
+  document.getElementById('hdr-t').textContent=t('hdr-t');
+  if(cur===1)document.getElementById('m1-tip').textContent=t('tip-start');
+  if(cur===3)document.getElementById('m3-instr').textContent=t('m3-instr');
+}
+function toggleLang(){lang=lang==='en'?'ru':'en';ul();if(cur===2)buildM2();if(cur===3)buildM3();if(cur===4)buildM4();}
+function goTo(n){
+  document.querySelectorAll('.s').forEach(e=>e.classList.remove('on'));
+  document.getElementById('sc'+n).classList.add('on');
+  ['d0','d1','d2','d3'].forEach((id,i)=>{
+    const d=document.getElementById(id);
+    d.className='dot'+(i<n-1?' done':i===n-1?' cur':'');
+  });
+  cur=n;window.scrollTo(0,0);
+  if(n===1)initSpray();if(n===2)buildM2();if(n===3)buildM3();if(n===4)buildM4();if(n===5)showResults();
+}
+function restart(){scores={m1:0,m2:0,m3:0,m4:0};m2qi=0;m2score=0;m3placed=[];m3sel=null;m4qi=0;m4score=0;goTo(0);}
+
+function initSpray(){
+  const canvas=document.getElementById('sc');
+  SW=canvas.clientWidth||560;SH=Math.round(SW*0.55);
+  canvas.width=SW;canvas.height=SH;
+  sprayCtx=canvas.getContext('2d');
+  PX=SW*0.06;PY=SH*0.08;PW=SW*0.88;PH=SH*0.84;
+  CW=SW/GW;CH=SH/GH;
+  paintedCells=new Uint8Array(GW*GH);isPanelCell=new Uint8Array(GW*GH);
+  totalPanel=0;panelPainted=0;totalPainted=0;lastPos=[];
+  for(let gy=0;gy<GH;gy++)for(let gx=0;gx<GW;gx++){
+    const cx=(gx+.5)*CW,cy=(gy+.5)*CH;
+    if(cx>=PX&&cx<=PX+PW&&cy>=PY&&cy<=PY+PH){isPanelCell[gy*GW+gx]=1;totalPanel++;}
+  }
+  drawBg();
+  document.getElementById('m1-tip').textContent=t('tip-start');
+  document.getElementById('cov-b').style.width='0%';document.getElementById('cov-v').textContent='0%';
+  document.getElementById('over-b').style.width='0%';document.getElementById('over-v').textContent='0%';
+  document.getElementById('m1-pass').style.display='none';
+  function pos(e){const r=canvas.getBoundingClientRect();const s=e.touches?e.touches[0]:e;return{x:(s.clientX-r.left)*(SW/r.width),y:(s.clientY-r.top)*(SH/r.height),t:Date.now()};}
+  canvas.onmousedown=e=>{spraying=true;const p=pos(e);lastPos=[p];applyPaint(p.x,p.y);};
+  canvas.onmousemove=e=>{if(!spraying)return;const p=pos(e);lastPos.push(p);if(lastPos.length>8)lastPos.shift();applyPaint(p.x,p.y);updateSpeedUI();};
+  canvas.onmouseup=canvas.onmouseleave=()=>{spraying=false;lastPos=[];};
+  canvas.ontouchstart=e=>{e.preventDefault();spraying=true;const p=pos(e);lastPos=[p];applyPaint(p.x,p.y);};
+  canvas.ontouchmove=e=>{e.preventDefault();if(!spraying)return;const p=pos(e);lastPos.push(p);if(lastPos.length>8)lastPos.shift();applyPaint(p.x,p.y);updateSpeedUI();};
+  canvas.ontouchend=()=>{spraying=false;lastPos=[];};
+}
+function drawBg(){
+  const c=sprayCtx;c.clearRect(0,0,SW,SH);
+  c.fillStyle='#E2E8F0';c.fillRect(0,0,SW,SH);
+  c.fillStyle='#E8EDF5';c.fillRect(0,0,SW,SH);
+  const r=14;c.beginPath();c.moveTo(PX+r,PY);c.lineTo(PX+PW-r,PY);c.arcTo(PX+PW,PY,PX+PW,PY+r,r);
+  c.lineTo(PX+PW,PY+PH-r);c.arcTo(PX+PW,PY+PH,PX+PW-r,PY+PH,r);
+  c.lineTo(PX+r,PY+PH);c.arcTo(PX,PY+PH,PX,PY+PH-r,r);c.lineTo(PX,PY+r);c.arcTo(PX,PY,PX+r,PY,r);c.closePath();
+  c.fillStyle='#CBD5E1';c.fill();c.strokeStyle='#94A3B8';c.lineWidth=1.5;c.stroke();
+  for(let i=0;i<5;i++){c.fillStyle='rgba(0,0,0,0.04)';c.fillRect(PX+PW*0.12+i*PW*0.15,PY+PH*0.08,PW*0.09,PH*0.84);}
+  c.font='bold 12px -apple-system,Arial,sans-serif';c.fillStyle='rgba(0,0,0,0.25)';c.textAlign='center';
+  c.fillText(lang==='en'?'CAR BODY PANEL — BARE METAL':'КУЗОВНАЯ ПАНЕЛЬ — ЧИСТЫЙ МЕТАЛЛ',SW/2,PY+PH/2+4);
+}
+function applyPaint(x,y){
+  const c=sprayCtx,R=32;
+  const g=c.createRadialGradient(x,y,0,x,y,R);
+  g.addColorStop(0,'rgba(29,78,216,0.08)');g.addColorStop(0.5,'rgba(29,78,216,0.04)');g.addColorStop(1,'rgba(29,78,216,0)');
+  c.fillStyle=g;c.beginPath();c.arc(x,y,R,0,Math.PI*2);c.fill();
+  for(let i=0;i<6;i++){const a=Math.random()*Math.PI*2,d=Math.random()*R;c.fillStyle='rgba(29,78,216,0.02)';c.beginPath();c.arc(x+Math.cos(a)*d,y+Math.sin(a)*d,2+Math.random()*4,0,Math.PI*2);c.fill();}
+  const gx1=Math.max(0,Math.floor((x-R)/CW)),gx2=Math.min(GW-1,Math.ceil((x+R)/CW));
+  const gy1=Math.max(0,Math.floor((y-R)/CH)),gy2=Math.min(GH-1,Math.ceil((y+R)/CH));
+  for(let gx=gx1;gx<=gx2;gx++)for(let gy=gy1;gy<=gy2;gy++){
+    const dx=(gx+.5)*CW-x,dy=(gy+.5)*CH-y;
+    if(dx*dx+dy*dy<=R*R&&!paintedCells[gy*GW+gx]){
+      paintedCells[gy*GW+gx]=1;totalPainted++;
+      if(isPanelCell[gy*GW+gx])panelPainted++;
+    }
+  }
+  updateMetrics();
+}
+function updateMetrics(){
+  const cov=totalPanel?Math.round(panelPainted/totalPanel*100):0;
+  const ov=totalPainted?Math.round((totalPainted-panelPainted)/totalPainted*100):0;
+  const cb=document.getElementById('cov-b'),ob=document.getElementById('over-b');
+  cb.style.width=cov+'%';document.getElementById('cov-v').textContent=cov+'%';
+  cb.className='bar-f'+(cov>=80?' ok':cov>=50?'':' warn');
+  ob.style.width=Math.min(ov,100)+'%';document.getElementById('over-v').textContent=ov+'%';
+  ob.className='bar-f'+(ov>30?' bad':ov>15?' warn':'');
+  if(cov>=80&&ov<=25){document.getElementById('m1-tip').textContent=t('tip-pass');document.getElementById('m1-pass').style.display='block';}
+  else if(ov>30)document.getElementById('m1-tip').textContent=t('tip-over');
+}
+function updateSpeedUI(){
+  if(lastPos.length<2)return;
+  const a=lastPos[0],b=lastPos[lastPos.length-1];
+  const dx=b.x-a.x,dy=b.y-a.y,dt=b.t-a.t||1;
+  const spd=Math.sqrt(dx*dx+dy*dy)/dt*1000;
+  const pct=Math.min(Math.max(spd/400,0),1);
+  document.getElementById('spd-b').style.left=(pct*84)+'%';
+  const cov=totalPanel?Math.round(panelPainted/totalPanel*100):0;
+  const ov=totalPainted?Math.round((totalPainted-panelPainted)/totalPainted*100):0;
+  if(cov>=80&&ov<=25)return;
+  const tip=document.getElementById('m1-tip');
+  if(spd<40)tip.textContent=t('tip-slow');
+  else if(spd>350)tip.textContent=t('tip-fast');
+  else if(ov<=25)tip.textContent=t('tip-good');
+}
+function resetSpray(){paintedCells=new Uint8Array(GW*GH);panelPainted=0;totalPainted=0;lastPos=[];drawBg();updateMetrics();document.getElementById('m1-pass').style.display='none';document.getElementById('m1-tip').textContent=t('tip-start');document.getElementById('cov-b').className='bar-f';document.getElementById('over-b').className='bar-f';}
+function finishM1(){const cov=totalPanel?Math.round(panelPainted/totalPanel*100):0;const ov=totalPainted?Math.round((totalPainted-panelPainted)/totalPainted*100):0;scores.m1=cov>=80&&ov<=25?25:cov>=60?15:5;goTo(2);}
+
+function buildM2(){m2qi=0;m2score=0;renderM2Q();}
+function renderM2Q(){
+  const qs=M2d[lang];const el=document.getElementById('m2-body');
+  if(m2qi>=qs.length){scores.m2=Math.round(m2score/qs.length*25);goTo(3);return;}
+  const q=qs[m2qi];
+  el.innerHTML=`<div style="display:grid;grid-template-columns:210px 1fr;gap:20px;align-items:start;margin-bottom:14px"><div><canvas id="dc" width="210" height="140" style="border-radius:10px;border:1px solid #1E2D45;display:block"></canvas></div><div><div style="font-size:14px;font-weight:600;margin-bottom:14px;line-height:1.4;color:#1E293B">${q.q}</div>${q.opts.map((o,i)=>`<button class="opt" id="o${i}" onclick="ansM2(${i})">${o}</button>`).join('')}</div></div><div style="font-size:12px;color:#4A6FA5">${t('q-label')} ${m2qi+1} ${t('of')} ${qs.length}</div>`;
+  drawDefect(document.getElementById('dc'),q.type);
+}
+function drawDefect(cv,type){
+  const c=cv.getContext('2d'),W=cv.width,H=cv.height;
+  c.fillStyle='#2563EB';c.fillRect(0,0,W,H);
+  c.fillStyle='rgba(29,78,216,0.5)';
+  for(let i=0;i<8;i++)c.fillRect(Math.random()*W,Math.random()*H,15+Math.random()*25,8+Math.random()*12);
+  if(type==='run'){
+    const cx=W/2;c.fillStyle='#60A5FA';
+    c.beginPath();c.moveTo(cx-9,28);c.bezierCurveTo(cx-13,48,cx-5,68,cx-4,90);
+    c.bezierCurveTo(cx-1,100,cx+1,100,cx+4,90);c.bezierCurveTo(cx+5,68,cx+13,48,cx+9,28);c.closePath();c.fill();
+    c.beginPath();c.arc(cx,100,6,0,Math.PI*2);c.fillStyle='#93C5FD';c.fill();
+  }else if(type==='fish'){
+    [[0.28,0.38],[0.62,0.32],[0.5,0.67]].forEach(([rx,ry])=>{
+      const x=rx*W,y=ry*H,r=14;
+      c.beginPath();c.arc(x,y,r,0,Math.PI*2);c.fillStyle='#1E40AF';c.fill();
+      c.beginPath();c.arc(x,y,r*0.55,0,Math.PI*2);c.fillStyle='#E2E8F0';c.fill();
+    });
+  }else if(type==='peel'){
+    c.clearRect(0,0,W,H);
+    for(let gy=0;gy<H;gy+=7)for(let gx=0;gx<W;gx+=7){
+      const n=((Math.sin(gx*.4)*Math.cos(gy*.35))+1)/2;
+      c.fillStyle=`hsl(215,${60+n*20}%,${36+n*24}%)`;
+      c.beginPath();c.arc(gx+3.5,gy+3.5,2+n*3.5,0,Math.PI*2);c.fill();
+    }
+  }else if(type==='dirt'){
+    [[.33,.42],[.6,.55],[.45,.65],[.58,.28]].forEach(([rx,ry])=>{
+      const x=rx*W,y=ry*H;
+      c.beginPath();c.arc(x,y,9,0,Math.PI*2);c.fillStyle='rgba(255,255,255,0.15)';c.fill();
+      c.beginPath();c.arc(x+1,y-1,3.5,0,Math.PI*2);c.fillStyle='#0f172a';c.fill();
+    });
+  }
+}
+function ansM2(i){
+  const qs=M2d[lang],q=qs[m2qi];const ok=i===q.ans;if(ok)m2score++;
+  for(let j=0;j<q.opts.length;j++){const b=document.getElementById('o'+j);if(b){b.className='opt'+(j===q.ans?' ok':j===i?' no':'');b.disabled=true;}}
+  const fb=document.createElement('div');fb.className='tip';fb.style.marginTop='10px';fb.style.background='#F0FDF4';fb.style.borderColor='#86EFAC';fb.style.color='#166534';fb.textContent=q.fb;
+  document.getElementById('m2-body').appendChild(fb);
+  setTimeout(()=>{m2qi++;renderM2Q();},1400);
+}
+
+function buildM3(){
+  m3placed=[];m3sel=null;
+  const pool=document.getElementById('m3-pool'),slts=document.getElementById('m3-slots');
+  const steps=STEPS[lang],shuf=[0,1,2,3,4,5].sort(()=>Math.random()-.5);
+  pool.innerHTML=shuf.map(i=>`<div class="step" id="p${i}" onclick="selStep(${i})">${i+1}. ${steps[i]}</div>`).join('');
+  slts.innerHTML=Array.from({length:6},(_,i)=>`<div class="slot" id="sl${i}" onclick="placeStep(${i})">${lang==='en'?'Step':'Этап'} ${i+1}</div>`).join('');
+  document.getElementById('m3-chk').style.display='none';document.getElementById('m3-nxt').style.display='none';
+}
+function selStep(i){
+  if(document.getElementById('p'+i).classList.contains('placed'))return;
+  m3sel=i;
+  document.querySelectorAll('.step').forEach(e=>e.classList.remove('sel'));
+  document.getElementById('p'+i).classList.add('sel');
+}
+function placeStep(si){
+  if(m3sel===null)return;
+  const slot=document.getElementById('sl'+si);
+  if(slot.classList.contains('filled'))return;
+  slot.textContent=(si+1)+'. '+STEPS[lang][m3sel];
+  slot.classList.add('filled');slot.dataset.si=m3sel;
+  document.getElementById('p'+m3sel).classList.add('placed');
+  m3placed[si]=m3sel;m3sel=null;
+  document.querySelectorAll('.step').forEach(e=>e.classList.remove('sel'));
+  if(Object.keys(m3placed).length>=6)document.getElementById('m3-chk').style.display='inline-block';
+}
+function resetM3(){buildM3();}
+function checkSeq(){
+  let correct=0;
+  for(let i=0;i<6;i++){
+    const slot=document.getElementById('sl'+i);
+    if(m3placed[i]===i){slot.className='slot filled ok2';correct++;}
+    else if(m3placed[i]!==undefined)slot.className='slot filled no2';
+  }
+  scores.m3=Math.round(correct/6*25);
+  const fb=document.createElement('div');fb.className='tip';fb.style.marginTop='12px';fb.style.background='#F0FDF4';fb.style.borderColor='#86EFAC';fb.style.color='#166534';
+  fb.textContent=t(correct===6?'m3-ok':'m3-no');
+  document.getElementById('m3-slots').appendChild(fb);
+  document.getElementById('m3-chk').style.display='none';document.getElementById('m3-nxt').style.display='inline-block';
+}
+
+function buildM4(){m4qi=0;m4score=0;renderM4Q();}
+function renderM4Q(){
+  const qs=M4d[lang];const el=document.getElementById('m4-body');
+  if(m4qi>=qs.length){scores.m4=Math.round(m4score/qs.length*25);goTo(5);return;}
+  const q=qs[m4qi];
+  el.innerHTML=`<div style="background:#F8FAFC;border:1.5px solid #E2E8F0;border-radius:10px;padding:14px 16px;margin-bottom:14px;font-size:14px;line-height:1.5;color:#1E293B;font-weight:600">${q.q}</div>${q.opts.map((o,i)=>`<button class="opt" id="q${i}" onclick="ansM4(${i})">${o}</button>`).join('')}<div style="font-size:12px;color:#4A6FA5;margin-top:10px">${t('q-label')} ${m4qi+1} ${t('of')} ${qs.length}</div>`;
+}
+function ansM4(i){
+  const qs=M4d[lang],q=qs[m4qi];const ok=i===q.ans;if(ok)m4score++;
+  for(let j=0;j<q.opts.length;j++){const b=document.getElementById('q'+j);if(b){b.className='opt'+(j===q.ans?' ok':j===i?' no':'');b.disabled=true;}}
+  const fb=document.createElement('div');fb.className='tip';fb.style.marginTop='10px';fb.style.background='#F0FDF4';fb.style.borderColor='#86EFAC';fb.style.color='#166534';fb.textContent=q.fb;
+  document.getElementById('m4-body').appendChild(fb);
+  setTimeout(()=>{m4qi++;renderM4Q();},1500);
+}
+
+function showResults(){
+  const total=scores.m1+scores.m2+scores.m3+scores.m4;
+  const ring=document.getElementById('score-ring');
+  ring.textContent=total+'%';ring.style.borderColor=total>=70?'#10B981':'#EF4444';
+  document.getElementById('r1').textContent=scores.m1+'/25';document.getElementById('r2').textContent=scores.m2+'/25';
+  document.getElementById('r3').textContent=scores.m3+'/25';document.getElementById('r4').textContent=scores.m4+'/25';
+  document.getElementById('res-sub').textContent=t(total>=70?'res-pass':'res-fail');
+  document.getElementById('cert-date').textContent=new Date().toLocaleDateString(lang==='en'?'en-GB':'ru-RU',{year:'numeric',month:'long',day:'numeric'});
+  ['d0','d1','d2','d3'].forEach(id=>{document.getElementById(id).className='dot done';});
+}
+ul();
+</script>
+</body>
+</html>
